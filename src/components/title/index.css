@@ -1,0 +1,10 @@
+.title-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.title-btn:hover {
+    color: #34D399
+}

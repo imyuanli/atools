@@ -4,6 +4,7 @@ import {Link} from "@umijs/renderer-react";
 import Title from "@/components/title";
 import './index.css'
 import MyCard from "@/components/my-card";
+import {ROUTERS} from "@/constant";
 
 export default function Index() {
     return (
@@ -14,13 +15,26 @@ export default function Index() {
                 prefix={<SearchOutlined className="site-form-item-icon"/>}
                 size={'large'}
             />
-            <MyCard title={'常用工具'} icon={<AppstoreOutlined/>} isIndex={true}>
-                <Link to="/password-generator" className={'inline-grid'}>
-                    <Button size={'large'}>
-                        密码生成器
-                    </Button>
-                </Link>
-            </MyCard>
+            {
+                ROUTERS.map((router: any, index) => {
+                    return (
+                        <MyCard key={index} title={router?.title} icon={router?.icon} isIndex={true}>
+                            {
+                                router?.router.map((item: any, k: number) => {
+                                    return (
+                                        <Link key={k} to={item?.value} className={'inline-grid'}>
+                                            <Button size={'large'}>
+                                                {item?.name}
+                                            </Button>
+                                        </Link>
+                                    )
+                                })
+                            }
+                        </MyCard>
+                    )
+                })
+            }
+
         </div>
     );
 }

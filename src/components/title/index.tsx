@@ -1,6 +1,7 @@
 import {UserOutlined, HomeOutlined} from "@ant-design/icons";
 import './index.css'
 import {Link} from "@umijs/renderer-react";
+
 export default function Index(props: any) {
     const {value} = props
     return (
@@ -8,12 +9,12 @@ export default function Index(props: any) {
             <div className={'text-2xl font-bold mb-3'}>
                 {value ? `${value} - 一个木函` : '一个木函 - 多功能效率工具箱'}
             </div>
-            <div className={'flex justify-center items-center text-green-600'}>
+            <div className={'flex justify-center items-center'}>
                 {
                     value &&
                     <div className={'title-btn mr-3'}>
                         <HomeOutlined className={'mr-1'}/>
-                        <span><Link to="/">返回首页</Link></span>
+                        <span><Link to="/" className={'link'}>返回首页</Link></span>
                     </div>
                 }
                 {/*<div className={'title-btn'}>*/}

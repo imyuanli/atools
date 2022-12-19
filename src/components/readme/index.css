@@ -5,8 +5,8 @@
     margin-right: .25rem;
     display: inline-block;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
-    background-color: #78bd9a;
-    border: .125rem solid #c9e5d7;
+    width: 12px;
+    height: 12px;
+    background-color: #1677ff;
+    border: 2px solid #BFDBFE;
 }

@@ -3,8 +3,17 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    color: #1677ff;
 }
 
 .title-btn:hover {
-    color: #34D399
+    color: #93C5FD
+}
+
+.link {
+    color: #1677ff;
+}
+
+.link:hover {
+    color: #93C5FD
 }

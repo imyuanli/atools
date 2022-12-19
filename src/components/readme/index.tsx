@@ -10,7 +10,7 @@ export default function Readme(props: any) {
                 {
                     explain.split('\n').map((item:any,index:any) => {
                         return (
-                            <div className={'explain-li'}>
+                            <div className={'explain-li text-lg'}>
                                 {
                                     item
                                 }

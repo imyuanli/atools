@@ -106,7 +106,9 @@ export default function PasswordGenerator() {
                 <div>
                     <Checkbox.Group options={options} defaultValue={checkRes} onChange={onChange}/>
                 </div>
-                <div><Button onClick={onClick}>生成</Button></div>
+                <div className={'flex justify-end items-center'}>
+                    <Button size={'large'} type={'primary'} onClick={onClick}>生成</Button>
+                </div>
             </MyCard>
             <MyCard title={'生成结果'} icon={<EditOutlined/>}>
                 <div>

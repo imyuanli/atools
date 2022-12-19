@@ -1,9 +1,10 @@
 .main{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
+    background: #FAFAFA;
+    min-height: 100vh;
 }
 
 .content{

@@ -13,7 +13,7 @@ export default function Index() {
                 prefix={<SearchOutlined className="site-form-item-icon"/>}
                 size={'large'}
             />
-            <div className={'my-12 pt-9 p-6 grid gap-4 grid-cols-4 shadow-lg bg-white rounded-lg relative border-2'}>
+            <div className={'my-12 pt-9 p-6 grid gap-4 grid-cols-2 shadow-lg bg-white rounded-lg relative border-2 md:grid-cols-4'}>
                 <div className={'card-title'}>
                     <AppstoreOutlined className={'mr-1'}/>
                     <span className={'font-bold'}>常用工具</span>

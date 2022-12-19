@@ -14,8 +14,8 @@ export default function Index() {
                 prefix={<SearchOutlined className="site-form-item-icon"/>}
                 size={'large'}
             />
-            <MyCard title={'常用工具'} icon={<AppstoreOutlined/>}>
-                <Link to="/docs" className={'inline-grid'}>
+            <MyCard title={'常用工具'} icon={<AppstoreOutlined/>} isIndex={true}>
+                <Link to="/password-generator" className={'inline-grid'}>
                     <Button size={'large'}>
                         密码生成器
                     </Button>

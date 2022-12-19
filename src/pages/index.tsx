@@ -1,4 +1,4 @@
-import {AppstoreOutlined, SearchOutlined, UserOutlined} from "@ant-design/icons";
+import {SearchOutlined} from "@ant-design/icons";
 import {Button, Input} from "antd";
 import {Link} from "@umijs/renderer-react";
 import Title from "@/components/title";
@@ -10,11 +10,11 @@ export default function Index() {
     return (
         <div>
             <Title/>
-            <Input
-                placeholder="输入关键字搜索"
-                prefix={<SearchOutlined className="site-form-item-icon"/>}
-                size={'large'}
-            />
+            {/*<Input*/}
+            {/*    placeholder="输入关键字搜索"*/}
+            {/*    prefix={<SearchOutlined className="site-form-item-icon"/>}*/}
+            {/*    size={'large'}*/}
+            {/*/>*/}
             {
                 ROUTERS.map((router: any, index) => {
                     return (

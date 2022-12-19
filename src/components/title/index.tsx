@@ -16,10 +16,10 @@ export default function Index(props: any) {
                         <span><Link to="/">返回首页</Link></span>
                     </div>
                 }
-                <div className={'title-btn'}>
-                    <UserOutlined className={'mr-1'}/>
-                    <span>未登录</span>
-                </div>
+                {/*<div className={'title-btn'}>*/}
+                {/*    <UserOutlined className={'mr-1'}/>*/}
+                {/*    <span>未登录</span>*/}
+                {/*</div>*/}
             </div>
         </div>
     );

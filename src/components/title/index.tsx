@@ -1,5 +1,6 @@
 import {UserOutlined, HomeOutlined} from "@ant-design/icons";
 import './index.css'
+import {Link} from "@umijs/renderer-react";
 export default function Index(props: any) {
     const {value} = props
     return (
@@ -12,7 +13,7 @@ export default function Index(props: any) {
                     value &&
                     <div className={'title-btn mr-3'}>
                         <HomeOutlined className={'mr-1'}/>
-                        <span>返回首页</span>
+                        <span><Link to="/">返回首页</Link></span>
                     </div>
                 }
                 <div className={'title-btn'}>

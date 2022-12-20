@@ -1,10 +1,20 @@
 import {
-    AppstoreOutlined,/*商品*/
+    AppstoreOutlined, FileImageOutlined,FontSizeOutlined
 } from '@ant-design/icons';
 
 export const ROUTERS = [
     {
-        title: '常用工具',
+        title: '图片工具',
+        router: [
+            {
+                name: '必应壁纸',
+                value: '/bing-image'
+            },
+        ],
+        icon: <FileImageOutlined />
+    },
+    {
+        title: '文本工具',
         router: [
             {
                 name: '密码生成器',
@@ -15,6 +25,6 @@ export const ROUTERS = [
                 value: '/simp-words'
             }
         ],
-        icon: <AppstoreOutlined/>
+        icon: <FontSizeOutlined />
     }
 ]

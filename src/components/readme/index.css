@@ -1,12 +1,13 @@
 .explain-li:before {
     position: relative;
     content: "";
-    left: -.25rem;
+    left: 0;
+    top: 2px;
     margin-right: .25rem;
     display: inline-block;
     border-radius: 50%;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background-color: #1677ff;
-    border: 2px solid #BFDBFE;
+    border: 3px solid #BFDBFE;
 }

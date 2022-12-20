@@ -8,9 +8,9 @@ export default function MyCard(props: any) {
             className={`my-12 pt-9 p-6 shadow-lg bg-white rounded-lg relative border-2 ${isIndex ? style : ""}`}>
             {
                 title &&
-                <div className={'card-title'}>
+                <div className={'card-title text-base'}>
                     {icon}
-                    <div className={'font-bold ml-2'}>{title}</div>
+                    <div className={'ml-2'}>{title}</div>
                 </div>
             }
             {children}

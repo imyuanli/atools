@@ -1,10 +1,11 @@
 import Title from "@/components/title";
 import MyCard from "@/components/my-card";
-import {EditOutlined, MinusOutlined, PlusOutlined} from "@ant-design/icons";
+import {EditOutlined, LockOutlined} from "@ant-design/icons";
 import Readme from "@/components/readme";
 import {Button, Checkbox, Slider} from "antd";
 import {useEffect, useState} from "react";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
+import Copy from "@/components/copy";
 
 export default function PasswordGenerator() {
     const [pwdLength, setPwdLength] = useState<number>(16);
@@ -86,7 +87,7 @@ export default function PasswordGenerator() {
             <Title value={'密码生成器'}/>
             <MyCard title={'生成选项'} icon={<EditOutlined/>}>
                 <div>
-                    密码长度 (4~64)
+                    <div className={'mb-1 text-lg'}>密码长度 (4~64)</div>
                     <Slider defaultValue={pwdLength}
                             min={4}
                             max={64}
@@ -94,7 +95,7 @@ export default function PasswordGenerator() {
                                 setPwdLength(e)
                             }}
                     />
-                    密码数量
+                    <div className={'mb-1 text-lg'}>密码数量</div>
                     <Slider defaultValue={pwdCount}
                             min={1}
                             max={50}
@@ -103,15 +104,14 @@ export default function PasswordGenerator() {
                             }}
                     />
                 </div>
-                <div>
-                    <Checkbox.Group options={options} defaultValue={checkRes} onChange={onChange}/>
-                </div>
-                <div className={'flex justify-end items-center'}>
-                    <Button size={'large'} type={'primary'} onClick={onClick}>生成</Button>
+                <Checkbox.Group className={'mt-3'} options={options} defaultValue={checkRes} onChange={onChange}/>
+                <div className={'flex justify-end items-center mt-3'}>
+                    <Button style={{maxWidth:120}} className={'w-1/6'} size={'large'} type={'primary'} onClick={onClick}>生成</Button>
                 </div>
             </MyCard>
-            <MyCard title={'生成结果'} icon={<EditOutlined/>}>
-                <div>
+            <MyCard title={'生成结果'} icon={<LockOutlined />}>
+                <div className={'bg-blue-50 p-3 rounded-lg relative'}>
+                    <Copy />
                     {
                         result.map((item: string, index: number) => {
                             return (

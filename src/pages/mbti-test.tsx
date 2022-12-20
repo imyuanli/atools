@@ -123,7 +123,7 @@ export default function SimpWords() {
                                     </div>
                                     <Progress percent={getPercentage(current, question.length)} showInfo={false}/>
                                 </div>
-                                <div className={'text-lg mb-3'}>
+                                <div className={'text-2xl mb-3'}>
                                     {question[current]["q"]}
                                 </div>
                                 <div className={'flex justify-center items-center flex-wrap mb-3'}>

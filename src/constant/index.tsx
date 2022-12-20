@@ -9,6 +9,10 @@ export const ROUTERS = [
             {
                 name: '密码生成器',
                 value: '/password-generator'
+            },
+            {
+                name: '舔狗日记',
+                value: '/simp-words'
             }
         ],
         icon: <AppstoreOutlined/>

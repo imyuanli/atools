@@ -6,8 +6,10 @@ import './index.css'
 import MyCard from "@/components/my-card";
 import {ROUTERS} from "@/constant";
 import Readme from "@/components/readme";
+import {useState} from "react";
 
 export default function Index() {
+    let sum = 0
     return (
         <div>
             <Title/>
@@ -22,6 +24,7 @@ export default function Index() {
                         <MyCard key={index} title={router?.title} icon={router?.icon} isIndex={true}>
                             {
                                 router?.router.map((item: any, k: number) => {
+                                    sum+=1
                                     return (
                                         <Link key={k} to={item?.value} className={'inline-grid'}>
                                             <Button size={'large'}>
@@ -36,7 +39,7 @@ export default function Index() {
                 })
             }
             <Readme explain={
-                ` 当前处于高速更新迭代中，敬请期待 (当前共有${1}个工具)`}/>
+                ` 当前处于高速更新迭代中，敬请期待 (当前共有${sum}个工具)`}/>
         </div>
     );
 }

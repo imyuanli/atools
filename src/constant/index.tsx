@@ -1,5 +1,5 @@
 import {
-    AppstoreOutlined, FileImageOutlined,FontSizeOutlined
+    AppstoreOutlined, ToolOutlined, FileImageOutlined, FontSizeOutlined
 } from '@ant-design/icons';
 
 export const ROUTERS = [
@@ -11,7 +11,7 @@ export const ROUTERS = [
                 value: '/bing-image'
             },
         ],
-        icon: <FileImageOutlined />
+        icon: <FileImageOutlined/>
     },
     {
         title: '文本工具',
@@ -29,6 +29,16 @@ export const ROUTERS = [
                 value: '/soul-words'
             }
         ],
-        icon: <FontSizeOutlined />
-    }
+        icon: <FontSizeOutlined/>
+    },
+    {
+        title: '其他工具',
+        router: [
+            {
+                name: 'MBTI测试',
+                value: '/mbti-test'
+            },
+        ],
+        icon: <ToolOutlined/>
+    },
 ]

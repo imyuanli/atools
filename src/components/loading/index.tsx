@@ -1,9 +1,15 @@
 import {Spin} from "antd";
+import React from "react";
 
-export default function Loading() {
+interface props {
+    text?: string
+}
+
+export const Loading: React.FunctionComponent<props> = ({text}) => {
     return (
         <div className={'flex justify-center items-center flex-col w-full'}>
-            <Spin tip="全力加载中..." />
+            <Spin tip={text ? text : `Loading...`}/>
         </div>
     );
 }
+export default Loading

@@ -87,7 +87,7 @@ export default function PasswordGenerator() {
             <Title value={'密码生成器'}/>
             <MyCard title={'生成选项'} icon={<EditOutlined/>}>
                 <div>
-                    <div className={'mb-1 text-lg'}>密码长度 (4~64)</div>
+                    <div className={'mb-1'}>密码长度 (4~64)</div>
                     <Slider defaultValue={pwdLength}
                             min={4}
                             max={64}
@@ -95,7 +95,7 @@ export default function PasswordGenerator() {
                                 setPwdLength(e)
                             }}
                     />
-                    <div className={'mb-1 text-lg'}>密码数量</div>
+                    <div className={'mb-1'}>密码数量</div>
                     <Slider defaultValue={pwdCount}
                             min={1}
                             max={50}

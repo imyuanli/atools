@@ -1,5 +1,7 @@
-import request from "@/service/request";
+import request from "@/service/alapi/request";
 
+
+//alapi
 const token = "uLZ0RC7ZaTwjB0GV"
 const BASE_URL = 'https://v2.alapi.cn'
 

@@ -1,18 +1,16 @@
 import Title from "@/components/title";
 import MyCard from "@/components/my-card";
-import {Button, message} from "antd";
+import {Button} from "antd";
 import {useEffect, useState} from "react";
-import {res} from "pino-std-serializers";
-import {get_dog_message} from "@/service/service";
+import {get_dog_message} from "@/service/alapi/service";
+import Loading from "@/components/loading";
 
 export default function SimpWords() {
     const [dogMessage, setDogMessage] = useState("")
     const getDogMessage = () => {
         get_dog_message().then((res: any) => {
-            if (res.data) {
-                setDogMessage(res.data.content)
-            } else {
-                message.warning('res.msg')
+            if (res) {
+                setDogMessage(res.content)
             }
         })
     }
@@ -34,7 +32,7 @@ export default function SimpWords() {
                             </div>
                         </>
                         :
-                        <div>等待一会</div>
+                        <Loading/>
                 }
             </MyCard>
         </div>

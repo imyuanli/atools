@@ -5,6 +5,7 @@ import Title from "@/components/title";
 import './index.css'
 import MyCard from "@/components/my-card";
 import {ROUTERS} from "@/constant";
+import Readme from "@/components/readme";
 
 export default function Index() {
     return (
@@ -34,7 +35,8 @@ export default function Index() {
                     )
                 })
             }
-
+            <Readme explain={
+                ` 当前处于高速更新迭代中，敬请期待 (当前共有${1}个工具)`}/>
         </div>
     );
 }

@@ -111,7 +111,7 @@ export default function PasswordGenerator() {
             </MyCard>
             <MyCard title={'生成结果'} icon={<LockOutlined />}>
                 <div className={'bg-blue-50 p-3 rounded-lg relative'}>
-                    <Copy />
+                    <Copy value={result.toString()}/>
                     {
                         result.map((item: string, index: number) => {
                             return (

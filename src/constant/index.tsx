@@ -23,6 +23,10 @@ export const ROUTERS = [
             {
                 name: '舔狗日记',
                 value: '/simp-words'
+            },
+            {
+                name: '心灵毒鸡汤',
+                value: '/soul-words'
             }
         ],
         icon: <FontSizeOutlined />

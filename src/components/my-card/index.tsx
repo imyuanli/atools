@@ -5,11 +5,11 @@ export default function MyCard(props: any) {
     const style = 'grid gap-4 grid-cols-2 md:grid-cols-4'
     return (
         <div
-            className={`my-12 pt-9 p-6 shadow-lg bg-white rounded-lg relative border-2 ${isIndex ? style : ""}`}>
+            className={`my-16 pt-12 p-9 shadow-lg bg-white rounded-lg relative border-2 ${isIndex ? style : ""}`}>
             {
                 title &&
                 <div className={'card-title text-base'}>
-                    {icon}
+                    {icon && icon}
                     <div className={'ml-2'}>{title}</div>
                 </div>
             }

@@ -7,8 +7,9 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background-color: #1677ff;
+    background-color: #1976d2;
     align-items: center;
     border-radius: 8px;
     color: #fff;
+    box-shadow: 0 3px 5px rgb(36 159 253 / 30%);
 }

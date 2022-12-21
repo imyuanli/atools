@@ -1,5 +1,6 @@
 import {Outlet} from 'umi';
 import './index.css'
+import 'antd/dist/reset.css'
 
 export default function Layout() {
     return (

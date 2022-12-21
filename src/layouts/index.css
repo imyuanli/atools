@@ -3,13 +3,12 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    background: #F4F8FB;
     min-height: 100vh;
 }
 
 .content {
     width: 95%;
-    max-width: 1200px;
+    max-width: 800px;
     padding: 6px;
 }
 
@@ -20,4 +19,6 @@ a {
 body {
     padding: 0;
     margin: 0;
+    font-family: "PingFang SC", "Microsoft Yahei", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f4f8fb;
 }

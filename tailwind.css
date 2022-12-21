@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*高亮文本颜色*/
+.color-text {
+    color: #9c27b0;
+}
+/*hover*/
+.hover-color-text {
+    color: #7b1fa2;
+}
+
+/*主色*/
+.theme-bg {
+    color: #1976d2;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

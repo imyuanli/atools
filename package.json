@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.1",
     "antd": "^5.0.7",
     "copy-to-clipboard": "^3.3.3",
     "umi": "^4.0.38"

@@ -4,6 +4,7 @@
     -webkit-backdrop-filter: blur(30px) saturate(1.5) !important;
     border-radius: 12px;
     position: relative;
+    box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
 }
 
 .card-title {

@@ -5,7 +5,7 @@ export default function MyCard(props: any) {
     const style = 'grid gap-4 grid-cols-2 md:grid-cols-4'
     return (
         <div
-            className={`card-bg my-16 pt-12 p-9 shadow-lg   ${isIndex ? style : ""}`}>
+            className={`card-bg my-16 pt-12 p-9 ${isIndex ? style : ""}`}>
             {
                 title &&
                 <div className={'card-title text-base'}>

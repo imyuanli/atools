@@ -25,25 +25,25 @@ body {
     transition: .25s;
 }
 
-/*.custom-background {*/
-/*    z-index: -3;*/
-/*    position: fixed;*/
-/*    left: 0;*/
-/*    top: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
-/*    transition: opacity 1s, transform .25s, filter .25s;*/
-/*    backface-visibility: hidden;*/
-/*    background-repeat: no-repeat;*/
-/*    background-size: cover;*/
-/*    background-position: 50%;*/
+.custom-background {
+    z-index: -3;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 1s, transform .25s, filter .25s;
+    backface-visibility: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
 
-/*    display: none;*/
-/*    !*filter: blur(10px);*!*/
-/*    opacity: 1;*/
-/*    background-image: url(https://api.dujin.org/bing/1920.php);*/
-/*}*/
+    /*display: none;*/
+    /*filter: blur(10px);*/
+    opacity: 1;
+    background-image: url(https://api.dujin.org/bing/1920.php);
+}
 
 
 .content {

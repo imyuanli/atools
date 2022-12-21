@@ -3,17 +3,17 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    color: #9c27b0;
+    color: rgba(255,255,255,.65);
 }
 
 .title-btn:hover {
-    color: #7b1fa2
+    color: rgba(255,255,255,.35);
 }
 
 .link {
-    color: #9c27b0;
+    color: rgba(255,255,255,.65);
 }
 
 .link:hover {
-    color: #7b1fa2
+    color: rgba(255,255,255,.35);
 }

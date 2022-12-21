@@ -1,4 +1,21 @@
 /*标识符*/
+
+.item-box {
+    font-weight: 500;
+    font-size: 0.9375rem;
+    min-width: 64px;
+    padding: 7px 21px;
+    border-radius: 4px;
+    color: white;
+    background-color: rgba(255, 255, 255, .2);
+    border: none;
+    position: relative;
+}
+
+.item-box:hover {
+    background: rgba(255, 255, 255, .5)
+}
+
 .badge:after {
     content: "";
     position: absolute;
@@ -15,20 +32,20 @@
 
 /*推荐*/
 .recommend:after {
-    background-color: #1976d2;
+    background-color: #5CA1FF;
 }
 
 /*新功能*/
 .new:after {
-    background-color: #1976d2;
+    background-color: #70C000;
 }
 
 /*维护中无法访问*/
 .error:after {
-    background-color: #1976d2;
+    background-color: #BB8CDD;
 }
 
 /*热门*/
 .hot:after {
-    background-color: #1976d2;
+    background-color: #FF4B68;
 }

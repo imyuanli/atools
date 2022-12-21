@@ -5,6 +5,7 @@ import {ROUTERS} from "@/constant";
 import {Button} from "@mui/material";
 // import Readme from "@/components/readme";
 import './index.css'
+
 export default function Index() {
     let sum = 0
     return (
@@ -19,9 +20,9 @@ export default function Index() {
                                     sum += 1
                                     return (
                                         <Link key={k} to={item?.value} className={'inline-grid'}>
-                                            <Button className={'badge recommend'} variant="outlined" size={'large'}>
+                                            <div className={`item-box flex-center badge ${item?.state}`}>
                                                 {item?.name}
-                                            </Button>
+                                            </div>
                                         </Link>
                                     )
                                 })

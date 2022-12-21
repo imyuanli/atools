@@ -13,7 +13,7 @@ export const ROUTERS = [
             {
                 name: '必应壁纸',
                 value: '/bing-image',
-                state:'recommend'
+                state:'error'
             },
         ],
         icon: <FileImageOutlined/>
@@ -24,7 +24,7 @@ export const ROUTERS = [
             {
                 name: '密码生成器',
                 value: '/password-generator',
-                state:'recommend'
+                state:'hot'
             },
             {
                 name: '舔狗日记',
@@ -34,7 +34,7 @@ export const ROUTERS = [
             {
                 name: '心灵毒鸡汤',
                 value: '/soul-words',
-                state:'recommend'
+                state:'new'
             }
         ],
         icon: <FontSizeOutlined/>
@@ -45,7 +45,7 @@ export const ROUTERS = [
             {
                 name: 'MBTI测试',
                 value: '/mbti-test',
-                state:'recommend'
+                state:'new'
             },
         ],
         icon: <ToolOutlined/>

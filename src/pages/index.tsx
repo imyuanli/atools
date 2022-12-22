@@ -27,7 +27,7 @@ export default function Index() {
                                     sum += 1
                                     return (
                                         <Link key={k} to={item?.value} className={'inline-grid'}>
-                                            <Button className={`badge ${item?.state}`} size={'large'}>
+                                            <Button className={`badge rounded-md ${item?.state}`} size={'large'}>
                                                 {item?.name}
                                             </Button>
                                         </Link>

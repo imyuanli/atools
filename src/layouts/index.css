@@ -9,9 +9,9 @@
 }
 
 .content {
-    width: 95%;
+    width: 100%;
     max-width: 1024px;
-    padding: 6px;
+    padding: 6px 9px;
 }
 
 a {

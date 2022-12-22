@@ -9,8 +9,10 @@ export default function MyCard(props: any) {
             {
                 title &&
                 <div className={'card-title text-base'}>
-                    {icon}
-                    <div className={'ml-2'}>{title}</div>
+                    {
+                        icon && <div className={'mr-2'}>{icon}</div>
+                    }
+                    <div>{title}</div>
                 </div>
             }
             {children}

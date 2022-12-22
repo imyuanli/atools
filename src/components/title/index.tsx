@@ -5,22 +5,22 @@ import {Link} from "@umijs/renderer-react";
 export default function Index(props: any) {
     const {value} = props
     return (
-        <div className={'flex justify-center items-center flex-col w-full mt-12 mb-24'}>
+        <div className={'flex-center flex-col w-full mt-12 mb-24'}>
             <div className={'text-2xl font-bold mb-3'}>
-                {value ? `${value} - 一个木函` : '一个木函 - 多功能效率工具箱'}
+                {value ? `${value} - WoodBox` : 'WoodBox - 多功能工具'}
             </div>
-            <div className={'flex justify-center items-center'}>
+            <div className={'flex-center'}>
                 {
                     value &&
-                    <div className={'title-btn mr-3'}>
-                        <HomeOutlined className={'mr-1'}/>
-                        <span><Link to="/" className={'link'}>返回首页</Link></span>
-                    </div>
+                    <Link to={'/'}>
+                        <HomeOutlined/>
+                        <span className={'ml-1'}>返回首页</span>
+                    </Link>
                 }
-                {/*<div className={'title-btn'}>*/}
-                {/*    <UserOutlined className={'mr-1'}/>*/}
-                {/*    <span>未登录</span>*/}
-                {/*</div>*/}
+                <Link to={'/login'} className={'ml-3'}>
+                    <UserOutlined/>
+                    <span className={'ml-1'}>未登录</span>
+                </Link>
             </div>
         </div>
     );

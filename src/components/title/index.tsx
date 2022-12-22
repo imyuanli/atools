@@ -6,7 +6,7 @@ export default function Index(props: any) {
     const {value} = props
     return (
         <div className={'flex-center flex-col w-full mt-12'}>
-            <div className={'text-2xl font-bold mb-3'}>
+            <div className={'text-3xl font-bold mb-3'}>
                 {value ?
                     <div className={'flex'}>
                         <span>{value}</span>

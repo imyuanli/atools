@@ -2,10 +2,9 @@ import Title from "@/components/title";
 import MyCard from "@/components/my-card";
 import {EditOutlined, LockOutlined} from "@ant-design/icons";
 // import Readme from "@/components/readme";
-import {Checkbox} from "antd";
+import {Button, Checkbox, Slider} from "antd";
 import {useEffect, useState} from "react";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
-import {Button, Slider} from "@mui/material";
 // import Copy from "@/components/copy";
 
 export default function PasswordGenerator() {
@@ -87,32 +86,27 @@ export default function PasswordGenerator() {
         <div>
             <Title value={'密码生成器'}/>
             <MyCard title={'生成选项'} icon={<EditOutlined/>}>
-                <div className={'text-white'}>
+                <div>
                     <div className={'mb-1'}>密码长度 (4~64)</div>
-                    <Slider
-                        defaultValue={pwdLength}
-                        min={4}
-                        max={64}
-                        onChange={(e: any) => {
-                            setPwdLength(e.target.value)
-                        }}
-                        aria-label="Default"
+                    <Slider defaultValue={pwdLength}
+                            min={4}
+                            max={64}
+                            onChange={(e) => {
+                                setPwdLength(e)
+                            }}
                     />
                     <div className={'mb-1'}>密码数量</div>
-                    <Slider
-                        defaultValue={pwdCount}
-                        valueLabelDisplay="auto"
-                        min={1}
-                        max={50}
-                        onChange={(e: any) => {
-                            setPwdCount(e.target.value)
-                        }}
-                        aria-label="Default"
+                    <Slider defaultValue={pwdCount}
+                            min={1}
+                            max={50}
+                            onChange={(e) => {
+                                setPwdCount(e)
+                            }}
                     />
                 </div>
                 <Checkbox.Group className={'mt-3'} options={options} defaultValue={checkRes} onChange={onChange}/>
                 <div className={'flex justify-end items-center mt-3'}>
-                    <Button style={{maxWidth: 120}} className={'w-1/6'} variant="contained"
+                    <Button style={{maxWidth: 120}} className={'w-1/6'} size={'large'} type={'primary'}
                             onClick={onClick}>生成</Button>
                 </div>
             </MyCard>

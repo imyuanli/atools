@@ -1,26 +1,21 @@
 .card-bg {
-    background-color: rgba(255, 255, 255, .3);
-    backdrop-filter: blur(30px) saturate(1.5) !important;
-    -webkit-backdrop-filter: blur(30px) saturate(1.5) !important;
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px) saturate(1.1);
+    -webkit-backdrop-filter: blur(30px) saturate(1.1);
     border-radius: 12px;
     position: relative;
-    box-shadow: rgb(0 0 0 / 20%) 0 0 10px;
 }
 
 .card-title {
     position: absolute;
-    top: -18px;
-    left: 28px;
-    padding: 8px 12px;
-    font-weight: 700;
+    top: 9px;
+    left: 18px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background-color: #1976d2;
     align-items: center;
     border-radius: 8px;
-    color: #fff;
-    box-shadow: 0 3px 5px rgb(36 159 253 / 30%);
+    color: rgba(255,255,255,.6);
 }
 
 

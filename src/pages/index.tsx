@@ -24,10 +24,10 @@ export default function Index() {
                         <MyCard key={index} title={router?.title} icon={router?.icon} isIndex={true}>
                             {
                                 router?.router.map((item: any, k: number) => {
-                                    sum+=1
+                                    sum += 1
                                     return (
                                         <Link key={k} to={item?.value} className={'inline-grid'}>
-                                            <Button size={'large'}>
+                                            <Button className={`badge ${item?.state}`} size={'large'}>
                                                 {item?.name}
                                             </Button>
                                         </Link>

@@ -2,47 +2,65 @@ import {
     AppstoreOutlined, ToolOutlined, FileImageOutlined, FontSizeOutlined
 } from '@ant-design/icons';
 
-export const ROUTERS = [
+// 分类
+export const typeList = [
+    // {
+    //     type: 'usually',
+    //     title: '常用工具',
+    //     icon: <AppstoreOutlined/>
+    // },
     {
+        type: 'picture',
         title: '图片工具',
-        router: [
-            {
-                name: '必应壁纸',
-                value: '/bing-image',
-                state: 'error'
-            },
-        ],
         icon: <FileImageOutlined/>
     },
     {
+        type: 'text',
         title: '文本工具',
-        router: [
-            {
-                name: '密码生成器',
-                value: '/password-generator',
-                state: 'hot'
-            },
-            {
-                name: '舔狗日记',
-                value: '/simp-words',
-                state: 'recommend'
-            },
-            {
-                name: '心灵毒鸡汤',
-                value: '/soul-words',
-            }
-        ],
         icon: <FontSizeOutlined/>
     },
     {
+        type: 'other',
         title: '其他工具',
-        router: [
-            {
-                name: 'MBTI测试',
-                value: '/mbti-test',
-                state: 'new'
-            },
-        ],
         icon: <ToolOutlined/>
     },
+]
+
+//路由
+export const routerList = [
+    {
+        name: '必应壁纸',
+        link: '/bing-image',
+        state: 'error',
+        type: 'picture',
+        isCollect:false,
+    },
+    {
+        name: '密码生成器',
+        link: '/password-generator',
+        state: 'hot',
+        type: 'text',
+        isCollect:false,
+    },
+    {
+        name: '舔狗日记',
+        link: '/simp-words',
+        state: 'recommend',
+        type: 'text',
+        isCollect:false,
+    },
+    {
+        name: '心灵毒鸡汤',
+        link: '/soul-words',
+        state: "",
+        type: 'text',
+        isCollect:false,
+    },
+    {
+        name: 'MBTI测试',
+        link: '/mbti-test',
+        state: 'new',
+        type: 'other',
+        isCollect:false,
+    }
 ]

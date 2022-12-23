@@ -1,10 +1,10 @@
 import {Button} from "antd";
 import {useTitle} from "ahooks";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "@umijs/renderer-react";
 import './index.css'
 import MyCard from "@/components/my-card";
-import {ROUTERS} from "@/constant";
+import {routerList, typeList} from "@/constant";
 import Readme from "@/components/readme";
 import {useOutletContext} from "@@/exports";
 import Welcome from "@/components/welcome";
@@ -29,19 +29,21 @@ export default function Index() {
             <Welcome/>
             <Search/>
             {
-                ROUTERS.map((router: any, index) => {
+                typeList.map((list: any, index: any) => {
                     return (
-                        <MyCard key={index} title={router?.title} icon={router?.icon} isIndex={true}>
+                        <MyCard key={index} title={list?.title} icon={list?.icon} isIndex={true}>
                             {
-                                router?.router.map((item: any, k: number) => {
-                                    sum += 1
-                                    return (
-                                        <Link key={k} to={item?.value} className={'inline-grid'}>
-                                            <Button className={`badge rounded-md ${item?.state}`} size={'large'}>
-                                                {item?.name}
-                                            </Button>
-                                        </Link>
-                                    )
+                                routerList?.map((router: any, k: number) => {
+                                    if (list?.type == router?.type) {
+                                        sum += 1
+                                        return (
+                                            <Link key={k} to={router?.link} className={'inline-grid'}>
+                                                <Button className={`badge rounded-md ${router?.state}`} size={'large'}>
+                                                    {router?.name}
+                                                </Button>
+                                            </Link>
+                                        )
+                                    }
                                 })
                             }
                         </MyCard>

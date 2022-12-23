@@ -2,7 +2,7 @@ import {Outlet} from 'umi';
 import './index.css'
 import 'antd/dist/antd.css'
 import {
-    BulbOutlined,HomeOutlined,
+    BulbOutlined, HomeOutlined,
     MenuFoldOutlined,
     QuestionCircleOutlined,
     SettingOutlined,
@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import {Button, Divider, Drawer, Tooltip} from "antd";
 import {useState} from "react";
-import {Link} from "@umijs/renderer-react";
+import {Link, useNavigate} from "@umijs/renderer-react";
 import Title from "@/components/title";
 
 
@@ -57,6 +57,13 @@ export default function Layout() {
         title,
         setTitle
     }
+
+    //链接跳转
+    const navigate = useNavigate()
+    const goToPage = (link: any) => {
+        onClose()
+        navigate(link)
+    }
     return (
         <div className={'main'}>
             <div className={'absolute right-3 top-3 flex-col flex'}>
@@ -89,13 +96,16 @@ export default function Layout() {
                         {
                             menuItems.map((item: any, index: number) => {
                                 return (
-                                    <Link to={item?.link}
-                                          key={index}
-                                          className={'text-gray-800 text-lg p-3 flex-center w-full hover:bg-gray-100 hover:text-gray-800'}
+                                    <div
+                                        onClick={() => {
+                                            goToPage(item?.link)
+                                        }}
+                                        key={index}
+                                        className={'text-gray-800 text-lg p-3 flex-center w-full cursor-pointer hover:bg-gray-100'}
                                     >
                                         {item?.icon}
                                         <span className={'ml-2'}>{item?.label}</span>
-                                    </Link>
+                                    </div>
                                 )
                             })
                         }

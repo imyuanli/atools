@@ -2,16 +2,16 @@ import {Outlet} from 'umi';
 import './index.css'
 import 'antd/dist/antd.css'
 import {
-    BulbOutlined, HomeOutlined,
+    HomeOutlined,
     MenuFoldOutlined,
-    QuestionCircleOutlined,
-    SettingOutlined,
-    UserOutlined
 } from "@ant-design/icons";
 import {Button, Divider, Drawer, Tooltip} from "antd";
 import {useState} from "react";
-import {Link, useNavigate} from "@umijs/renderer-react";
+import {useNavigate} from "@umijs/renderer-react";
 import Title from "@/components/title";
+import Collect from "@/components/collect";
+import {DEFAULT_ROUTER} from "@/constant";
+import {useLocalStorageState} from "ahooks";
 
 
 const menuItems = [
@@ -51,11 +51,20 @@ export default function Layout() {
         setOpen(false);
     };
 
+    //将路由持久化
+    const [routerList, setRouterList] = useLocalStorageState<any>(
+        'routerList',
+        {
+            defaultValue: DEFAULT_ROUTER,
+        },
+    );
+
     //由主页面传递得title参数
     const [title, setTitle] = useState()
     const context = {
         title,
-        setTitle
+        setTitle,
+        routerList
     }
 
     //链接跳转
@@ -116,6 +125,7 @@ export default function Layout() {
                 <Title value={title}/>
                 <Outlet context={context}/>
             </div>
+            <Collect routerList={routerList} setRouterList={setRouterList}/>
         </div>
     );
 }

@@ -1,14 +1,15 @@
 .card-title {
     position: absolute;
-    top: -18px;
-    left: 28px;
+    top: -20px;
+    left: 12px;
     padding: 10px 12px;
     font-weight: 700;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background-color: #1677ff;
+    background-color: #1890ff;
     align-items: center;
     border-radius: 8px;
     color: #fff;
+    box-shadow: 0 0.5rem 0.625rem rgb(36 159 253 / 30%);
 }

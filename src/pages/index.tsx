@@ -1,45 +1,48 @@
-import {SearchOutlined} from "@ant-design/icons";
-import {Button, Input} from "antd";
+import {Button} from "antd";
 import {Link} from "@umijs/renderer-react";
-import Title from "@/components/title";
 import './index.css'
 import MyCard from "@/components/my-card";
-import {ROUTERS} from "@/constant";
+import {DEFAULT_TYPE} from "@/constant";
 import Readme from "@/components/readme";
-import {useState} from "react";
+import {useOutletContext} from "@@/exports";
+import Welcome from "@/components/welcome";
+import Search from "@/components/search";
+import Favorites from "@/components/favorites";
+import Title from "@/components/title";
 
 export default function Index() {
+    const {routerList}: any = useOutletContext();
+    //总共有多少工具
     let sum = 0
     return (
         <div>
             <Title/>
-            {/*<Input*/}
-            {/*    placeholder="输入关键字搜索"*/}
-            {/*    prefix={<SearchOutlined className="site-form-item-icon"/>}*/}
-            {/*    size={'large'}*/}
-            {/*/>*/}
+            <Welcome/>
+            <Search/>
+            <Favorites routerList={routerList}/>
             {
-                ROUTERS.map((router: any, index) => {
+                DEFAULT_TYPE.map((list: any, index: any) => {
                     return (
-                        <MyCard key={index} title={router?.title} icon={router?.icon} isIndex={true}>
+                        <MyCard key={index} title={list?.title} icon={list?.icon} isIndex={true}>
                             {
-                                router?.router.map((item: any, k: number) => {
-                                    sum+=1
-                                    return (
-                                        <Link key={k} to={item?.value} className={'inline-grid'}>
-                                            <Button size={'large'}>
-                                                {item?.name}
-                                            </Button>
-                                        </Link>
-                                    )
+                                routerList?.map((router: any, k: number) => {
+                                    if (list?.type == router?.type) {
+                                        sum += 1
+                                        return (
+                                            <Link key={k} to={router?.link} className={'inline-grid'}>
+                                                <Button className={`badge rounded-md ${router?.state}`} size={'large'}>
+                                                    {router?.name}
+                                                </Button>
+                                            </Link>
+                                        )
+                                    }
                                 })
                             }
                         </MyCard>
                     )
                 })
             }
-            <Readme explain={
-                ` 当前处于高速更新迭代中，敬请期待 (当前共有${sum}个工具)`}/>
+            <Readme explain={` 当前处于高速更新迭代中，敬请期待 (当前共有${sum}个工具)`}/>
         </div>
     );
 }

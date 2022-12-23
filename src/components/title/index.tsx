@@ -1,26 +1,38 @@
 import {UserOutlined, HomeOutlined} from "@ant-design/icons";
 import './index.css'
 import {Link} from "@umijs/renderer-react";
+import {useTitle} from "ahooks";
 
-export default function Index(props: any) {
+export default function Title(props: any) {
     const {value} = props
+    //设置页面的title
+    useTitle(value?value:'WoodBox')
     return (
-        <div className={'flex justify-center items-center flex-col w-full mt-12 mb-24'}>
-            <div className={'text-2xl font-bold mb-3'}>
-                {value ? `${value} - 一个木函` : '一个木函 - 多功能效率工具箱'}
-            </div>
-            <div className={'flex justify-center items-center'}>
-                {
-                    value &&
-                    <div className={'title-btn mr-3'}>
-                        <HomeOutlined className={'mr-1'}/>
-                        <span><Link to="/" className={'link'}>返回首页</Link></span>
+        <div className={'flex-center flex-col w-full mt-12'}>
+            <div className={'text-3xl font-bold mb-3'}>
+                {value ?
+                    <div className={'flex'}>
+                        <span>{value}</span>
+                        <span className={'hidden ml-1 md:block'}>- WoodBox</span>
+                    </div> :
+                    <div className={'flex'}>
+                        <span>WoodBox</span>
+                        <span className={'hidden ml-1 md:block'}>- 多功能工具</span>
                     </div>
                 }
-                {/*<div className={'title-btn'}>*/}
-                {/*    <UserOutlined className={'mr-1'}/>*/}
-                {/*    <span>未登录</span>*/}
-                {/*</div>*/}
+            </div>
+            <div className={'flex-center mb-3'}>
+                {
+                    value &&
+                    <Link to={'/'}  className={'mr-3'}>
+                        <HomeOutlined/>
+                        <span className={'ml-1'}>返回首页</span>
+                    </Link>
+                }
+                {/*<Link to={'/login'}>*/}
+                {/*    <UserOutlined/>*/}
+                {/*    <span className={'ml-1'}>未登录</span>*/}
+                {/*</Link>*/}
             </div>
         </div>
     );

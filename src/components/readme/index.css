@@ -2,12 +2,12 @@
     position: relative;
     content: "";
     left: 0;
-    top: 2px;
-    margin-right: .25rem;
+    top: 1px;
+    margin-right: 3px;
     display: inline-block;
     border-radius: 50%;
-    width: 6px;
-    height: 6px;
-    background-color: #1677ff;
-    border: 3px solid #BFDBFE;
+    width: 12px;
+    height: 12px;
+    background-color: #1890ff;
+    border: 3px solid #bde2fe;
 }

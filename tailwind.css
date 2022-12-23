@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*flex居中*/
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*主色*/
+.color-main {
+    color: #1890ff
+}
+
+.bg-color-main {
+    background-color: #1890ff
+}

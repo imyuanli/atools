@@ -3,14 +3,15 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    background: #f5f5f5;
+    background: #F4F8FB;
     min-height: 100vh;
+    position: relative;
 }
 
 .content {
-    width: 95%;
-    max-width: 1200px;
-    padding: 6px;
+    width: 100%;
+    max-width: 1024px;
+    padding: 6px 9px;
 }
 
 a {

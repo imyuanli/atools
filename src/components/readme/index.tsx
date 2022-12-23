@@ -1,9 +1,13 @@
 import MyCard from "@/components/my-card";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import './index.css'
+import React from "react";
 
-export default function Readme(props: any) {
-    const {explain} = props
+interface props {
+    explain: any
+}
+
+const Readme: React.FunctionComponent<props> = ({explain}) => {
     return (
         <MyCard title={'说明文档'} icon={<ExclamationCircleOutlined/>}>
             <div>
@@ -22,3 +26,4 @@ export default function Readme(props: any) {
         </MyCard>
     );
 }
+export default Readme

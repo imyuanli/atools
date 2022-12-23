@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
-    "antd": "^5.0.7",
+    "ahooks": "^3.7.3",
+    "antd": "^4.24.5",
     "copy-to-clipboard": "^3.3.3",
     "umi": "^4.0.38"
   },

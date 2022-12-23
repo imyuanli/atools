@@ -20,26 +20,26 @@ const menuItems = [
         icon: <HomeOutlined/>,
         link: '/'
     },
-    {
-        label: '更新日志',
-        icon: <BulbOutlined/>,
-        link: '/update_history',
-    },
-    {
-        label: '反馈',
-        icon: <UserOutlined/>,
-        link: '/help',
-    },
-    {
-        label: '帮助',
-        icon: <QuestionCircleOutlined/>,
-        link: '/help',
-    },
-    {
-        label: '设置',
-        icon: <UserOutlined/>,
-        link: '/setting',
-    },
+    // {
+    //     label: '更新日志',
+    //     icon: <BulbOutlined/>,
+    //     link: '/update_history',
+    // },
+    // {
+    //     label: '反馈',
+    //     icon: <UserOutlined/>,
+    //     link: '/help',
+    // },
+    // {
+    //     label: '帮助',
+    //     icon: <QuestionCircleOutlined/>,
+    //     link: '/help',
+    // },
+    // {
+    //     label: '设置',
+    //     icon: <UserOutlined/>,
+    //     link: '/setting',
+    // },
 ]
 export default function Layout() {
     //菜单
@@ -64,9 +64,9 @@ export default function Layout() {
                     <Button type="primary" shape="circle" className={'m-2'} icon={<MenuFoldOutlined/>} size={"large"}
                             onClick={showDrawer}/>
                 </Tooltip>
-                <Tooltip title="设置" placement={"left"}>
-                    <Button type="primary" shape="circle" className={'m-2'} icon={<SettingOutlined/>} size={"large"}/>
-                </Tooltip>
+                {/*<Tooltip title="设置" placement={"left"}>*/}
+                {/*    <Button type="primary" shape="circle" className={'m-2'} icon={<SettingOutlined/>} size={"large"}/>*/}
+                {/*</Tooltip>*/}
             </div>
             <Drawer
                 width={300}
@@ -79,12 +79,12 @@ export default function Layout() {
                         WoodBox
                     </div>
                     <div className={'flex-center flex-col'}>
-                        <Link to={'/login'}
-                              className={'text-gray-800 text-lg p-3 flex-center w-full hover:bg-gray-100 hover:text-gray-800'}
-                        >
-                            <UserOutlined/>
-                            <span className={'ml-2'}>未登录</span>
-                        </Link>
+                        {/*<Link to={'/login'}*/}
+                        {/*      className={'text-gray-800 text-lg p-3 flex-center w-full hover:bg-gray-100 hover:text-gray-800'}*/}
+                        {/*>*/}
+                        {/*    <UserOutlined/>*/}
+                        {/*    <span className={'ml-2'}>未登录</span>*/}
+                        {/*</Link>*/}
                         <Divider/>
                         {
                             menuItems.map((item: any, index: number) => {

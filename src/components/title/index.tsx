@@ -26,10 +26,10 @@ export default function Title(props: any) {
                         <span className={'ml-1'}>返回首页</span>
                     </Link>
                 }
-                <Link to={'/login'}>
-                    <UserOutlined/>
-                    <span className={'ml-1'}>未登录</span>
-                </Link>
+                {/*<Link to={'/login'}>*/}
+                {/*    <UserOutlined/>*/}
+                {/*    <span className={'ml-1'}>未登录</span>*/}
+                {/*</Link>*/}
             </div>
         </div>
     );

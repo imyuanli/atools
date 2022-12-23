@@ -2,7 +2,7 @@ import {UserOutlined, HomeOutlined} from "@ant-design/icons";
 import './index.css'
 import {Link} from "@umijs/renderer-react";
 
-export default function Index(props: any) {
+export default function Title(props: any) {
     const {value} = props
     return (
         <div className={'flex-center flex-col w-full mt-12'}>
@@ -18,7 +18,7 @@ export default function Index(props: any) {
                     </div>
                 }
             </div>
-            <div className={'flex-center'}>
+            <div className={'flex-center mb-3'}>
                 {
                     value &&
                     <Link to={'/'}  className={'mr-3'}>

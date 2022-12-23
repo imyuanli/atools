@@ -3,9 +3,9 @@ import './index.css'
 import 'antd/dist/antd.css'
 import {
     HomeOutlined,
-    MenuFoldOutlined,
+    MenuFoldOutlined, ReloadOutlined,
 } from "@ant-design/icons";
-import {Button, Divider, Drawer, Tooltip} from "antd";
+import {Button, Divider, Drawer, message, Modal, Tooltip} from "antd";
 import {useState} from "react";
 import {useNavigate} from "@umijs/renderer-react";
 import Title from "@/components/title";
@@ -67,6 +67,31 @@ export default function Layout() {
         onClose()
         navigate(link)
     }
+    //清楚网站缓存
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleOk = () => {
+        //重置欢迎
+        localStorage.removeItem("welcome")
+        //重置你的收藏夹
+        localStorage.removeItem("routerList")
+        setIsModalOpen(false);
+
+        //加个清除效果
+        const hide = message.loading('正在删除', 0, () => {
+            message.success('清除成功，即将自动刷新页面');
+        });
+        setTimeout(hide, 1000);
+        setTimeout(() => {
+            window.location.reload()
+        }, 1500)
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    const clearWebkitData = () => {
+        setIsModalOpen(true);
+    }
     return (
         <div className={'main'}>
             <div className={'absolute right-3 top-3 flex-col flex'}>
@@ -77,7 +102,15 @@ export default function Layout() {
                 {/*<Tooltip title="设置" placement={"left"}>*/}
                 {/*    <Button type="primary" shape="circle" className={'m-2'} icon={<SettingOutlined/>} size={"large"}/>*/}
                 {/*</Tooltip>*/}
+                <Tooltip title="清除网站缓存" placement={"left"}>
+                    <Button type="primary" shape="circle" className={'m-2'} icon={<ReloadOutlined/>} size={"large"}
+                            onClick={clearWebkitData}/>
+                </Tooltip>
             </div>
+            <div className={'content'}>
+                <Outlet context={context}/>
+            </div>
+            <Collect routerList={routerList} setRouterList={setRouterList}/>
             <Drawer
                 width={300}
                 onClose={onClose}
@@ -115,10 +148,15 @@ export default function Layout() {
                     </div>
                 </div>
             </Drawer>
-            <div className={'content'}>
-                <Outlet context={context}/>
-            </div>
-            <Collect routerList={routerList} setRouterList={setRouterList}/>
+            <Modal title="清楚网站缓存"
+                   open={isModalOpen}
+                   onOk={handleOk}
+                   onCancel={handleCancel}
+                   okText={'确定'}
+                   cancelText={'再思考一下'}
+            >
+                是否要清除浏览器缓存？该操作不会删除你的用户数据，清除数据后页面将会刷新
+            </Modal>
         </div>
     );
 }

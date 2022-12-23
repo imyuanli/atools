@@ -1,21 +1,22 @@
 import {Button} from "antd";
 import {useTitle} from "ahooks";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {Link} from "@umijs/renderer-react";
 import './index.css'
 import MyCard from "@/components/my-card";
-import {routerList, typeList} from "@/constant";
+import {DEFAULT_TYPE} from "@/constant";
 import Readme from "@/components/readme";
 import {useOutletContext} from "@@/exports";
 import Welcome from "@/components/welcome";
 import Search from "@/components/search";
+import Favorites from "@/components/favorites";
 
 export default function Index() {
     //设置页面title
     useTitle('WoodBox');
 
     //设置title
-    const {setTitle}: any = useOutletContext();
+    const {setTitle, routerList}: any = useOutletContext();
 
     //页面初始化
     useEffect(() => {
@@ -28,8 +29,9 @@ export default function Index() {
         <div>
             <Welcome/>
             <Search/>
+            <Favorites routerList={routerList}/>
             {
-                typeList.map((list: any, index: any) => {
+                DEFAULT_TYPE.map((list: any, index: any) => {
                     return (
                         <MyCard key={index} title={list?.title} icon={list?.icon} isIndex={true}>
                             {

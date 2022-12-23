@@ -3,7 +3,7 @@ import {
 } from '@ant-design/icons';
 
 // 分类
-export const typeList = [
+export const DEFAULT_TYPE = [
     // {
     //     type: 'usually',
     //     title: '常用工具',
@@ -27,7 +27,7 @@ export const typeList = [
 ]
 
 //路由
-export const routerList = [
+export const DEFAULT_ROUTER = [
     {
         name: '必应壁纸',
         link: '/bing-image',

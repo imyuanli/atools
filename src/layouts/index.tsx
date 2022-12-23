@@ -58,14 +58,8 @@ export default function Layout() {
             defaultValue: DEFAULT_ROUTER,
         },
     );
-
-    //由主页面传递得title参数
-    const [title, setTitle] = useState()
-    const context = {
-        title,
-        setTitle,
-        routerList
-    }
+    //由主页面参数
+    const context = {routerList}
 
     //链接跳转
     const navigate = useNavigate()
@@ -122,7 +116,6 @@ export default function Layout() {
                 </div>
             </Drawer>
             <div className={'content'}>
-                <Title value={title}/>
                 <Outlet context={context}/>
             </div>
             <Collect routerList={routerList} setRouterList={setRouterList}/>

@@ -1,9 +1,12 @@
 import {UserOutlined, HomeOutlined} from "@ant-design/icons";
 import './index.css'
 import {Link} from "@umijs/renderer-react";
+import {useTitle} from "ahooks";
 
 export default function Title(props: any) {
     const {value} = props
+    //设置页面的title
+    useTitle(value?value:'WoodBox')
     return (
         <div className={'flex-center flex-col w-full mt-12'}>
             <div className={'text-3xl font-bold mb-3'}>

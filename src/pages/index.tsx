@@ -1,6 +1,4 @@
 import {Button} from "antd";
-import {useTitle} from "ahooks";
-import {useEffect} from "react";
 import {Link} from "@umijs/renderer-react";
 import './index.css'
 import MyCard from "@/components/my-card";
@@ -10,23 +8,15 @@ import {useOutletContext} from "@@/exports";
 import Welcome from "@/components/welcome";
 import Search from "@/components/search";
 import Favorites from "@/components/favorites";
+import Title from "@/components/title";
 
 export default function Index() {
-    //设置页面title
-    useTitle('WoodBox');
-
-    //设置title
-    const {setTitle, routerList}: any = useOutletContext();
-
-    //页面初始化
-    useEffect(() => {
-        setTitle(null)
-    }, [])
-
+    const {routerList}: any = useOutletContext();
     //总共有多少工具
     let sum = 0
     return (
         <div>
+            <Title/>
             <Welcome/>
             <Search/>
             <Favorites routerList={routerList}/>

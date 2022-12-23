@@ -1,7 +1,13 @@
 import './index.css'
+import React from "react";
 
-export default function MyCard(props: any) {
-    const {title, icon, children, isIndex} = props
+interface props {
+    title?: string,
+    icon?: any,
+    children: any,
+    isIndex?: any
+}
+const MyCard: React.FunctionComponent<props> = ({title, icon, children, isIndex}) => {
     const style = 'grid gap-4 grid-cols-2 md:grid-cols-4'
     return (
         <div
@@ -19,3 +25,4 @@ export default function MyCard(props: any) {
         </div>
     );
 }
+export default MyCard

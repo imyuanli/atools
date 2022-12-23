@@ -2,16 +2,16 @@ import {Outlet} from 'umi';
 import './index.css'
 import 'antd/dist/antd.css'
 import {
-    BulbOutlined,
-    CoffeeOutlined, HomeOutlined,
+    BulbOutlined,HomeOutlined,
     MenuFoldOutlined,
     QuestionCircleOutlined,
     SettingOutlined,
     UserOutlined
 } from "@ant-design/icons";
-import {Button, Divider, Drawer, Menu, Tooltip} from "antd";
+import {Button, Divider, Drawer, Tooltip} from "antd";
 import {useState} from "react";
 import {Link} from "@umijs/renderer-react";
+import Title from "@/components/title";
 
 
 const menuItems = [
@@ -42,16 +42,21 @@ const menuItems = [
     },
 ]
 export default function Layout() {
+    //菜单
     const [open, setOpen] = useState(false);
-
     const showDrawer = () => {
         setOpen(true);
     };
-
     const onClose = () => {
         setOpen(false);
     };
 
+    //由主页面传递得title参数
+    const [title, setTitle] = useState()
+    const context = {
+        title,
+        setTitle
+    }
     return (
         <div className={'main'}>
             <div className={'absolute right-3 top-3 flex-col flex'}>
@@ -98,7 +103,8 @@ export default function Layout() {
                 </div>
             </Drawer>
             <div className={'content'}>
-                <Outlet/>
+                <Title value={title}/>
+                <Outlet context={context}/>
             </div>
         </div>
     );

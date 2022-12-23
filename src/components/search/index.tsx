@@ -1,7 +1,7 @@
 import {Button, Input, Result} from "antd";
 import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
 import {useState} from "react";
-import {routerList} from "@/constant";
+import {DEFAULT_ROUTER} from "@/constant";
 import MyCard from "@/components/my-card";
 import {Link} from "@umijs/renderer-react";
 
@@ -17,7 +17,7 @@ export default function Search() {
         setInputVal(val)
         let arr: Array<any> = []
         if (val) {
-            arr = routerList.filter((item: any) => {
+            arr = DEFAULT_ROUTER.filter((item: any) => {
                 return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
             })
         }
@@ -47,7 +47,7 @@ export default function Search() {
                 inputVal &&
                 (
 
-                    <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined />}>
+                    <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
                         {
                             resultArr.length > 0 ?
                                 resultArr?.map((router: any, k: number) => {

@@ -7,6 +7,7 @@ import MyCard from "@/components/my-card";
 import {ROUTERS} from "@/constant";
 import Readme from "@/components/readme";
 import {useLocalStorageState} from "ahooks";
+import {useState} from "react";
 
 export default function Index() {
     const [welcome, setWelcome] = useLocalStorageState<any>(
@@ -15,7 +16,7 @@ export default function Index() {
             defaultValue: true,
         },
     );
-
+    const [isFocus, setIsFocus] = useState(false)
     let sum = 0
     return (
         <div>
@@ -37,12 +38,20 @@ export default function Index() {
                     </div>
                 </MyCard>
             }
-            <div className={'flex-center bg-white p-3 rounded-lg'}>
-                <SearchOutlined className={'text-2xl mr-3'} />
+            <div
+                className={`flex-center ${isFocus ? 'bg-color-main scale-105 text-white' : 'bg-white'} p-3 rounded-lg shadow-lg duration-100`}>
+                <SearchOutlined className={'text-2xl mr-3'}/>
                 <Input
                     placeholder="输入关键字搜索"
+                    style={{color: `${isFocus ? 'white' : ''}`}}
                     size={'large'}
                     bordered={false}
+                    onFocus={() => {
+                        setIsFocus(true)
+                    }}
+                    onBlur={() => {
+                        setIsFocus(false)
+                    }}
                 />
             </div>
             {

@@ -1,0 +1,68 @@
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.box {
+  font-size: 0;
+  width: 500px;
+  height: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  @media (max-width: 610px) {
+    height: 400px;
+    width: 400px;
+  }
+  @media (max-width: 360px) {
+    height: 350px;
+    width: 350px;
+  }
+
+  .flash {
+    animation: flash ease 2s infinite;
+    background-color: #4fa38c;
+  }
+}
+
+.block {
+  display: inline-block;
+  width: calc(100% / 20 - 6px);
+  height: calc(100% / 20 - 6px);
+  margin: 3px;
+
+  &.past {
+    background-color: #98c3b9;
+  }
+
+  &.sleep {
+    background-color: #c1e8f9;
+  }
+
+  &.work {
+    background-color: #ab9f93;
+  }
+
+  &.child {
+    background-color: #e3a6ab;
+  }
+
+  &.parents {
+    background-color: #7ea1b7;
+  }
+
+  &.surplus {
+    background-color: #e2e2e2;
+  }
+
+  &.retired {
+    background-color: #f8c039;
+  }
+}

@@ -4,11 +4,11 @@ import {
 
 // 分类
 export const DEFAULT_TYPE = [
-    // {
-    //     type: 'usually',
-    //     title: '常用工具',
-    //     icon: <AppstoreOutlined/>
-    // },
+    {
+        type: 'usually',
+        title: '常用工具',
+        icon: <AppstoreOutlined/>
+    },
     {
         type: 'picture',
         title: '图片工具',
@@ -62,5 +62,12 @@ export const DEFAULT_ROUTER = [
         state: 'new',
         type: 'other',
         isCollect:false,
-    }
+    },
+    {
+        name: '人生小格',
+        link: '/life-grid',
+        state: 'new',
+        type: 'usually',
+        isCollect:false,
+    },
 ]

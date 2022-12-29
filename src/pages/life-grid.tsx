@@ -11,9 +11,8 @@ import './life-grid.less'
 import Copy from "@/components/copy";
 import {useLocation} from "react-router";
 import queryString from 'query-string';
-// import DatePicker from "@/components/DatePicker";
-import moment from "moment";
-import {DatePicker} from "antd";
+import {Button, DatePicker} from "antd";
+import {Link} from "@umijs/renderer-react";
 
 type Props = {};
 const LifeGrid = (props: Props) => {
@@ -62,7 +61,6 @@ const LifeGrid = (props: Props) => {
     const [length, setLength] = useState<any>(null)
 
     useEffect(() => {
-        console.log(birthday)
         setDateData()
         getResults()
         //每秒刷新
@@ -139,17 +137,26 @@ const LifeGrid = (props: Props) => {
         <div>
             <Title value={'人生小格'}/>
             <MyCard>
-                <DatePicker
-                    style={{width: '100%'}}
-                    placeholder={'请选择你的出生日期'}
-                    onChange={(_: any, dateString: any) => {
-                        setBirthday(dateString)
-                    }}
-                    size={'large'}
-                    locale={locale}
-                    defaultValue={moment(birthday, 'YYYY-MM-DD')}
-                    format={'YYYY-MM-DD'}
-                />
+                {
+                    parsed?.date ?
+                        <div className={'flex-center'}>
+                            <Button type={'primary'} size={'large'} onClick={() => {
+                                window.location.href = '/life-grid'
+                            }}>
+                                测测你的人生小格
+                            </Button>
+                        </div>
+                        :
+                        <DatePicker
+                            style={{width: '100%'}}
+                            placeholder={'请选择你的出生日期'}
+                            onChange={(_: any, dateString: any) => {
+                                setBirthday(dateString)
+                            }}
+                            size={'large'}
+                            locale={locale}
+                        />
+                }
             </MyCard>
             {
                 pastTime &&
@@ -216,7 +223,7 @@ const LifeGrid = (props: Props) => {
                 </MyCard>
             }
             {
-                birthday && <MyCard title={'分享人生进度'} icon={<ShareAltOutlined/>}>
+                !parsed?.date && birthday && <MyCard title={'分享人生进度'} icon={<ShareAltOutlined/>}>
                     <div className={'bg-blue-50 p-3 rounded-lg relative'}>
                         <Copy value={share()}/>
                         <span>{share()}</span>

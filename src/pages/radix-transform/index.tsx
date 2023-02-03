@@ -105,7 +105,7 @@ export default function RadixTransform() {
                                 <div key={index}>
                                     <BaseTransform
                                         name={item.name}
-                                        value={item.value}
+                                        value={item.value.toUpperCase()}
                                     />
                                 </div>
                             )

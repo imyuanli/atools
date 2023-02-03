@@ -94,16 +94,16 @@ export default function Layout() {
     }
     return (
         <div className={'main'}>
-            <div className={'absolute right-3 top-3 flex-col flex'}>
+            <div className={'absolute right-1 md:right-3 top-3 flex-col flex'}>
                 <Tooltip title="菜单" placement={"left"}>
-                    <Button type="primary" shape="circle" className={'m-2'} icon={<MenuFoldOutlined/>} size={"large"}
+                    <Button type="primary" shape="circle" icon={<MenuFoldOutlined/>} size={"large"}
                             onClick={showDrawer}/>
                 </Tooltip>
                 {/*<Tooltip title="设置" placement={"left"}>*/}
                 {/*    <Button type="primary" shape="circle" className={'m-2'} icon={<SettingOutlined/>} size={"large"}/>*/}
                 {/*</Tooltip>*/}
                 <Tooltip title="清除网站缓存" placement={"left"}>
-                    <Button type="primary" shape="circle" className={'m-2'} icon={<ReloadOutlined/>} size={"large"}
+                    <Button type="primary" shape="circle" className={'mt-2'} icon={<ReloadOutlined/>} size={"large"}
                             onClick={clearWebkitData}/>
                 </Tooltip>
             </div>

@@ -43,7 +43,7 @@ export default function Collect(props: any) {
         <>
             {
                 notIndex &&
-                <div className={'fixed right-3 bottom-3'}>
+                <div className={'fixed right-1 md:right-3 bottom-3'}>
                     <Button onClick={handleChangeCollect} shape={'circle'} size={'large'} type={'primary'} icon={
                         isCollect ? <StarFilled/> : <StarOutlined/>}/>
                 </div>

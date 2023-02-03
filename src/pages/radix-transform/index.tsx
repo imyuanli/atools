@@ -2,9 +2,8 @@ import Title from "@/components/title";
 import MyCard from "@/components/my-card";
 import {
     Input,
-    Select,
 } from 'antd';
-import './system-change.less'
+import './index.less'
 import {useEffect, useState} from "react";
 
 interface systemProps {
@@ -13,7 +12,7 @@ interface systemProps {
     name: string
 }
 
-export default function systemChange() {
+export default function RadixTransform() {
     const [conversionInput, setConversionInput] = useState('')
     const [systemArr, setSystemArr] = useState<systemProps[]>(
         [{
@@ -72,7 +71,7 @@ export default function systemChange() {
                 result.push(" ");
             }
             let item = list[i];
-            var binaryStr: string = ''
+            let binaryStr: string = ''
             if (checkRate(item)) {
                 binaryStr = parseInt(item).toString(number)
             } else {

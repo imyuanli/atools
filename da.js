@@ -34,6 +34,10 @@ const typeList = [
         type: 'other',
         title: '其他工具',
     },
+    {
+        type: 'conversion',
+        title: '数据换算',
+    },
 ]
 
 const arr = []
@@ -72,6 +76,13 @@ const routerList = [
         link: '/mbti-test',
         state: 'new',
         type: 'other',
+        isCollect: false,
+    },
+    {
+        name: '进制转换',
+        link: '/system-change',
+        state: '',
+        type: 'conversion',
         isCollect: false,
     }
 ]

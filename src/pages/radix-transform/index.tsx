@@ -3,8 +3,11 @@ import MyCard from "@/components/my-card";
 import {
     Input,
 } from 'antd';
-import './index.less'
 import {useEffect, useState} from "react";
+import Explain from "@/components/explain";
+import Readme from "@/components/readme";
+import * as React from "react";
+import BaseTransform from "@/components/base-transform";
 
 interface systemProps {
     value: any;
@@ -99,19 +102,22 @@ export default function RadixTransform() {
                     {
                         systemArr.map((item, index) => {
                             return (
-                                <div className="sysytemList" key={index}>
-                                    <span>{item.name}：{item.value}</span>
+                                <div key={index}>
+                                    <BaseTransform
+                                        name={item.name}
+                                        value={item.value}
+                                    />
                                 </div>
                             )
                         })
                     }
                 </div>
             </MyCard>
-            <MyCard title={'说明'}>
-                <div>
+            <Readme>
+                <Explain>
                     请规范的输入相应进制，否则将无法正确计算
-                </div>
-            </MyCard>
+                </Explain>
+            </Readme>
         </div>
     )
 }

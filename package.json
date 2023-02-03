@@ -12,6 +12,7 @@
     "@ant-design/icons": "^4.8.0",
     "ahooks": "^3.7.3",
     "antd": "^4.24.5",
+    "bytes": "^3.1.2",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.7",
     "moment": "^2.29.4",

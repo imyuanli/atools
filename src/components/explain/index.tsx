@@ -7,8 +7,11 @@ interface props {
 
 const Explain: React.FunctionComponent<props> = ({children}) => {
     return (
-        <div className={'explain-li text-base mb-1'}>
-            {children}
+        <div className={'flex mb-2'}>
+            <div className={'explain-li text-base mt-1'}/>
+            <div>
+                {children}
+            </div>
         </div>
     );
 }

@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import Copy from "@/components/copy";
 
-export default function PasswordGenerator() {
+export default function PwdGenerator() {
     const [pwdLength, setPwdLength] = useState<number>(16);
     const [pwdCount, setPwdCount] = useState<number>(1);
     const [checkRes, setCheckRes] = useState<any>(['number', 'lower']);
@@ -106,10 +106,11 @@ export default function PasswordGenerator() {
                 </div>
                 <Checkbox.Group className={'mt-3'} options={options} defaultValue={checkRes} onChange={onChange}/>
                 <div className={'flex justify-end items-center mt-3'}>
-                    <Button style={{maxWidth:120}} className={'w-1/6'} size={'large'} type={'primary'} onClick={onClick}>生成</Button>
+                    <Button style={{maxWidth: 120}} className={'w-1/6'} size={'large'} type={'primary'}
+                            onClick={onClick}>生成</Button>
                 </div>
             </MyCard>
-            <MyCard title={'生成结果'} icon={<LockOutlined />}>
+            <MyCard title={'生成结果'} icon={<LockOutlined/>}>
                 <div className={'bg-blue-50 p-3 rounded-lg relative'}>
                     <Copy value={result.toString()}/>
                     {

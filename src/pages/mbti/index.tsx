@@ -8,7 +8,7 @@ import {get_mbti_questions} from "@/service/juheapi/service";
 import Readme from "@/components/readme";
 import {getPercentage} from "@/utils";
 
-export default function SimpWords() {
+export default function Mbti() {
     //题目列表
     const [question, setQuestion] = useState<any>([])
     //当前题目
@@ -300,14 +300,14 @@ export default function SimpWords() {
             </MyCard>
             {
                 (loadingReport || report) &&
-                <MyCard title={'测试结果'} icon={<EditOutlined/>}>
-                    {
-                        loadingReport ?
-                            <Loading text={"正在计算你的人格，请稍等"}/>
-                            :
-                            <div>报告</div>
-                    }
-                </MyCard>
+              <MyCard title={'测试结果'} icon={<EditOutlined/>}>
+                  {
+                      loadingReport ?
+                          <Loading text={"正在计算你的人格，请稍等"}/>
+                          :
+                          <div>报告</div>
+                  }
+              </MyCard>
             }
             <Readme explain={'根据用户填写的心理测试题，经过MBTI理论和指标模型的分析，最终得到人格测试报告。\n' + '测得的结果仅供参考娱乐。'}/>
         </div>

@@ -1,11 +1,10 @@
 import Title from "@/components/title";
 import MyCard from "@/components/my-card";
-import {Button} from "antd";
 
-export default function User() {
+export default function BingImage() {
     return (
         <div>
-            <Title value={'用户信息'}/>
+            <Title value={'必应壁纸'}/>
             <MyCard>
                 <div>
                     必应壁纸

@@ -1,4 +1,3 @@
-// @flow 
 import * as React from 'react';
 import MyCard from "@/components/my-card";
 import Title from "@/components/title";
@@ -7,7 +6,7 @@ import 'dayjs/locale/zh-cn';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import dayjs from "dayjs";
 import {FieldTimeOutlined, HourglassOutlined, ShareAltOutlined} from "@ant-design/icons";
-import './life-grid.less'
+import './index.less'
 import Copy from "@/components/copy";
 import {useLocation} from "react-router";
 import queryString from 'query-string';
@@ -160,75 +159,75 @@ const LifeGrid = (props: Props) => {
             </MyCard>
             {
                 pastTime &&
-                <MyCard title={'过去的时光'} icon={<HourglassOutlined/>}>
-                    <div className={'grid grid-cols-3 gap-4 justify-items-center md:text-base md:text-xl'}>
-                        <div>
-                            {pastTime?.year} 年
-                        </div>
-                        <div>
-                            {pastTime?.month} 月
-                        </div>
-                        <div>
-                            {pastTime?.day} 日
-                        </div>
-                        <div>
-                            {pastTime?.hour} 时
-                        </div>
-                        <div>
-                            {pastTime?.minute} 分
-                        </div>
-                        <div>
-                            {pastTime?.second} 秒
-                        </div>
-                    </div>
-                </MyCard>
+              <MyCard title={'过去的时光'} icon={<HourglassOutlined/>}>
+                <div className={'grid grid-cols-3 gap-4 justify-items-center md:text-base md:text-xl'}>
+                  <div>
+                      {pastTime?.year} 年
+                  </div>
+                  <div>
+                      {pastTime?.month} 月
+                  </div>
+                  <div>
+                      {pastTime?.day} 日
+                  </div>
+                  <div>
+                      {pastTime?.hour} 时
+                  </div>
+                  <div>
+                      {pastTime?.minute} 分
+                  </div>
+                  <div>
+                      {pastTime?.second} 秒
+                  </div>
+                </div>
+              </MyCard>
             }
             {
                 remainTime &&
-                <MyCard title={'剩下的时光'} icon={<HourglassOutlined/>}>
-                    <div className={'grid grid-cols-3 gap-4 justify-items-center md:text-base md:text-xl'}>
-                        <div>
-                            {remainTime?.year} 年
-                        </div>
-                        <div>
-                            {remainTime?.month} 月
-                        </div>
-                        <div>
-                            {remainTime?.day} 日
-                        </div>
-                        <div>
-                            {remainTime?.hour} 时
-                        </div>
-                        <div>
-                            {remainTime?.minute} 分
-                        </div>
-                        <div>
-                            {remainTime?.second} 秒
-                        </div>
-                    </div>
-                </MyCard>
+              <MyCard title={'剩下的时光'} icon={<HourglassOutlined/>}>
+                <div className={'grid grid-cols-3 gap-4 justify-items-center md:text-base md:text-xl'}>
+                  <div>
+                      {remainTime?.year} 年
+                  </div>
+                  <div>
+                      {remainTime?.month} 月
+                  </div>
+                  <div>
+                      {remainTime?.day} 日
+                  </div>
+                  <div>
+                      {remainTime?.hour} 时
+                  </div>
+                  <div>
+                      {remainTime?.minute} 分
+                  </div>
+                  <div>
+                      {remainTime?.second} 秒
+                  </div>
+                </div>
+              </MyCard>
             }
             {
                 (result && length) && <MyCard title={'人生进度'} icon={<FieldTimeOutlined/>}>
-                    <div className="box">
-                        {
-                            result.map((item: any, index: any) => {
-                                return (
-                                    <div key={index}
-                                         className={`block ${item.type} ${index === 323 && index >= length.past ? 'retired' : ''} ${index === (length.past - 1) ? 'flash' : ''}`}/>
-                                )
-                            })
-                        }
-                    </div>
-                </MyCard>
+                <div className="box">
+                    {
+                        result.map((item: any, index: any) => {
+                            return (
+                                <div key={index}
+                                     className={`block ${item.type} ${index === 323 && index >= length.past ? 'retired' : ''} ${index === (length.past - 1) ? 'flash' : ''}`}/>
+                            )
+                        })
+                    }
+                </div>
+              </MyCard>
             }
             {
                 !parsed?.date && birthday && <MyCard title={'分享人生进度'} icon={<ShareAltOutlined/>}>
-                    <div className={'bg-blue-50 p-3 rounded-lg relative'}>
-                        <Copy value={share()}/>
-                        <span>{share()}</span>
-                    </div>
-                </MyCard>
+                <div className={'bg-blue-50 p-3 rounded-lg relative'}>
+                  <Copy value={share()}/>
+                  <span>{share()}</span>
+                </div>
+              </MyCard>
             }
         </div>
     );

@@ -4,25 +4,13 @@ import './index.css'
 import React from "react";
 
 interface props {
-    explain: any
+    children: any
 }
 
-const Readme: React.FunctionComponent<props> = ({explain}) => {
+const Readme: React.FunctionComponent<props> = ({children}) => {
     return (
         <MyCard title={'说明文档'} icon={<ExclamationCircleOutlined/>}>
-            <div>
-                {
-                    explain.split('\n').map((item:any,index:any) => {
-                        return (
-                            <div key={index} className={'explain-li text-base mb-1'}>
-                                {
-                                    item
-                                }
-                            </div>
-                        )
-                    })
-                }
-            </div>
+            {children}
         </MyCard>
     );
 }

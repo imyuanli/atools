@@ -84,9 +84,9 @@ export const DEFAULT_ROUTER = [
     },
     {
         name: '数据转换',
-        link: '/system-change',
+        link: '/radix-transform',
         state: 'new',
-        type: 'other',
+        type: 'data',
         isCollect:false,
     },
 ]

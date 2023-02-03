@@ -82,4 +82,11 @@ export const DEFAULT_ROUTER = [
         type: 'data',
         isCollect: false,
     },
+    {
+        name: '数据转换',
+        link: '/system-change',
+        state: 'new',
+        type: 'other',
+        isCollect:false,
+    },
 ]

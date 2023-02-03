@@ -4,6 +4,8 @@ import {Button} from "antd";
 import {useEffect, useState} from "react";
 import {get_dog_message} from "@/service/alapi/service";
 import Loading from "@/components/loading";
+import Readme from "@/components/readme";
+import Explain from "@/components/explain";
 
 export default function DogDiary() {
     const [dogMessage, setDogMessage] = useState("")
@@ -35,6 +37,11 @@ export default function DogDiary() {
                         <Loading/>
                 }
             </MyCard>
+            <Readme>
+                <Explain>
+                    舔一个是狗！舔一群是狼！加油成为战狼吧！
+                </Explain>
+            </Readme>
         </div>
     );
 }

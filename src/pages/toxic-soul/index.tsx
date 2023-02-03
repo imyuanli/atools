@@ -4,6 +4,8 @@ import {Button} from "antd";
 import {useEffect, useState} from "react";
 import {get_soul_message} from "@/service/alapi/service";
 import Loading from "@/components/loading";
+import Readme from "@/components/readme";
+import Explain from "@/components/explain";
 
 export default function ToxicSoul() {
     const [message, setMessage] = useState("")
@@ -35,6 +37,11 @@ export default function ToxicSoul() {
                         <Loading/>
                 }
             </MyCard>
+            <Readme>
+                <Explain>
+                    鸡汤虽好可不要贪杯哦~
+                </Explain>
+            </Readme>
         </div>
     );
 }

@@ -6,6 +6,7 @@ import {Button, Checkbox, Slider} from "antd";
 import {useEffect, useState} from "react";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import Copy from "@/components/copy";
+import Explain from "@/components/explain";
 
 export default function PwdGenerator() {
     const [pwdLength, setPwdLength] = useState<number>(16);
@@ -122,7 +123,14 @@ export default function PwdGenerator() {
                     }
                 </div>
             </MyCard>
-            <Readme explain={'请至少选择一个密码组成成分\n' + '密码完全在浏览器生成，请放心使用'}/>
+            <Readme>
+                <Explain>
+                    请至少选择一个密码组成成分
+                </Explain>
+                <Explain>
+                    密码完全在浏览器生成，请放心使用
+                </Explain>
+            </Readme>
         </div>
     );
 }

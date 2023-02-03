@@ -7,6 +7,7 @@ import {ArrowLeftOutlined, CheckCircleOutlined, EditOutlined} from "@ant-design/
 import {get_mbti_questions} from "@/service/juheapi/service";
 import Readme from "@/components/readme";
 import {getPercentage} from "@/utils";
+import Explain from "@/components/explain";
 
 export default function Mbti() {
     //题目列表
@@ -309,7 +310,14 @@ export default function Mbti() {
                   }
               </MyCard>
             }
-            <Readme explain={'根据用户填写的心理测试题，经过MBTI理论和指标模型的分析，最终得到人格测试报告。\n' + '测得的结果仅供参考娱乐。'}/>
+            <Readme>
+                <Explain>
+                    根据用户填写的心理测试题，经过MBTI理论和指标模型的分析，最终得到人格测试报告
+                </Explain>
+                <Explain>
+                    测得的结果仅供参考娱乐
+                </Explain>
+            </Readme>
         </div>
     );
 }

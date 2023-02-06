@@ -6,7 +6,6 @@ export default function BaseTransform(props: any) {
 
     //变更的方法
     const onChange = (value: any, type: any) => setCurInput({type, value})
-
     return (
         <div>
             {

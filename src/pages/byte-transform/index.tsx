@@ -5,7 +5,6 @@ import Explain from "@/components/explain";
 import {useEffect, useState} from "react";
 import * as React from "react";
 import BaseTransform from "@/components/base-transform";
-import {Input} from "antd";
 
 const bytes = require('bytes');
 
@@ -16,6 +15,7 @@ interface systemProps {
 }
 
 export default function ByteTransform() {
+    //定义有哪些分类
     const [itemArr, setItemArr] = useState<systemProps[]>([
         {
             name: 'B',
@@ -48,11 +48,11 @@ export default function ByteTransform() {
             value: ''
         },
     ])
-    //输入的是哪一个
-    const [curInput, setCurInput] = useState({type: '', value: '',})
-    //变更的方法
-    const onChange = (value: any, type: any) => setCurInput({type, value,})
 
+    //输入的是哪一个
+    const [curInput, setCurInput] = useState({type: '', value: ''})
+
+    //监听到改变就修改对应的值
     useEffect(() => {
         //当前输入的值 转换成 B
         const byte = bytes(curInput.value + curInput.type)
@@ -70,24 +70,11 @@ export default function ByteTransform() {
     return (
         <div>
             <Title value={'字节数转换'}/>
-            <MyCard title={'进制转换'}>
-                <div>
-                    {
-                        itemArr.map((item, index) => {
-                            return (
-                                <div key={index}>
-                                    <BaseTransform
-                                        name={item.name}
-                                        value={item.value}
-                                        onChange={(e: any) => {
-                                            onChange(e.target.value, item.type)
-                                        }}
-                                    />
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+            <MyCard title={'字节数转换'}>
+                <BaseTransform
+                    itemArr={itemArr}
+                    setCurInput={setCurInput}
+                />
             </MyCard>
             <Readme>
                 <Explain>

@@ -2,28 +2,91 @@ import Title from "@/components/title";
 import MyCard from "@/components/my-card";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
+import {useEffect, useState} from "react";
+import * as React from "react";
+import BaseTransform from "@/components/base-transform";
 import {Input} from "antd";
-import {useState} from "react";
-import "bytes"
+
+const bytes = require('bytes');
+
+interface systemProps {
+    value: any;
+    type: string;
+    name: string
+}
+
 export default function ByteTransform() {
-    const [count,setCount] = useState()
+    const [itemArr, setItemArr] = useState<systemProps[]>([
+        {
+            name: 'B',
+            type: 'B',
+            value: ''
+        },
+        {
+            name: 'KB',
+            type: 'KB',
+            value: ''
+        },
+        {
+            name: 'MB',
+            type: 'MB',
+            value: ''
+        },
+        {
+            name: 'GB',
+            type: 'GB',
+            value: ''
+        },
+        {
+            name: 'TB',
+            type: 'TB',
+            value: ''
+        },
+        {
+            name: 'PB',
+            type: 'PB',
+            value: ''
+        },
+    ])
+    //输入的是哪一个
+    const [curInput, setCurInput] = useState({type: '', value: '',})
+    //变更的方法
+    const onChange = (value: any, type: any) => setCurInput({type, value,})
+
+    useEffect(() => {
+        //当前输入的值 转换成 B
+        const byte = bytes(curInput.value + curInput.type)
+        const res = [...itemArr]
+        res.map((item, index) => {
+            if (curInput.type == item.type) {
+                item.value = curInput.value
+            } else {
+                item.value = bytes.format(byte, {unit: item.type, unitSeparator: ',', decimalPlaces: 10})?.split(",")[0]
+            }
+        })
+        setItemArr([...res])
+    }, [curInput])
 
     return (
         <div>
             <Title value={'字节数转换'}/>
-            <MyCard>
-                <Input />
+            <MyCard title={'进制转换'}>
                 <div>
-                    <div>er</div>
-                    <span>{}</span>
-                </div>
-                <div>
-                    <div>kb</div>
-                    <Input />
-                </div>
-                <div>
-                    <div>mb</div>
-                    <Input />
+                    {
+                        itemArr.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <BaseTransform
+                                        name={item.name}
+                                        value={item.value}
+                                        onChange={(e: any) => {
+                                            onChange(e.target.value, item.type)
+                                        }}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </MyCard>
             <Readme>

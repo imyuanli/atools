@@ -39,10 +39,6 @@ export default function RadixTransform() {
         },]
     )
 
-    let obj = {
-        2: /^[0-1]+$|^$/
-    }
-
     //返回的 方法对象
     const rex = () => {
         let value = curInput.value
@@ -57,7 +53,6 @@ export default function RadixTransform() {
         // @ts-ignore
         return obj[curInput.type]
     }
-
 
     useEffect(() => {
         const res = [...itemArr]

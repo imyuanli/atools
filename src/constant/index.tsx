@@ -103,6 +103,13 @@ export const DEFAULT_ROUTER = [
         type: 'data',
         isCollect:false,
     },
+    {
+        name: '数字转中文',
+        link: '/number-transform',
+        state: 'new',
+        type: 'data',
+        isCollect:false,
+    },
 ]
 
 //图片api

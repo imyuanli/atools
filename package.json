@@ -19,6 +19,7 @@
     "dayjs": "^1.11.7",
     "html2canvas": "^1.4.1",
     "moment": "^2.29.4",
+    "nzh": "^1.0.8",
     "query-string": "^8.1.0",
     "react-color": "^2.19.3",
     "react-lazy-images": "^1.1.0",

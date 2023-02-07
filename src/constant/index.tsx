@@ -97,3 +97,6 @@ export const DEFAULT_ROUTER = [
         isCollect:false,
     },
 ]
+
+//图片api
+export const IMG_URL='https://qiniu.imyuanli.cn/wbt'

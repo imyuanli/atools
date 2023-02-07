@@ -41,6 +41,13 @@ export const DEFAULT_ROUTER = [
         isCollect: false,
     },
     {
+        name: 'ACG表情包制作',
+        link: '/acg-make',
+        state: 'hot',
+        type: 'picture',
+        isCollect: false,
+    },
+    {
         name: '密码生成器',
         link: '/pwd-generator',
         state: 'hot',

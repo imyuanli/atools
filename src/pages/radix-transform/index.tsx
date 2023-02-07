@@ -39,38 +39,47 @@ export default function RadixTransform() {
         },]
     )
 
+    let obj = {
+        2: /^[0-1]+$|^$/
+    }
+
+    //返回的 方法对象
+    const rex = () => {
+        let value = curInput.value
+        let obj = {
+            '2': /^[0-1]+$|^$/.test(value),
+            '8': /^[0-7]+$|^$/.test(value),
+            '10': /^[0-9]+$|^$/.test(value),
+            '16': /^[a-fA-F0-9]+$|^$/.test(value),
+            '32': /^[a-zA-Z0-9]+$|^$/.test(value),
+        }
+        // todo 先注释掉吧
+        // @ts-ignore
+        return obj[curInput.type]
+    }
+
+
     useEffect(() => {
         const res = [...itemArr]
-        // 输入框校验
-        if(Number(curInput.type) == 2) {
-            if(!/^[0-1]+$|^$/.test(curInput.value)) return
-        }else if(Number(curInput.type) == 8) {
-            if(!/^[0-7]+$|^$/.test(curInput.value)) return
-        }else if(Number(curInput.type) == 10) {
-            if(!/^[0-9]+$|^$/.test(curInput.value)) return
-        }else if(Number(curInput.type) == 16) {
-            if(!/^[a-fA-F0-9]+$|^$/.test(curInput.value)) return
-        }else if(Number(curInput.type) == 32) {
-            if(!/^[a-zA-Z0-9]+$|^$/.test(curInput.value)) return
-        }
+        if (!rex()) return
         res.map((item, index) => {
             if (curInput.type == item.type) {
                 item.value = curInput.value
             } else {
-                item.value = baseConversion(curInput.value,Number(curInput.type),item.type)
+                item.value = baseConversion(curInput.value, Number(curInput.type), item.type)
             }
         })
         setItemArr([...res])
     }, [curInput])
-    
+
     // 进制转换num:输入的值 m：输入的值input的框的进制，转换后的进制
-    const baseConversion = (num:any,m:number,n:number) => {
-        let result = parseInt(num,m).toString(n)
+    const baseConversion = (num: any, m: number, n: number) => {
+        let result = parseInt(num, m).toString(n)
         return num ? result : ''
     }
     return (
         <div>
-            <Title value={'数据转换'}/>
+            <Title value={'进制转换'}/>
             <MyCard title={'进制转换'}>
                 <BaseTransform
                     itemArr={itemArr}

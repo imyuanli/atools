@@ -82,13 +82,13 @@ export const DEFAULT_ROUTER = [
         type: 'data',
         isCollect: false,
     },
-    // {
-    //     name: '进制转换',
-    //     link: '/radix-transform',
-    //     state: 'new',
-    //     type: 'data',
-    //     isCollect:false,
-    // },
+    {
+        name: '进制转换',
+        link: '/radix-transform',
+        state: 'new',
+        type: 'data',
+        isCollect:false,
+    },
     {
         name: '温度转换',
         link: '/temperature-trans',

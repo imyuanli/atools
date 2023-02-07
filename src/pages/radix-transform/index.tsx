@@ -1,8 +1,5 @@
 import Title from "@/components/title";
 import MyCard from "@/components/my-card";
-import {
-    Input,
-} from 'antd';
 import {useEffect, useState} from "react";
 import Explain from "@/components/explain";
 import Readme from "@/components/readme";
@@ -11,107 +8,74 @@ import BaseTransform from "@/components/base-transform";
 
 interface systemProps {
     value: any;
-    number: number;
-    name: string
+    type: any;
+    name: string;
 }
 
 export default function RadixTransform() {
-    const [conversionInput, setConversionInput] = useState('')
-    const [systemArr, setSystemArr] = useState<systemProps[]>(
+    //输入的是哪一个
+    const [curInput, setCurInput] = useState({type: '', value: ''})
+    const [itemArr, setItemArr] = useState<systemProps[]>(
         [{
             value: '',
             name: '二进制',
-            number: 2
+            type: 2,
         }, {
             value: '',
             name: '八进制',
-            number: 8
+            type: 8,
         }, {
             value: '',
             name: '十进制',
-            number: 10
+            type: 10,
         }, {
             value: '',
             name: '十六进制',
-            number: 16
+            type: 16,
         }, {
             value: '',
             name: '三十二进制',
-            number: 32
+            type: 32,
         },]
     )
 
     useEffect(() => {
-        systemArr.map((item: any, index) => {
-            const res = [...systemArr]
-            if (conversionInput == '') {
-                res[index].value = ''
-            } else {
-                if (item.number == 2) {
-                    res[index].value = strToBinary(conversionInput, 2)
-                } else if (item.number == 8) {
-                    res[index].value = strToBinary(conversionInput, 8)
-                } else if (item.number == 10) {
-                    res[index].value = strToBinary(conversionInput, 10)
-                } else if (item.number == 16) {
-                    res[index].value = strToBinary(conversionInput, 16)
-                } else if (item.number == 32) {
-                    res[index].value = strToBinary(conversionInput, 32)
-                }
-            }
-            setSystemArr([...res])
-        })
-    }, [conversionInput])
-
-    const checkRate = (input: any) => /^[0-9]+.?[0-9]*/.test(input)
-
-    //将字符串转换成二进制形式，中间用空格隔开
-    function strToBinary(str: any, number: number) {
-        let result = [];
-        let list = str.split(" ");
-        for (let i = 0; i < list.length; i++) {
-            if (i != 0) {
-                result.push(" ");
-            }
-            let item = list[i];
-            let binaryStr: string = ''
-            if (checkRate(item)) {
-                binaryStr = parseInt(item).toString(number)
-            } else {
-                binaryStr = item.charCodeAt().toString(number);
-            }
-            if (binaryStr == 'NaN') continue
-            result.push(binaryStr);
+        const res = [...itemArr]
+        // 输入框校验
+        if(Number(curInput.type) == 2) {
+            if(!/^[0-1]+$|^$/.test(curInput.value)) return
+        }else if(Number(curInput.type) == 8) {
+            if(!/^[0-7]+$|^$/.test(curInput.value)) return
+        }else if(Number(curInput.type) == 10) {
+            if(!/^[0-9]+$|^$/.test(curInput.value)) return
+        }else if(Number(curInput.type) == 16) {
+            if(!/^[a-fA-F0-9]+$|^$/.test(curInput.value)) return
+        }else if(Number(curInput.type) == 32) {
+            if(!/^[a-zA-Z0-9]+$|^$/.test(curInput.value)) return
         }
-        return result.join("");
-    }
-
-    // 获取input值
-    const changeConversion = (e: any) => {
-        setConversionInput(() => {
-            return e.target.value
+        res.map((item, index) => {
+            if (curInput.type == item.type) {
+                item.value = curInput.value
+            } else {
+                item.value = baseConversion(curInput.value,Number(curInput.type),item.type)
+            }
         })
+        setItemArr([...res])
+    }, [curInput])
+    
+    // 进制转换num:输入的值 m：输入的值input的框的进制，转换后的进制
+    const baseConversion = (num:any,m:number,n:number) => {
+        let result = parseInt(num,m).toString(n)
+        return num ? result : ''
     }
     return (
         <div>
             <Title value={'数据转换'}/>
             <MyCard title={'进制转换'}>
-                <Input onChange={changeConversion} value={conversionInput} style={{width: '100%'}} allowClear
-                       defaultValue="不同类型的值可用空格隔开"/>
-                <div>
-                    {
-                        systemArr.map((item, index) => {
-                            return (
-                                <div key={index}>
-                                    <BaseTransform
-                                        name={item.name}
-                                        value={item.value.toUpperCase()}
-                                    />
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                <BaseTransform
+                    itemArr={itemArr}
+                    setCurInput={setCurInput}
+                />
             </MyCard>
             <Readme>
                 <Explain>

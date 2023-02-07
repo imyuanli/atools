@@ -162,7 +162,7 @@ export default function AcgMake() {
                                                             color: data.color,
                                                             fontSize: data.size,
                                                         }}
-                                                        className={`${data.position.join(" ")}`}
+                                                        className={`${data.position.join(" ")} break-words`}
                                                     >
                                                         {data.value}
                                                     </div>

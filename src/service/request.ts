@@ -47,15 +47,13 @@ function request(url: any, data: any = {}, method: string = 'GET') {
         axios(axiosJson)
             .then((res) => {
                 if (res.status === HTTP_STATUS.SUCCESS) {
-                    //正常请求
-                    if (res.data.errno === 0) {
-                        resolve(res.data.data);
-                    } else if (res.data.errno === 422) {
+                    if (res.data.errno === 422) {
                         notification['warning']({
                             message: '提示',
                             description: res.data.errmsg,
                         });
                     }
+                    resolve(res.data);
                 }
             })
             .catch((err) => {

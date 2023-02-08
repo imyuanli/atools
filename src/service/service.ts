@@ -12,3 +12,8 @@ export async function get_short_url(payload: any) {
 export async function get_short_revert(payload: any) {
     return request.post(BASE_URL + `/get_short_revert/`, payload)
 }
+
+export async function get_soul_message() {
+    return request.get(BASE_URL + `/get_soul_message/`)
+}
+

@@ -1,16 +1,18 @@
 import Title from "@/components/title";
 import MyCard from "@/components/my-card";
-import {Button} from "antd";
 import {useEffect, useState} from "react";
-import {get_dog_message} from "@/service/service";
+import {get_dog_diary} from "@/service/service";
 import Loading from "@/components/loading";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
+import ApiBtn from "@/components/api-btn";
+import Copy from "@/components/copy";
 
 export default function DogDiary() {
     const [dogMessage, setDogMessage] = useState("")
     const getDogMessage = () => {
-        get_dog_message().then((res: any) => {
+        setDogMessage("")
+        get_dog_diary().then((res: any) => {
             if (res) setDogMessage(res)
         })
     }
@@ -23,14 +25,16 @@ export default function DogDiary() {
             <MyCard>
                 {
                     dogMessage ?
-                        <>
-                            <div className={'p-16 text-xl'}>
+                        <div className={'relative'}>
+                            <Copy value={dogMessage} />
+                            <div className={'p-16 text-xl whitespace-pre-wrap'}>
                                 {dogMessage}
                             </div>
-                            <div className={'flex w-full justify-end items-center'}>
-                                <Button type={'primary'} size={'large'} onClick={getDogMessage}>再来亿篇</Button>
-                            </div>
-                        </>
+                            <ApiBtn
+                                text={'再来亿篇'}
+                                func={getDogMessage}
+                            />
+                        </div>
                         :
                         <Loading/>
                 }

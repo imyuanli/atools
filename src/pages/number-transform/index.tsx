@@ -35,6 +35,10 @@ export default function NumberTransform() {
             value: '',
             name: '中文金额(简写)',
             type: 'toMoney',
+        }, {
+            value: '',
+            name: '中文金额(完整)',
+            type: 'toComMoney',
         }]
     )
 
@@ -44,20 +48,31 @@ export default function NumberTransform() {
             if (curInput.type == item.type) {
                 item.value = curInput.value;
             } else {
-                item.value = numberToCn(curInput.value,item.type)
+                item.value = numberToCn(curInput.value,curInput.type,item.type)
             }
         })
         setItemArr([...res])
     }, [switchFlag,curInput])
 
-    const numberToCn = (value: any, type: any) => {
+    const numberToCn = (value: any, curType: any, type:any) => {
+        console.log(value,curType,type);
         const cnorhk = switchFlag ? nzhhk : nzhcn;
-        if (type == 'toLower') {
-            return cnorhk.encodeS(value);
-        } else if (type == 'toCapital') {
-            return cnorhk.encodeB(value);
-        }else if (type == 'toMoney') {
-            return cnorhk.toMoney(value,{outSymbol:false});
+        if(curType == 'number') {
+            if(type == 'toLower') {
+                return cnorhk.encodeS(value);
+            }else if (type == 'toCapital') {
+                return cnorhk.encodeB(value);
+            }else if (type == 'toMoney') {
+                return cnorhk.toMoney(value);
+            }else if (type == 'toComMoney') {
+                return cnorhk.toMoney(value,{complete:true});
+            }
+        }else if(curType == 'toLower'){
+            if(type == 'number') {
+                return cnorhk.decodeS(value);
+            }else if (type == 'toCapital') {
+                return cnorhk.decodeB(value);
+            }
         }
     }
   

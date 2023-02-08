@@ -13,11 +13,8 @@ export default function DogDiary() {
     const getDogMessage = () => {
         setDogMessage("")
         get_dog_diary().then((res: any) => {
-            if (res.data) {
-                setDogMessage(res.data)
-            } else {
-                setDogMessage("")
-            }
+            if (!res.errno) setDogMessage(res)
+            else setDogMessage("")
         }).catch((e) => {
             setDogMessage("")
         })

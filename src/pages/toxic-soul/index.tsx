@@ -13,9 +13,8 @@ export default function ToxicSoul() {
     const getSoulMessage = () => {
         setMessage("")
         get_soul_message().then((res: any) => {
-            if (res.data) {
-                setMessage(res.data)
-            } else setMessage("")
+            if (!res.errno) setMessage(res)
+            else setMessage("")
         }).catch((e) => {
             setMessage("")
         })

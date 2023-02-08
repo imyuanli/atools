@@ -1,23 +1,27 @@
 import Title from "@/components/title";
 import MyCard from "@/components/my-card";
-import {Button} from "antd";
 import {useEffect, useState} from "react";
-import {get_soul_message} from "@/service/alapi/service";
 import Loading from "@/components/loading";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
+import ApiBtn from "@/components/api-btn";
+import Copy from "@/components/copy";
+import {get_soul_message} from "@/service/service";
 
 export default function ToxicSoul() {
     const [message, setMessage] = useState("")
-    const getDogMessage = () => {
+    const getSoulMessage = () => {
+        setMessage("")
         get_soul_message().then((res: any) => {
-            if (res) {
-                setMessage(res.content)
-            }
+            if (res.data) {
+                setMessage(res.data)
+            } else setMessage("")
+        }).catch((e) => {
+            setMessage("")
         })
     }
     useEffect(() => {
-        getDogMessage()
+        getSoulMessage()
     }, [])
     return (
         <div>
@@ -25,14 +29,16 @@ export default function ToxicSoul() {
             <MyCard>
                 {
                     message ?
-                        <>
-                            <div className={'p-16 text-xl flex justify-center items-center'}>
-                                {message}
-                            </div>
-                            <div className={'flex w-full justify-end items-center'}>
-                                <Button type={'primary'} size={'large'} onClick={getDogMessage}>再来亿碗</Button>
-                            </div>
-                        </>
+                        <div className={'relative'}>
+                            <Copy value={message}/>
+                            <div className={'p-16 text-xl whitespace-pre-wrap flex justify-center  items-center'}
+                                 dangerouslySetInnerHTML={{__html: message}}
+                            />
+                            <ApiBtn
+                                text={'再来亿碗'}
+                                func={getSoulMessage}
+                            />
+                        </div>
                         :
                         <Loading/>
                 }

@@ -42,6 +42,36 @@ export default function NumberTransform() {
         }]
     )
 
+    //返回的 方法对象
+    const transToNum = (value:any,type:any) => {
+        const cnorhk = switchFlag ? nzhhk : nzhcn;
+        let obj = {
+            'toLower': cnorhk.encodeS(value),
+            'toCapital': cnorhk.encodeB(value),
+            'toMoney': cnorhk.toMoney(value,{outSymbol:false}),
+            'toComMoney': cnorhk.toMoney(value,{complete:true,outSymbol:false}),
+        }
+        // todo 先注释掉吧
+        // @ts-ignore
+        return obj[type]
+    }
+
+    //返回的 方法对象
+    const transToCn = (value: any, curType: any, type: any) => {
+        const cnorhk = switchFlag ? nzhhk : nzhcn;
+        const transNums = (curType == 'toLower') ? cnorhk.decodeS(value) : cnorhk.decodeB(value)
+        let obj = {
+            'number': transNums,
+            'toLower': cnorhk.encodeS(transNums),
+            'toCapital': cnorhk.encodeB(transNums),
+            'toMoney': cnorhk.toMoney(transNums,{outSymbol:false}),
+            'toComMoney': cnorhk.toMoney(transNums,{complete:true,outSymbol:false}),
+        }
+        // todo 先注释掉吧
+        // @ts-ignore
+        return obj[type]
+    }
+
     useEffect(() => {
         const res = [...itemArr];
         res.map((item, index) => {
@@ -54,25 +84,11 @@ export default function NumberTransform() {
         setItemArr([...res])
     }, [switchFlag,curInput])
 
-    const numberToCn = (value: any, curType: any, type:any) => {
-        console.log(value,curType,type);
-        const cnorhk = switchFlag ? nzhhk : nzhcn;
-        if(curType == 'number') {
-            if(type == 'toLower') {
-                return cnorhk.encodeS(value);
-            }else if (type == 'toCapital') {
-                return cnorhk.encodeB(value);
-            }else if (type == 'toMoney') {
-                return cnorhk.toMoney(value);
-            }else if (type == 'toComMoney') {
-                return cnorhk.toMoney(value,{complete:true});
-            }
-        }else if(curType == 'toLower'){
-            if(type == 'number') {
-                return cnorhk.decodeS(value);
-            }else if (type == 'toCapital') {
-                return cnorhk.decodeB(value);
-            }
+    const numberToCn = (value: any, curType: any, type: any) => {
+        if (curType == 'number') {
+            return transToNum(value,type)
+        } else {
+            return value == '' ? '' : transToCn(value,curType,type)
         }
     }
   

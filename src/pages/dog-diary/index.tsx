@@ -13,7 +13,13 @@ export default function DogDiary() {
     const getDogMessage = () => {
         setDogMessage("")
         get_dog_diary().then((res: any) => {
-            if (res) setDogMessage(res)
+            if (res.data) {
+                setDogMessage(res.data)
+            } else {
+                setDogMessage("")
+            }
+        }).catch((e) => {
+            setDogMessage("")
         })
     }
     useEffect(() => {
@@ -26,7 +32,7 @@ export default function DogDiary() {
                 {
                     dogMessage ?
                         <div className={'relative'}>
-                            <Copy value={dogMessage} />
+                            <Copy value={dogMessage}/>
                             <div className={'p-16 text-xl whitespace-pre-wrap'}>
                                 {dogMessage}
                             </div>

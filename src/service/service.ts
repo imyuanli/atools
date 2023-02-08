@@ -8,3 +8,7 @@ export async function get_dog_message() {
 export async function get_short_url(payload: any) {
     return request.post(BASE_URL + `/get_short_url/`, payload)
 }
+
+export async function get_short_revert(payload: any) {
+    return request.post(BASE_URL + `/get_short_revert/`, payload)
+}

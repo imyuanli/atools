@@ -33,7 +33,7 @@ export const DEFAULT_TYPE = [
 
 //路由
 export const DEFAULT_ROUTER = [
-    //常用工具
+    //常用
     {
         name: '人生小格',
         link: '/life-grid',
@@ -72,7 +72,7 @@ export const DEFAULT_ROUTER = [
         isCollect: false,
     },
 
-    //文本相关
+    //文本
     {
         name: '密码生成器',
         link: '/pwd-generator',
@@ -96,7 +96,6 @@ export const DEFAULT_ROUTER = [
     },
 
     //数据转换
-
     {
         name: '字节数转换',
         link: '/byte-transform',
@@ -109,11 +108,18 @@ export const DEFAULT_ROUTER = [
         link: '/radix-transform',
         state: 'new',
         type: 'data',
-        isCollect:false,
+        isCollect: false,
     },
     {
         name: '温度转换',
         link: '/temperature-trans',
+        state: 'new',
+        type: 'data',
+        isCollect: false,
+    },
+    {
+        name: '数字转中文',
+        link: '/number-transform',
         state: 'new',
         type: 'data',
         isCollect: false,
@@ -126,13 +132,6 @@ export const DEFAULT_ROUTER = [
         state: 'new',
         type: 'other',
         isCollect: false,
-    },
-    {
-        name: '数字转中文',
-        link: '/number-transform',
-        state: 'new',
-        type: 'data',
-        isCollect:false,
     },
 ]
 

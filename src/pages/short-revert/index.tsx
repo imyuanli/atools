@@ -21,10 +21,10 @@ export default function BingImage() {
         setLoading(true)
         get_short_revert(data).then(
             (res: any) => {
-                if (res) {
+                if (!res.errno) {
                     setResult(res?.long_url)
                     setLoading(false)
-                }
+                } else setLoading(false)
             })
             .catch((e) => {
                 setLoading(false)

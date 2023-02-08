@@ -18,16 +18,16 @@ export default function BingImage() {
     const [result, setResult] = useState(null)
     const [loading, setLoading] = useState(false)
     const onClick = () => {
-        if(!data.url){
+        if (!data.url) {
             message.warn('网址不能为空')
         }
         setLoading(true)
         get_short_url(data).then(
             (res: any) => {
-                if (res) {
+                if (!res.errno) {
                     setResult(res?.short_url)
                     setLoading(false)
-                }
+                } else setLoading(false)
             })
             .catch((e) => {
                 setLoading(false)

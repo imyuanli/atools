@@ -11,7 +11,7 @@ export default function BaseTransform(props: any) {
             {
                 itemArr.map((item: any, index: any) => {
                     return (
-                        <div key={index} className="mt-3 p-3 rounded-lg bg-blue-50 flex-center relative">
+                        <div key={index} className="mt-3 p-3 rounded-lg flex-center relative">
                             <div className={'text-base flex-none'}>
                                 <span>{item.name}：</span>
                             </div>

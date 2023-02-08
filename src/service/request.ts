@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {message} from "antd";
+import {message, notification} from "antd";
 
 // 	返回200表示接口正常
 // 404	接口地址不存在
@@ -50,11 +50,20 @@ function request(url: any, data: any = {}, method: string = 'GET') {
                     //正常请求
                     if (res.data.errno === 0) {
                         resolve(res.data.data);
+                    } else if (res.data.errno === 422) {
+                        notification['warning']({
+                            message: '提示',
+                            description: res.data.errmsg,
+                        });
                     }
                 }
             })
             .catch((err) => {
-                message.error('网络波动了，请稍后刷新重试一下',);
+                notification['warning']({
+                    message: '请求出错了',
+                    description:
+                        '网络波动了，请稍后刷新重试一下',
+                });
             });
     });
 }

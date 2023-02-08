@@ -4,3 +4,7 @@ import BASE_URL from './base_url'
 export async function get_dog_message() {
     return request.get(BASE_URL + `/get_dog_diary/`)
 }
+
+export async function get_short_url(payload: any) {
+    return request.post(BASE_URL + `/get_short_url/`, payload)
+}

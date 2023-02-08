@@ -33,6 +33,30 @@ export const DEFAULT_TYPE = [
 
 //路由
 export const DEFAULT_ROUTER = [
+    //常用工具
+    {
+        name: '人生小格',
+        link: '/life-grid',
+        state: 'new',
+        type: 'usually',
+        isCollect: false,
+    },
+    {
+        name: '短网址生成',
+        link: '/short-url',
+        state: 'new',
+        type: 'usually',
+        isCollect: false,
+    },
+    {
+        name: '短网址还原',
+        link: '/short-revert',
+        state: 'new',
+        type: 'usually',
+        isCollect: false,
+    },
+
+    //图片
     {
         name: '必应壁纸',
         link: '/bing-image',
@@ -47,6 +71,8 @@ export const DEFAULT_ROUTER = [
         type: 'picture',
         isCollect: false,
     },
+
+    //文本相关
     {
         name: '密码生成器',
         link: '/pwd-generator',
@@ -68,20 +94,9 @@ export const DEFAULT_ROUTER = [
         type: 'text',
         isCollect: false,
     },
-    {
-        name: 'MBTI测试',
-        link: '/mbti',
-        state: 'new',
-        type: 'other',
-        isCollect: false,
-    },
-    {
-        name: '人生小格',
-        link: '/life-grid',
-        state: 'new',
-        type: 'usually',
-        isCollect: false,
-    },
+
+    //数据转换
+
     {
         name: '字节数转换',
         link: '/byte-transform',
@@ -101,7 +116,16 @@ export const DEFAULT_ROUTER = [
         link: '/temperature-trans',
         state: 'new',
         type: 'data',
-        isCollect:false,
+        isCollect: false,
+    },
+
+    //其他
+    {
+        name: 'MBTI测试',
+        link: '/mbti',
+        state: 'new',
+        type: 'other',
+        isCollect: false,
     },
     {
         name: '数字转中文',
@@ -113,4 +137,4 @@ export const DEFAULT_ROUTER = [
 ]
 
 //图片api
-export const IMG_URL='https://qiniu.imyuanli.cn/wbt'
+export const IMG_URL = 'https://qiniu.imyuanli.cn/wbt'

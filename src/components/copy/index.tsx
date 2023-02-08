@@ -9,8 +9,8 @@ export default function Copy(props: any) {
         message.success("复制成功")
     }
     return (
-        <div className={'absolute top-2 right-2 cursor-pointer'} onClick={copyEleValue}>
-            <CopyOutlined className={'text-xl text-gray-500'}/>
+        <div className={'absolute top-1 right-1 cursor-pointer'} onClick={copyEleValue}>
+            <CopyOutlined className={'text-lg text-gray-500'}/>
         </div>
     );
 }

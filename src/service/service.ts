@@ -17,7 +17,11 @@ export async function get_soul_message() {
     return request.get(BASE_URL + `/get_soul_message/`)
 }
 
-export async function get_mbti_question_list() {
-    return request.get(BASE_URL + `/get_mbti_question_list/`)
+export async function get_mbti_question_list(payload: any) {
+    return request.get(BASE_URL + `/get_mbti_question_list/`, payload)
 }
 
+
+export async function get_mbti_result(payload: any) {
+    return request.post(BASE_URL + `/get_mbti_result/`, payload)
+}

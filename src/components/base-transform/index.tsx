@@ -23,6 +23,7 @@ export default function BaseTransform(props: any) {
                                 style={{width: '100%'}}
                                 allowClear
                                 placeholder={`请输入${item.name}`}
+                                type={item.inputType}
                             />
                         </div>
                     )

@@ -1,0 +1,6 @@
+blockquote p {
+    border-left: 3px solid #33a474;
+    font-style: italic;
+    margin-bottom: 15px!important;
+    padding-left: 15px;
+}

@@ -1,49 +1,100 @@
-import {Button} from "antd";
+import {Button, Input, Result} from "antd";
 import {Link} from "@umijs/renderer-react";
 import './index.css'
 import MyCard from "@/components/my-card";
-import {DEFAULT_TYPE} from "@/constant";
+import {DEFAULT_ROUTER, DEFAULT_TYPE} from "@/constant";
 import Readme from "@/components/readme";
 import {useOutletContext} from "@@/exports";
 import Welcome from "@/components/welcome";
-import Search from "@/components/search";
 import Favorites from "@/components/favorites";
 import Title from "@/components/title";
-import React from "react";
+import React, {useState} from "react";
 import Highlight from "@/components/highlight";
 import Explain from "@/components/explain";
+import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
 
 export default function Index() {
     const {routerList}: any = useOutletContext();
     //总共有多少工具
     let sum = 0
+    //搜索结果
+    const [inputVal, setInputVal] = useState(null)
+    const [resultArr, setResultArr] = useState<any>([])
+    const handleChange = (e: any) => {
+        let val = e.target.value
+        setInputVal(val)
+        let arr: Array<any> = []
+        if (val) {
+            arr = DEFAULT_ROUTER.filter((item: any) => {
+                return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
+            })
+        }
+        setResultArr([...arr])
+    }
     return (
         <div>
             <Title/>
             <Welcome/>
-            <Search/>
-            <Favorites routerList={routerList}/>
+            <div className={`flex-center  bg-white p-3 rounded-lg shadow-lg duration-100`}>
+                <Input
+                    prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
+                    placeholder="输入关键字搜索"
+                    size={'large'}
+                    bordered={false}
+                    onChange={handleChange}
+                    allowClear={true}
+                />
+            </div>
             {
-                DEFAULT_TYPE.map((list: any, index: any) => {
-                    return (
-                        <MyCard key={index} title={list?.title} icon={list?.icon} isIndex={true}>
-                            {
-                                routerList?.map((router: any, k: number) => {
-                                    if (list?.type == router?.type) {
-                                        sum += 1
-                                        return (
-                                            <Link key={k} to={router?.link} className={'inline-grid'}>
-                                                <Button className={`badge rounded-md ${router?.state}`} size={'large'}>
-                                                    {router?.name}
-                                                </Button>
-                                            </Link>
-                                        )
-                                    }
+                inputVal ?
+                    <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
+                        {
+                            resultArr.length > 0 ?
+                                resultArr?.map((router: any, k: number) => {
+                                    return (
+                                        <Link key={k} to={router?.link} className={'inline-grid'}>
+                                            <Button className={`rounded-md ${router?.state}`} size={'large'}>
+                                                {router?.name}
+                                            </Button>
+                                        </Link>
+                                    )
                                 })
-                            }
-                        </MyCard>
-                    )
-                })
+                                :
+                                <div className={'flex-center'}>
+                                    <Result
+                                        style={{padding: 0}}
+                                        title="没有找到相关结果"
+                                    />
+                                </div>
+                        }
+                    </MyCard>
+                    :
+                    <>
+                        <Favorites routerList={routerList}/>
+                        {
+                            DEFAULT_TYPE.map((list: any, index: any) => {
+                                return (
+                                    <MyCard key={index} title={list?.title} icon={list?.icon} isIndex={true}>
+                                        {
+                                            routerList?.map((router: any, k: number) => {
+                                                if (list?.type == router?.type) {
+                                                    sum += 1
+                                                    return (
+                                                        <Link key={k} to={router?.link} className={'inline-grid'}>
+                                                            <Button className={`badge rounded-md ${router?.state}`}
+                                                                    size={'large'}>
+                                                                {router?.name}
+                                                            </Button>
+                                                        </Link>
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    </MyCard>
+                                )
+                            })
+                        }
+                    </>
             }
             <Readme>
                 <Explain>

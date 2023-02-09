@@ -11,7 +11,8 @@ const bytes = require('bytes');
 interface systemProps {
     value: any;
     type: string;
-    name: string
+    name: string;
+    inputType:string
 }
 
 export default function ByteTransform() {
@@ -20,32 +21,38 @@ export default function ByteTransform() {
         {
             name: 'B',
             type: 'B',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: 'KB',
             type: 'KB',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: 'MB',
             type: 'MB',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: 'GB',
             type: 'GB',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: 'TB',
             type: 'TB',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: 'PB',
             type: 'PB',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
     ])
 

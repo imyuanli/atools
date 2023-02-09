@@ -10,7 +10,8 @@ import Highlight from "@/components/highlight";
 interface systemProps {
     value: any;
     type: string;
-    name: string
+    name: string;
+    inputType: string
 }
 
 export default function TemperatureTrans() {
@@ -19,17 +20,20 @@ export default function TemperatureTrans() {
         {
             name: '摄氏度',
             type: 'C',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: '华氏度',
             type: 'F',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: '开氏度',
             type: 'K',
-            value: ''
+            value: '',
+            inputType: 'number'
         }
     ])
     //输入的是哪一个

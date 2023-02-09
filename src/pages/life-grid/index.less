@@ -12,19 +12,9 @@
 
 .box {
   font-size: 0;
-  width: 500px;
-  height: 500px;
-  max-width: 100%;
+  max-width: 600px;
   margin: 0 auto;
   overflow: hidden;
-  @media (max-width: 610px) {
-    height: 400px;
-    width: 400px;
-  }
-  @media (max-width: 360px) {
-    height: 350px;
-    width: 350px;
-  }
 
   .flash {
     animation: flash ease 2s infinite;
@@ -34,8 +24,9 @@
 
 .block {
   display: inline-block;
-  width: calc(100% / 20 - 6px);
-  height: calc(100% / 20 - 6px);
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
   margin: 3px;
 
   &.past {

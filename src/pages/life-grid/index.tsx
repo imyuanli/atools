@@ -2,7 +2,6 @@ import * as React from 'react';
 import MyCard from "@/components/my-card";
 import Title from "@/components/title";
 import {useEffect, useState} from "react";
-import 'dayjs/locale/zh-cn';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import dayjs from "dayjs";
 import {FieldTimeOutlined, HourglassOutlined, ShareAltOutlined} from "@ant-design/icons";
@@ -11,10 +10,12 @@ import Copy from "@/components/copy";
 import {useLocation} from "react-router";
 import queryString from 'query-string';
 import {Button, DatePicker} from "antd";
-import {Link} from "@umijs/renderer-react";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
+import moment from 'moment';
+import 'moment/locale/zh-cn'
 
+moment.locale('zh-cn')
 type Props = {};
 const LifeGrid = (props: Props) => {
     //出生日期
@@ -151,6 +152,8 @@ const LifeGrid = (props: Props) => {
                         <DatePicker
                             style={{width: '100%'}}
                             placeholder={'请选择你的出生日期'}
+                            defaultPickerValue={moment('2000/01/01', 'YYYY/MM/DD')}
+                            format={'YYYY/MM/DD'}
                             onChange={(_: any, dateString: any) => {
                                 setBirthday(dateString)
                             }}

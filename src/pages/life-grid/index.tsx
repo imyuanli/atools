@@ -219,7 +219,7 @@ const LifeGrid = (props: Props) => {
                         result.map((item: any, index: any) => {
                             return (
                                 <div key={index}
-                                     className={`block ${item.type} ${index === 323 && index >= length.past ? 'retired' : ''} ${index === (length.past - 1) ? 'flash' : ''}`}/>
+                                     className={`blockBox ${item.type} ${index === 323 && index >= length.past ? 'retired' : ''} ${index === (length.past - 1) ? 'flash' : ''}`}/>
                             )
                         })
                     }
@@ -239,33 +239,33 @@ const LifeGrid = (props: Props) => {
                     假设我们的寿命是 80 岁,分为400个方块。
                 </Explain>
                 <Explain>
-                    <div className={'block past'}/>
+                    <div className={'blockBox past'}/>
                     <span>
                         你已经走过的生命
                     </span>
                 </Explain>
                 <Explain>
-                    <div className={'block sleep'}/>
+                    <div className={'blockBox sleep'}/>
                     <span>如果你平均每天休息 8 小时，这是你余下生命里睡眠占用的时间</span>
                 </Explain>
                 <Explain>
-                    <div className={'block work'}/>
+                    <div className={'blockBox work'}/>
                     <span>如果你 65 岁退休，退休前平均每天工作 8 小时，这是你余下生命里工作占用的时间</span>
                 </Explain>
                 <Explain>
-                    <div className={'block retired'}/>
+                    <div className={'blockBox retired'}/>
                     <span>65 岁，你退休了</span>
                 </Explain>
                 <Explain>
-                    <div className={'block child'}/>
+                    <div className={'blockBox child'}/>
                     <span>如果你 28 岁生孩子, 孩子18岁出门上大学, 这 18 年里你平均每天能花 5 个小时陪伴孩子，这里是你余下生命里所用去的时间</span>
                 </Explain>
                 <Explain>
-                    <div className={'block parents'}/>
+                    <div className={'blockBox parents'}/>
                     <span>如果你每个月能看望父母一天，在他们 80 岁前，这是你的余生里还能陪伴他们的时光</span>
                 </Explain>
                 <Explain>
-                    <div className={'block surplus'}/>
+                    <div className={'blockBox surplus'}/>
                     <span>除了以上之外，你剩下的所有日子</span>
                 </Explain>
                 <Explain>

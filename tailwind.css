@@ -18,6 +18,11 @@
     background-color: #13c2c2
 }
 
+.bg-color-op{
+    background-color: #e6fffb
+}
+
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 10px;

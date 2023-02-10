@@ -97,7 +97,7 @@ export default function Index() {
                                                 if (list?.type == router?.type) {
                                                     sum += 1
                                                     return (
-                                                        <div key={router.name+k} className={'w-full'}>
+                                                        <div key={router.name + k} className={'w-full'}>
                                                             <RouterBtn router={router}/>
                                                         </div>
                                                     )
@@ -126,8 +126,7 @@ export default function Index() {
                     </div>
                 </Explain>
                 <Explain>
-                    第三方软件(手机 App 或电脑软件)将本网站<Highlight value={'https://woodbox.imyuanli.cn'}/>嵌入到软件内时, 请注明来源,
-                    且软件内产生的一切内容与本网站无关
+                    第三方软件(手机 App 或电脑软件)将本网站 <a href="https://woodbox.imyuanli.cn"> https://woodbox.imyuanli.cn </a>嵌入到软件内时, 请注明来源, 且软件内产生的一切内容与本网站无关
                 </Explain>
                 <Explain>
                     当前处于高速更新迭代中，敬请期待 (当前共有 <Highlight value={sum}/> 个工具)

@@ -14,7 +14,7 @@ const MyCard: React.FunctionComponent<props> = ({title, icon, children, isIndex}
             className={`my-12 pt-12 px-9 pb-6 shadow-lg bg-white rounded-lg relative border-2 ${isIndex ? style : ""}`}>
             {
                 title &&
-                <div className={'card-title text-base'}>
+                <div className={'card-title bg-color-main text-base'}>
                     {
                         icon && <div className={'mr-2'}>{icon}</div>
                     }

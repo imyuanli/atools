@@ -1,6 +1,7 @@
 import {Outlet} from 'umi';
 import './index.css'
-import 'antd/dist/antd.css'
+import 'antd/es/style/themes/default.less';
+import 'antd/dist/antd.less'; // 引入官方提供的 less 样式入口文件
 import {
     HomeOutlined,
     MenuFoldOutlined, ReloadOutlined,

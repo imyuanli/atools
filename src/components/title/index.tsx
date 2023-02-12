@@ -13,11 +13,11 @@ export default function Title(props: any) {
                 {value ?
                     <div className={'flex'}>
                         <span>{value}</span>
-                        <span className={'hidden ml-1 md:block'}>- WoodBox</span>
+                        <span className={'hidden ml-1 md:block'}>- FlashTools</span>
                     </div> :
                     <div className={'flex'}>
-                        <span>WoodBox</span>
-                        <span className={'hidden ml-1 md:block'}>- 多功能工具</span>
+                        <span>FlashTools</span>
+                        <span className={'hidden ml-1 md:block'}>- 你的工具伙伴</span>
                     </div>
                 }
             </div>

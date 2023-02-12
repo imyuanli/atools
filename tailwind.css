@@ -11,11 +11,11 @@
 
 /*主色*/
 .color-main {
-    color: #13c2c2
+    color: #b37feb
 }
 
 .bg-color-main {
-    background-color: #13c2c2
+    background-color: #b37feb
 }
 
 .bg-color-op{
@@ -29,6 +29,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #13c2c2;
+    background-color: #b37feb;
     border-radius: 6666rem;
 }

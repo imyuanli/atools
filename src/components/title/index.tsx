@@ -26,17 +26,15 @@ export default function Title(props: any) {
                     <UserOutlined/>
                     <span className={'ml-1'}>未登录</span>
                 </Link>
+                <Link to={'/'} className={'mr-3'}>
+                    <BugOutlined/>
+                    <span className={'ml-1'}>我要反馈</span>
+                </Link>
                 {
                     value &&
-                  <Link to={'/'} className={'mr-3'}>
+                  <Link to={'/'}>
                     <HomeOutlined/>
                     <span className={'ml-1'}>返回首页</span>
-                  </Link>
-                }
-                {
-                  <Link to={'/'}>
-                    <BugOutlined />
-                    <span className={'ml-1'}>我要反馈</span>
                   </Link>
                 }
             </div>

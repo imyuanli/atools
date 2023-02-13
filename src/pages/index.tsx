@@ -4,7 +4,6 @@ import MyCard from "@/components/my-card";
 import {DEFAULT_ROUTER, DEFAULT_TYPE} from "@/constant";
 import Readme from "@/components/readme";
 import {useOutletContext} from "@@/exports";
-import Welcome from "@/components/welcome";
 import Favorites from "@/components/favorites";
 import Title from "@/components/title";
 import React, {useState} from "react";
@@ -53,7 +52,6 @@ export default function Index() {
     return (
         <div>
             <Title/>
-            <Welcome/>
             <div className={`flex-center  bg-white p-3 rounded-lg shadow-lg duration-100`}>
                 <Input
                     prefix={<SearchOutlined className={'text-2xl mr-3'}/>}

@@ -1,13 +1,12 @@
-import Title from "@/components/title";
-import MyCard from "@/components/my-card";
 import {Button, Tooltip} from "antd";
 import {Link} from "@umijs/renderer-react";
 import React from "react";
+import './index.less'
 
 export default function RouterBtn(props: any) {
     const {router} = props
     return (
-        <>
+        <div className={'router-btn'}>
             {
                 router?.state === 'error' ?
                     <Tooltip title="维护中，禁止访问">
@@ -38,6 +37,6 @@ export default function RouterBtn(props: any) {
                         <div className={`badge ${router?.state}`}/>
                     </Link>
             }
-        </>
+        </div>
     );
 }

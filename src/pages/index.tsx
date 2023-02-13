@@ -1,5 +1,4 @@
 import {Input, Result} from "antd";
-import './index.css'
 import MyCard from "@/components/my-card";
 import {DEFAULT_ROUTER, DEFAULT_TYPE} from "@/constant";
 import Readme from "@/components/readme";
@@ -30,25 +29,6 @@ export default function Index() {
         }
         setResultArr([...arr])
     }
-    //状态数组
-    const stateArr = [
-        {
-            name: '热门',
-            state: 'hot',
-        },
-        {
-            name: '新功能',
-            state: 'new',
-        },
-        {
-            name: '推荐',
-            state: 'recommend',
-        },
-        {
-            name: '维护中',
-            state: 'error',
-        }
-    ]
     return (
         <div>
             <Title/>
@@ -106,20 +86,6 @@ export default function Index() {
                     </>
             }
             <Readme>
-                <Explain>
-                    <div className={'flex'}>
-                        {
-                            stateArr.map((item, index) => {
-                                return (
-                                    <div key={index} className={'relative pr-4 mr-3'}>
-                                        <div>{item.name}</div>
-                                        <div className={`badge ${item.state}`}/>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </Explain>
                 <Explain>
                     第三方软件(手机 App 或电脑软件)将本网站 <a href="https://woodbox.imyuanli.cn"> https://woodbox.imyuanli.cn </a>嵌入到软件内时, 请注明来源, 且软件内产生的一切内容与本网站无关
                 </Explain>

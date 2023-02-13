@@ -2,11 +2,13 @@ import request from './request'
 import BASE_URL from './base_url'
 
 //控制台
+export async function get_all_tools() {
+    return request.get(BASE_URL + `/get_all_tools/`)
+}
+
 export async function insert_new_tool(payload: any) {
     return request.post(BASE_URL + `/insert_new_tool/`, payload)
 }
-
-
 
 
 export async function get_dog_diary() {

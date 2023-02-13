@@ -1,9 +1,9 @@
 import {Button, Drawer, Input, message, Select, Table} from "antd";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useSetState} from "ahooks";
 import {AppstoreOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined, ToolOutlined} from "@ant-design/icons";
 import {DEFAULT_STATE} from "@/constant";
-import {insert_new_tool} from "@/service/service";
+import {get_all_tools, insert_new_tool} from "@/service/service";
 
 interface dataItem {
     name: string,
@@ -41,8 +41,8 @@ export default function BingImage() {
             title: 'VIP',
             dataIndex: 'vip',
             key: 'vip',
-            render: (v: any) => <div>
-                <span>{v ? '需要' : '不需要'}</span>
+            render: (value: any) => <div>
+                <span>{value ? '需要' : '不需要'}</span>
             </div>,
         },
         {
@@ -52,8 +52,8 @@ export default function BingImage() {
         },
         {
             title: '创建日期',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'create_time',
+            key: 'create_time',
         },
         {
             title: '操作',
@@ -71,11 +71,24 @@ export default function BingImage() {
             link: '/life-grid',
             state: 'new',
             type: 'usually',
-            vip: false,
+            vip: 0,
             views: 599,
             date: 2015,
         }
     ])
+    //获取全部工具
+    const getAllTools = () => {
+        get_all_tools().then(
+            (res: any) => {
+                setDataSource(res)
+            }
+        )
+    }
+    //
+    useEffect(() => {
+        getAllTools()
+    }, [])
+
 
     //添加工具
     const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +104,7 @@ export default function BingImage() {
         link: '',
         state: 'new',
         type: 'usually',
-        vip: false,
+        vip: 0,
     }
     const [toolData, setToolData] = useSetState<dataItem>(obj)
     //添加工具
@@ -106,7 +119,7 @@ export default function BingImage() {
         }
         // todo 替换成远程接口
         insert_new_tool({toolData}).then(
-            (res)=>{
+            (res) => {
                 console.log(res)
             }
         )
@@ -273,11 +286,11 @@ export default function BingImage() {
                             }
                             options={[
                                 {
-                                    value: true,
+                                    value: 1,
                                     label: '需要',
                                 },
                                 {
-                                    value: false,
+                                    value: 0,
                                     label: '不需要',
                                 },
                             ]}

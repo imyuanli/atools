@@ -1,4 +1,4 @@
-import {UserOutlined, HomeOutlined} from "@ant-design/icons";
+import {UserOutlined, HomeOutlined, BugOutlined} from "@ant-design/icons";
 import './index.css'
 import {Link} from "@umijs/renderer-react";
 import {useTitle} from "ahooks";
@@ -6,7 +6,7 @@ import {useTitle} from "ahooks";
 export default function Title(props: any) {
     const {value} = props
     //设置页面的title
-    useTitle(value?value:'WoodBox')
+    useTitle(value ? value : 'WoodBox')
     return (
         <div className={'flex-center flex-col w-full mt-12'}>
             <div className={'text-3xl font-bold mb-3'}>
@@ -22,17 +22,23 @@ export default function Title(props: any) {
                 }
             </div>
             <div className={'flex-center mb-3'}>
+                <Link to={'/login'} className={'mr-3'}>
+                    <UserOutlined/>
+                    <span className={'ml-1'}>未登录</span>
+                </Link>
                 {
                     value &&
-                    <Link to={'/'}  className={'mr-3'}>
-                        <HomeOutlined/>
-                        <span className={'ml-1'}>返回首页</span>
-                    </Link>
+                  <Link to={'/'} className={'mr-3'}>
+                    <HomeOutlined/>
+                    <span className={'ml-1'}>返回首页</span>
+                  </Link>
                 }
-                {/*<Link to={'/login'}>*/}
-                {/*    <UserOutlined/>*/}
-                {/*    <span className={'ml-1'}>未登录</span>*/}
-                {/*</Link>*/}
+                {
+                  <Link to={'/'}>
+                    <BugOutlined />
+                    <span className={'ml-1'}>我要反馈</span>
+                  </Link>
+                }
             </div>
         </div>
     );

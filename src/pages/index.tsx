@@ -52,16 +52,13 @@ export default function Index() {
     return (
         <div>
             <Title/>
-            <div className={`flex-center  bg-white p-3 rounded-lg shadow-lg duration-100`}>
-                <Input
-                    prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
-                    placeholder="输入关键字搜索"
-                    size={'large'}
-                    bordered={false}
-                    onChange={handleChange}
-                    allowClear={true}
-                />
-            </div>
+            <Input
+                prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
+                placeholder="输入关键字搜索"
+                size={'large'}
+                onChange={handleChange}
+                allowClear={true}
+            />
             {
                 inputVal ?
                     <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>

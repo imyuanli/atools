@@ -1,6 +1,14 @@
 import request from './request'
 import BASE_URL from './base_url'
 
+//控制台
+export async function insert_new_tool(payload: any) {
+    return request.post(BASE_URL + `/insert_new_tool/`, payload)
+}
+
+
+
+
 export async function get_dog_diary() {
     return request.get(BASE_URL + `/get_dog_diary/`)
 }
@@ -25,3 +33,5 @@ export async function get_mbti_question_list(payload: any) {
 export async function get_mbti_result(payload: any) {
     return request.post(BASE_URL + `/get_mbti_result/`, payload)
 }
+
+

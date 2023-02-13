@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useSetState} from "ahooks";
 import {AppstoreOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined, ToolOutlined} from "@ant-design/icons";
 import {DEFAULT_STATE} from "@/constant";
+import {insert_new_tool} from "@/service/service";
 
 interface dataItem {
     name: string,
@@ -91,8 +92,6 @@ export default function BingImage() {
         state: 'new',
         type: 'usually',
         vip: false,
-        views: 599,
-        date: 2015,
     }
     const [toolData, setToolData] = useSetState<dataItem>(obj)
     //添加工具
@@ -106,6 +105,12 @@ export default function BingImage() {
             return
         }
         // todo 替换成远程接口
+        insert_new_tool({toolData}).then(
+            (res)=>{
+                console.log(res)
+            }
+        )
+
         const res = [...dataSource]
         res.push(toolData)
         // @ts-ignore

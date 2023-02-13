@@ -3,18 +3,109 @@ import './index.css'
 import 'antd/es/style/themes/default.less';
 import 'antd/dist/antd.less'; // 引入官方提供的 less 样式入口文件
 import {
-    HomeOutlined,
-    MenuFoldOutlined, ReloadOutlined,
+    AppstoreOutlined,
+    MailOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ReloadOutlined, SettingOutlined,
 } from "@ant-design/icons";
-import {Button, Divider, Drawer, message, Modal, Tooltip} from "antd";
-import {useState} from "react";
-import {useNavigate} from "@umijs/renderer-react";
-import Title from "@/components/title";
+import {Button, Layout, Menu, MenuProps, message, Modal, Tooltip} from "antd";
+import React, {useEffect, useState} from "react";
 import Collect from "@/components/collect";
 import {DEFAULT_ROUTER} from "@/constant";
 import {useLocalStorageState} from "ahooks";
+import {useLocation} from "@@/exports";
+import {Link} from "@umijs/renderer-react";
 
-export default function Layout() {
+const {Header, Content, Footer, Sider} = Layout;
+const items: MenuProps['items'] = [
+    {
+        label: (
+            <Link to={'/console/tool'}>
+                工具管理
+            </Link>
+        ),
+        key: 'tool',
+        icon: <MailOutlined/>,
+    },
+    {
+        label: (
+            <Link to={'/console/update'}>
+                更新管理
+            </Link>
+        ),
+        key: 'update',
+        icon: <AppstoreOutlined/>,
+    },
+    {
+        label: (
+            <Link to={'/console/link'}>
+                友链管理
+            </Link>
+        ),
+        key: 'link',
+        icon: <SettingOutlined/>,
+    },
+    {
+        label: (
+            <Link to={'/console/reward'}>
+                打赏管理
+            </Link>
+        ),
+        key: 'reward',
+        icon: <SettingOutlined/>,
+    },
+];
+export default function Index() {
+    //控制台
+    const location = useLocation();
+    const [current, setCurrent] = useState('tool');
+
+    //收缩
+    const [collapsed, setCollapsed] = useState(false);
+
+    //初次渲染对应的key
+    useEffect(() => {
+        const key = location.pathname.split('/console/')[1]
+        setCurrent(key)
+    }, [])
+
+    //切换对应的key
+    const onClick: MenuProps['onClick'] = e => {
+        setCurrent(e.key);
+    };
+
+
+    if (location.pathname.startsWith('/console')) {
+        return (
+            <Layout style={{minHeight: '100vh'}}>
+                <Sider trigger={null} collapsible collapsed={collapsed}>
+                    <div className={'flex-center m-3'}>
+                        <img src="../favicon.ico" className={'w-24'} alt=""/>
+                    </div>
+                    <Menu
+                        onClick={onClick}
+                        selectedKeys={[current]}
+                        theme="dark"
+                        mode="inline"
+                        items={items}
+                    />
+                </Sider>
+                <Layout className="site-layout">
+                    <Header style={{padding: 0, background: '#fff'}}>
+                        {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                            className: 'ml-3 text-lg',
+                            onClick: () => setCollapsed(!collapsed),
+                        })}
+                    </Header>
+                    <Content className="bg-white m-3 p-6">
+                        <Outlet/>
+                    </Content>
+                    <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
+                </Layout>
+            </Layout>
+        )
+    }
+
+
+    //官网
     //将路由持久化
     const [routerList, setRouterList] = useLocalStorageState<any>(
         'routerList',
@@ -53,17 +144,6 @@ export default function Layout() {
     return (
         <div className={'main'}>
             <div className={'absolute right-1 md:right-3 top-3 flex-col flex'}>
-                {/*<Tooltip title="菜单" placement={"left"}>*/}
-                {/*    <Button*/}
-                {/*        type="primary"*/}
-                {/*        shape="circle"*/}
-                {/*        icon={<MenuFoldOutlined/>}*/}
-                {/*        size={"large"}*/}
-                {/*    />*/}
-                {/*</Tooltip>*/}
-                {/*<Tooltip title="设置" placement={"left"}>*/}
-                {/*    <Button type="primary" shape="circle" className={'m-2'} icon={<SettingOutlined/>} size={"large"}/>*/}
-                {/*</Tooltip>*/}
                 <Tooltip title="清除网站缓存" placement={"left"}>
                     <Button type="primary" shape="circle" className={'mt-2'} icon={<ReloadOutlined/>} size={"large"}
                             onClick={clearWebkitData}/>

@@ -9,17 +9,23 @@
     align-items: center;
 }
 
+:root {
+    --parimary-color: #b37feb;
+    --shadow-color: #efdbff;
+    --result-color:#f9f0ff
+}
+
 /*主色*/
 .color-main {
-    color: #b37feb
+    color: var(--parimary-color)
 }
 
 .bg-color-main {
-    background-color: #b37feb
+    background-color: var(--parimary-color)
 }
 
-.bg-color-op{
-    background-color: #e6fffb
+.bg-color-result {
+    background-color: var(--result-color)
 }
 
 
@@ -29,6 +35,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #b37feb;
+    background-color: var(--parimary-color);
     border-radius: 6666rem;
 }

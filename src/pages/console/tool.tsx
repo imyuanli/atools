@@ -1,14 +1,7 @@
 import {Button, Drawer, Input, message, Select, Table} from "antd";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useSetState} from "ahooks";
-import {
-    AppstoreOutlined,
-    FileImageOutlined,
-    FontSizeOutlined,
-    RetweetOutlined,
-    ToolOutlined
-} from "@ant-design/icons";
-import {DEFAULT_ROUTER, DEFAULT_STATE} from "@/constant";
+import {DEFAULT_STATE, DEFAULT_TYPE} from "@/utils";
 import {get_all_tools, insert_new_tool, update_tool} from "@/service/service";
 import dayjs from "dayjs";
 
@@ -52,6 +45,9 @@ export default function Tool() {
             title: '类型',
             dataIndex: 'type',
             key: 'type',
+            render: (value: any) => <div>
+                {get_tool_type(value)}
+            </div>,
         },
         {
             title: 'VIP',
@@ -80,7 +76,7 @@ export default function Tool() {
             key: 'action',
             render: (value: any, record: any) => <div>
                 <Button className={'mr-3'} onClick={() => updateTool(record)}>编辑</Button>
-                <Button danger>下架</Button>
+                <Button danger>删除</Button>
             </div>,
         },
     ];
@@ -188,34 +184,6 @@ export default function Tool() {
         })
         showDrawer()
     }
-    //分类
-    const DEFAULT_TYPE = [
-        {
-            value: 'usually',
-            label: '常用工具',
-            icon: <AppstoreOutlined/>
-        },
-        {
-            value: 'picture',
-            label: '图片工具',
-            icon: <FileImageOutlined/>
-        },
-        {
-            value: 'text',
-            label: '文本工具',
-            icon: <FontSizeOutlined/>
-        },
-        {
-            value: 'data',
-            label: '数据换算',
-            icon: <RetweetOutlined/>
-        },
-        {
-            value: 'other',
-            label: '其他工具',
-            icon: <ToolOutlined/>
-        },
-    ]
     //搜索
     const handleChange = (e: any) => {
         let val = e.target.value
@@ -259,6 +227,11 @@ export default function Tool() {
     //     closeTypeDrawer()
     //     setTypeData({...typeInitObj})
     // };
+
+    const get_tool_type = (value:any)=>{
+        const res = DEFAULT_TYPE.find((item:any)=>item.value == value)
+        return res?.label
+    }
 
     return (
         <div>

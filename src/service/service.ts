@@ -6,6 +6,11 @@ export async function get_all_tools() {
     return request.get(BASE_URL + `/get_all_tools/`)
 }
 
+export async function get_no_delete_tools() {
+    return request.get(BASE_URL + `/get_no_delete_tools/`)
+}
+
+
 export async function insert_new_tool(payload: any) {
     return request.post(BASE_URL + `/insert_new_tool/`, payload)
 }

@@ -1,11 +1,11 @@
 import {Input, Result} from "antd";
 import MyCard from "@/components/my-card";
-import {DEFAULT_ROUTER, DEFAULT_TYPE} from "@/constant";
+import {DEFAULT_ROUTER, DEFAULT_TYPE} from "@/utils";
 import Readme from "@/components/readme";
 import {useOutletContext} from "@@/exports";
 import Favorites from "@/components/favorites";
 import Title from "@/components/title";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Highlight from "@/components/highlight";
 import Explain from "@/components/explain";
 import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
@@ -29,6 +29,17 @@ export default function Index() {
         }
         setResultArr([...arr])
     }
+
+    const [toolList, setToolList] = useState<[] | undefined>()
+
+    //数据处理
+    useEffect(() => {
+        const res: any = DEFAULT_TYPE.map(pitem => {
+            const children = routerList.filter((item: any) => pitem.value == item?.type)
+            return {...pitem, children}
+        })
+        setToolList(res)
+    }, [])
     return (
         <div>
             <Title/>
@@ -62,23 +73,12 @@ export default function Index() {
                     </MyCard>
                     :
                     <>
-                        <Favorites routerList={routerList}/>
+                        {/*<Favorites routerList={routerList}/>*/}
                         {
-                            DEFAULT_TYPE.map((list: any, index: any) => {
+                            toolList?.map((list: any, index: any) => {
                                 return (
-                                    <MyCard key={index} title={list?.title} icon={list?.icon} isIndex={true}>
-                                        {
-                                            routerList?.map((router: any, k: number) => {
-                                                if (list?.type == router?.type) {
-                                                    sum += 1
-                                                    return (
-                                                        <div key={router.name + k} className={'w-full'}>
-                                                            <RouterBtn router={router}/>
-                                                        </div>
-                                                    )
-                                                }
-                                            })
-                                        }
+                                    <MyCard key={index} title={list?.label} icon={list?.icon} isIndex={true}>
+                                        <RouterBtn routerList={list?.children}/>
                                     </MyCard>
                                 )
                             })
@@ -87,10 +87,11 @@ export default function Index() {
             }
             <Readme>
                 <Explain>
-                    第三方软件(手机 App 或电脑软件)将本网站 <a href="https://woodbox.imyuanli.cn"> https://woodbox.imyuanli.cn </a>嵌入到软件内时, 请注明来源, 且软件内产生的一切内容与本网站无关
+                    第三方软件(手机 App 或电脑软件)将本网站 <a href="https://woodbox.imyuanli.cn"> https://woodbox.imyuanli.cn </a>嵌入到软件内时,
+                    请注明来源, 且软件内产生的一切内容与本网站无关
                 </Explain>
                 <Explain>
-                    当前处于高速更新迭代中，敬请期待 (当前共有 <Highlight value={sum}/> 个工具)
+                    当前处于高速更新迭代中，敬请期待 (当前共有 <Highlight value={toolList?.length}/> 个工具)
                 </Explain>
             </Readme>
         </div>

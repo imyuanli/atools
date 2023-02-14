@@ -10,6 +10,9 @@ export async function insert_new_tool(payload: any) {
     return request.post(BASE_URL + `/insert_new_tool/`, payload)
 }
 
+export async function update_tool(payload: any) {
+    return request.post(BASE_URL + `/update_tool/`, payload)
+}
 
 export async function get_dog_diary() {
     return request.get(BASE_URL + `/get_dog_diary/`)

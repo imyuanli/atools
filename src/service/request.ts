@@ -28,7 +28,7 @@ const HTTP_STATUS = {
 };
 
 function request(url: any, data: any = {}, method: string = 'GET') {
-    return new Promise(function (resolve) {
+    return new Promise(function (resolve,reject) {
         let axiosJson = {
             url: url,
             method: method,
@@ -60,6 +60,7 @@ function request(url: any, data: any = {}, method: string = 'GET') {
                 }
             })
             .catch((err) => {
+                reject(err)
                 notification['warning']({
                     message: '请求出错了',
                     description:

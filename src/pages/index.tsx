@@ -10,36 +10,48 @@ import Highlight from "@/components/highlight";
 import Explain from "@/components/explain";
 import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
 import RouterBtn from "@/components/router-btn";
+import {get_no_delete_tools} from "@/service/service";
 
 export default function Index() {
-    const {routerList}: any = useOutletContext();
-    //总共有多少工具
-    let sum = 0
+    //接口获取列表
+    const [toolList, setToolList] = useState([])
+    const [sum, setSum] = useState(0)
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        setLoading(true)
+        get_no_delete_tools().then(
+            (res: any) => {
+                if (!res.errno) {
+                    const arr: any = DEFAULT_TYPE.map(pitem => {
+                        const children = res.filter((item: any) => pitem.value == item?.type)
+                        return {...pitem, children}
+                    })
+                    setSum(res.length)
+                    setToolList(arr)
+                    setLoading(false)
+                } else setLoading(false)
+            }
+        ).catch(() => {
+            setTimeout(() => {
+                setLoading(false)
+            }, 1500)
+        })
+
+    }, [])
     //搜索结果
     const [inputVal, setInputVal] = useState(null)
     const [resultArr, setResultArr] = useState<any>([])
     const handleChange = (e: any) => {
         let val = e.target.value
         setInputVal(val)
-        let arr: Array<any> = []
-        if (val) {
-            arr = DEFAULT_ROUTER.filter((item: any) => {
+        if (sum > 0) {
+            const arr = toolList?.filter((item: any) => {
                 return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
             })
+            setResultArr(arr)
         }
-        setResultArr([...arr])
     }
 
-    const [toolList, setToolList] = useState<[] | undefined>()
-
-    //数据处理
-    useEffect(() => {
-        const res: any = DEFAULT_TYPE.map(pitem => {
-            const children = routerList.filter((item: any) => pitem.value == item?.type)
-            return {...pitem, children}
-        })
-        setToolList(res)
-    }, [])
     return (
         <div>
             <Title/>
@@ -73,16 +85,20 @@ export default function Index() {
                     </MyCard>
                     :
                     <>
-                        {/*<Favorites routerList={routerList}/>*/}
                         {
-                            toolList?.map((list: any, index: any) => {
+                            !loading && toolList?.map((list: any, index: any) => {
                                 return (
-                                    <MyCard key={index} title={list?.label} icon={list?.icon} isIndex={true}>
-                                        <RouterBtn routerList={list?.children}/>
-                                    </MyCard>
+                                    <>
+                                        {list.children.length > 0 &&
+                                          <MyCard key={index} title={list?.label} icon={list?.icon} isIndex={true}>
+                                            <RouterBtn routerList={list?.children}/>
+                                          </MyCard>
+                                        }
+                                    </>
                                 )
                             })
                         }
+                        {/*<Favorites routerList={routerList}/>*/}
                     </>
             }
             <Readme>
@@ -91,7 +107,7 @@ export default function Index() {
                     请注明来源, 且软件内产生的一切内容与本网站无关
                 </Explain>
                 <Explain>
-                    当前处于高速更新迭代中，敬请期待 (当前共有 <Highlight value={toolList?.length}/> 个工具)
+                    当前处于高速更新迭代中，敬请期待 (当前共有 <Highlight value={sum}/> 个工具)
                 </Explain>
             </Readme>
         </div>

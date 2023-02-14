@@ -6,8 +6,8 @@ import {CirclePicker} from 'react-color'
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
 import {useSetState} from "ahooks";
-import {useEffect, useState} from "react";
-import {IMG_URL} from "@/constant";
+import {useState} from "react";
+import {IMG_URL} from "@/utils";
 import './index.css'
 import html2canvas from "html2canvas";
 import {LazyLoadImage} from 'react-lazy-load-image-component';

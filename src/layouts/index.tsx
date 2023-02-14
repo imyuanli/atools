@@ -9,7 +9,7 @@ import {
 import {Button, Layout, Menu, MenuProps, message, Modal, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
 import Collect from "@/components/collect";
-import {DEFAULT_ROUTER} from "@/constant";
+import {DEFAULT_ROUTER} from "@/utils";
 import {useLocalStorageState} from "ahooks";
 import {useLocation} from "@@/exports";
 import {Link} from "@umijs/renderer-react";

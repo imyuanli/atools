@@ -1,6 +1,6 @@
 import React from "react";
 import './index.less'
-import {DEFAULT_STATE} from "@/constant";
+import {DEFAULT_STATE} from "@/utils";
 
 export default function StatusMark() {
     return (

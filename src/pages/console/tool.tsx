@@ -4,6 +4,7 @@ import {useSetState} from "ahooks";
 import {AppstoreOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined, ToolOutlined} from "@ant-design/icons";
 import {DEFAULT_STATE} from "@/constant";
 import {get_all_tools, insert_new_tool, update_tool} from "@/service/service";
+import dayjs from "dayjs";
 
 interface dataItem {
     name: string,
@@ -63,6 +64,9 @@ export default function BingImage() {
             title: '创建日期',
             dataIndex: 'create_time',
             key: 'create_time',
+            render: (value: any) => <div>
+                {dayjs(value).format('YYYY-MM-DD HH:mm')}
+            </div>,
         },
         {
             title: '操作',

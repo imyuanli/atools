@@ -1,8 +1,14 @@
 import {Button, Drawer, Input, message, Select, Table} from "antd";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useSetState} from "ahooks";
-import {AppstoreOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined, ToolOutlined} from "@ant-design/icons";
-import {DEFAULT_STATE} from "@/constant";
+import {
+    AppstoreOutlined,
+    FileImageOutlined,
+    FontSizeOutlined,
+    RetweetOutlined,
+    ToolOutlined
+} from "@ant-design/icons";
+import {DEFAULT_ROUTER, DEFAULT_STATE} from "@/constant";
 import {get_all_tools, insert_new_tool, update_tool} from "@/service/service";
 import dayjs from "dayjs";
 
@@ -16,7 +22,7 @@ interface dataItem {
     date?: any,
 }
 
-export default function BingImage() {
+export default function Tool() {
     //获取状态
     const getState = (value: any) => {
         const res = DEFAULT_STATE.find(item => item.value === value)
@@ -83,13 +89,15 @@ export default function BingImage() {
         dataSource: [],
         loading: false,
         isOpen: false,
-        tid: null
+        tid: null,
+        resArr: []
     })
     const {
         dataSource,
         loading,
         isOpen,
-        tid
+        tid,
+        resArr
     } = state
     //获取全部工具
     const getAllTools = () => {
@@ -104,9 +112,9 @@ export default function BingImage() {
                 } else setState({loading: false})
             }
         ).catch(() => {
-            setTimeout(()=>{
+            setTimeout(() => {
                 setState({loading: false})
-            },1500)
+            }, 1500)
         })
     }
     //首次加载
@@ -208,6 +216,17 @@ export default function BingImage() {
             icon: <ToolOutlined/>
         },
     ]
+    //搜索
+    const handleChange = (e: any) => {
+        let val = e.target.value
+        setState({
+            resArr: dataSource.filter((item: any) => {
+                return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
+            })
+        })
+    }
+
+
     // //添加新的分类
     // const [isTypeOpen, setIsTypeOpen] = useState(false);
     // const showTypeDrawer = () => {
@@ -244,10 +263,21 @@ export default function BingImage() {
     return (
         <div>
             <div className={'mb-3 flex justify-end'}>
-                <Button type="primary" className={'mr-3'} onClick={showDrawer}>添加工具</Button>
+                <Input
+                    placeholder={'用名字搜索'}
+                    onChange={handleChange}
+                />
+                <Button type="primary" className={'ml-3'} onClick={showDrawer}>添加工具</Button>
                 {/*<Button type="primary" onClick={showTypeDrawer}>添加分类</Button>*/}
             </div>
-            <Table loading={loading} dataSource={dataSource} columns={columns}/>
+            <Table
+                pagination={{
+                    pageSize: 15
+                }}
+                loading={loading}
+                dataSource={resArr.length > 0 ? resArr : dataSource}
+                columns={columns}
+            />
             <Drawer
                 title="添加新工具"
                 open={isOpen}

@@ -1,9 +1,9 @@
 import {Button, Drawer, Input, message, Select, Table} from "antd";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useSetState} from "ahooks";
 import {AppstoreOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined, ToolOutlined} from "@ant-design/icons";
 import {DEFAULT_STATE} from "@/constant";
-import {get_all_tools, insert_new_tool} from "@/service/service";
+import {get_all_tools, insert_new_tool, update_tool} from "@/service/service";
 
 interface dataItem {
     name: string,
@@ -16,6 +16,12 @@ interface dataItem {
 }
 
 export default function BingImage() {
+    //获取状态
+    const getState = (value: any) => {
+        const res = DEFAULT_STATE.find(item => item.value === value)
+        return res?.label
+    }
+    //table的格式
     const columns = [
         {
             title: '名称',
@@ -31,6 +37,9 @@ export default function BingImage() {
             title: '状态',
             dataIndex: 'state',
             key: 'state',
+            render: (value: any) => <div>
+                <span>{getState(value)}</span>
+            </div>,
         },
         {
             title: '类型',
@@ -42,7 +51,7 @@ export default function BingImage() {
             dataIndex: 'vip',
             key: 'vip',
             render: (value: any) => <div>
-                <span>{value ? '需要' : '不需要'}</span>
+                <span>{value == 1 ? '需要' : '不需要'}</span>
             </div>,
         },
         {
@@ -59,46 +68,58 @@ export default function BingImage() {
             title: '操作',
             dataIndex: 'action',
             key: 'action',
-            render: () => <div>
-                <Button className={'mr-3'}>编辑</Button>
+            render: (value: any, record: any) => <div>
+                <Button className={'mr-3'} onClick={() => updateTool(record)}>编辑</Button>
                 <Button danger>下架</Button>
             </div>,
         },
     ];
-    const [dataSource, setDataSource] = useState<dataItem[]>([
-        {
-            name: '人生小格',
-            link: '/life-grid',
-            state: 'new',
-            type: 'usually',
-            vip: 0,
-            views: 599,
-            date: 2015,
-        }
-    ])
+    //定义数据
+    const [state, setState] = useSetState({
+        dataSource: [],
+        loading: false,
+        isOpen: false,
+        tid: null
+    })
+    const {
+        dataSource,
+        loading,
+        isOpen,
+        tid
+    } = state
     //获取全部工具
     const getAllTools = () => {
+        setState({loading: true})
         get_all_tools().then(
             (res: any) => {
-                setDataSource(res)
+                if (!res.errno) {
+                    setState({
+                        dataSource: res,
+                        loading: false
+                    })
+                } else setState({loading: false})
             }
-        )
+        ).catch(() => {
+            setTimeout(()=>{
+                setState({loading: false})
+            },1500)
+        })
     }
-    //
+    //首次加载
     useEffect(() => {
         getAllTools()
     }, [])
-
-
     //添加工具
-    const [isOpen, setIsOpen] = useState(false);
     const showDrawer = () => {
-        setIsOpen(true);
+        setState({isOpen: true})
     };
     const closeDrawer = () => {
-        setIsOpen(false);
+        setState({
+            isOpen: false,
+            tid: null
+        })
     };
-    //工具数据
+    //工具init数据
     const obj = {
         name: '',
         link: '',
@@ -108,7 +129,7 @@ export default function BingImage() {
     }
     const [toolData, setToolData] = useSetState<dataItem>(obj)
     //添加工具
-    const addNewTool = () => {
+    const addOrUpdateTool = () => {
         if (!toolData.name) {
             message.warn('添加工具名称')
             return
@@ -117,23 +138,44 @@ export default function BingImage() {
             message.warn('添加工具路由')
             return
         }
-        // todo 替换成远程接口
-        insert_new_tool({toolData}).then(
-            (res) => {
-                console.log(res)
-            }
-        )
-
-        const res = [...dataSource]
-        res.push(toolData)
-        // @ts-ignore
-        setDataSource([...res])
-
+        //更新
+        if (tid) {
+            update_tool({
+                tid,
+                toolData
+            }).then(
+                (res: any) => {
+                    if (!res.errno) {
+                        getAllTools()
+                    }
+                }
+            )
+        }
+        //添加工具
+        else {
+            insert_new_tool({toolData}).then(
+                (res: any) => {
+                    if (!res.errno) {
+                        getAllTools()
+                    }
+                }
+            )
+        }
         closeDrawer()
         setToolData({...obj})
-    };
-
-
+    }
+    //更新工具
+    const updateTool = (record: any) => {
+        setState({tid: record.tid})
+        setToolData({
+            name: record.name,
+            link: record.link,
+            state: record.state,
+            type: record.type,
+            vip: record.vip,
+        })
+        showDrawer()
+    }
     //分类
     const DEFAULT_TYPE = [
         {
@@ -162,46 +204,46 @@ export default function BingImage() {
             icon: <ToolOutlined/>
         },
     ]
-    //添加新的分类
-    const [isTypeOpen, setIsTypeOpen] = useState(false);
-    const showTypeDrawer = () => {
-        setIsTypeOpen(true);
-    };
-    const closeTypeDrawer = () => {
-        setIsTypeOpen(false);
-    };
-    const typeInitObj = {
-        label: '',
-        value: '',
-        icon: ''
-    }
-    const [typeData, setTypeData] = useSetState(typeInitObj)
-    const addNewType = () => {
-        if (!typeData.label) {
-            message.warn('添加类型名称')
-            return
-        }
-        if (!typeData.value) {
-            message.warn('添加类型')
-            return
-        }
-        if (!typeData.icon) {
-            message.warn('添加类型图标')
-            return
-        }
-        // todo 替换成远程接口
-        console.log('typeData:', typeData);
-        closeTypeDrawer()
-        setTypeData({...typeInitObj})
-    };
+    // //添加新的分类
+    // const [isTypeOpen, setIsTypeOpen] = useState(false);
+    // const showTypeDrawer = () => {
+    //     setIsTypeOpen(true);
+    // };
+    // const closeTypeDrawer = () => {
+    //     setIsTypeOpen(false);
+    // };
+    // const typeInitObj = {
+    //     label: '',
+    //     value: '',
+    //     icon: ''
+    // }
+    // const [typeData, setTypeData] = useSetState(typeInitObj)
+    // const addNewType = () => {
+    //     if (!typeData.label) {
+    //         message.warn('添加类型名称')
+    //         return
+    //     }
+    //     if (!typeData.value) {
+    //         message.warn('添加类型')
+    //         return
+    //     }
+    //     if (!typeData.icon) {
+    //         message.warn('添加类型图标')
+    //         return
+    //     }
+    //     // todo 替换成远程接口
+    //     console.log('typeData:', typeData);
+    //     closeTypeDrawer()
+    //     setTypeData({...typeInitObj})
+    // };
 
     return (
         <div>
             <div className={'mb-3 flex justify-end'}>
                 <Button type="primary" className={'mr-3'} onClick={showDrawer}>添加工具</Button>
-                <Button type="primary" onClick={showTypeDrawer}>添加分类</Button>
+                {/*<Button type="primary" onClick={showTypeDrawer}>添加分类</Button>*/}
             </div>
-            <Table dataSource={dataSource} columns={columns}/>
+            <Table loading={loading} dataSource={dataSource} columns={columns}/>
             <Drawer
                 title="添加新工具"
                 open={isOpen}
@@ -209,8 +251,9 @@ export default function BingImage() {
                 width={'40%'}
                 footer={
                     <div className={'flex justify-end'}>
-                        <Button size={'large'} type={'primary'} onClick={addNewTool}>添加</Button>
-                        {/*<Button size={'large'} type={'primary'}>更新</Button>*/}
+                        <Button size={'large'} type={'primary'} onClick={addOrUpdateTool}>
+                            {tid ? "更新" : "添加"}
+                        </Button>
                         <Button size={'large'} className={'ml-3'}>取消</Button>
                     </div>
                 }
@@ -298,61 +341,61 @@ export default function BingImage() {
                     </div>
                 </div>
             </Drawer>
-            <Drawer
-                title="添加新分类"
-                open={isTypeOpen}
-                onClose={closeTypeDrawer}
-                width={'40%'}
-                footer={
-                    <div className={'flex justify-end'}>
-                        <Button size={'large'} type={'primary'} onClick={addNewType}>添加</Button>
-                        {/*<Button size={'large'} type={'primary'}>更新</Button>*/}
-                        <Button size={'large'} className={'ml-3'}>取消</Button>
-                    </div>
-                }
-            >
-                <div>
-                    <div className={'mb-6'}>
-                        <div className={'mb-1'}>类型名称</div>
-                        <Input
-                            value={typeData.label}
-                            onChange={
-                                (e) => {
-                                    setTypeData({
-                                        label: e.target.value
-                                    })
-                                }
-                            }
-                        />
-                    </div>
-                    <div className={'mb-6'}>
-                        <div className={'mb-1'}>类型</div>
-                        <Input
-                            value={typeData.value}
-                            onChange={
-                                (e) => {
-                                    setTypeData({
-                                        value: e.target.value
-                                    })
-                                }
-                            }
-                        />
-                    </div>
-                    <div className={'mb-6'}>
-                        <div className={'mb-1'}>类型图标</div>
-                        <Input
-                            value={typeData.icon}
-                            onChange={
-                                (e) => {
-                                    setTypeData({
-                                        icon: e.target.value
-                                    })
-                                }
-                            }
-                        />
-                    </div>
-                </div>
-            </Drawer>
+            {/*<Drawer*/}
+            {/*    title="添加新分类"*/}
+            {/*    open={isTypeOpen}*/}
+            {/*    onClose={closeTypeDrawer}*/}
+            {/*    width={'40%'}*/}
+            {/*    footer={*/}
+            {/*        <div className={'flex justify-end'}>*/}
+            {/*            <Button size={'large'} type={'primary'} onClick={addNewType}>添加</Button>*/}
+            {/*            /!*<Button size={'large'} type={'primary'}>更新</Button>*!/*/}
+            {/*            <Button size={'large'} className={'ml-3'}>取消</Button>*/}
+            {/*        </div>*/}
+            {/*    }*/}
+            {/*>*/}
+            {/*    <div>*/}
+            {/*        <div className={'mb-6'}>*/}
+            {/*            <div className={'mb-1'}>类型名称</div>*/}
+            {/*            <Input*/}
+            {/*                value={typeData.label}*/}
+            {/*                onChange={*/}
+            {/*                    (e) => {*/}
+            {/*                        setTypeData({*/}
+            {/*                            label: e.target.value*/}
+            {/*                        })*/}
+            {/*                    }*/}
+            {/*                }*/}
+            {/*            />*/}
+            {/*        </div>*/}
+            {/*        <div className={'mb-6'}>*/}
+            {/*            <div className={'mb-1'}>类型</div>*/}
+            {/*            <Input*/}
+            {/*                value={typeData.value}*/}
+            {/*                onChange={*/}
+            {/*                    (e) => {*/}
+            {/*                        setTypeData({*/}
+            {/*                            value: e.target.value*/}
+            {/*                        })*/}
+            {/*                    }*/}
+            {/*                }*/}
+            {/*            />*/}
+            {/*        </div>*/}
+            {/*        <div className={'mb-6'}>*/}
+            {/*            <div className={'mb-1'}>类型图标</div>*/}
+            {/*            <Input*/}
+            {/*                value={typeData.icon}*/}
+            {/*                onChange={*/}
+            {/*                    (e) => {*/}
+            {/*                        setTypeData({*/}
+            {/*                            icon: e.target.value*/}
+            {/*                        })*/}
+            {/*                    }*/}
+            {/*                }*/}
+            {/*            />*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</Drawer>*/}
         </div>
     );
 }

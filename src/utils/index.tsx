@@ -148,6 +148,10 @@ export const IMG_URL = 'https://qiniu.imyuanli.cn/wbt'
 //默认状态
 export const DEFAULT_STATE = [
     {
+        value: 'idle',
+        label: '无状态',
+    },
+    {
         value: 'new',
         label: '新功能',
     },
@@ -160,8 +164,12 @@ export const DEFAULT_STATE = [
         label: '热门',
     },
     {
+        value: 'vip',
+        label: 'VIP',
+    },
+    {
         value: 'error',
-        label: 'bug',
+        label: 'Bug',
     },
 ]
 

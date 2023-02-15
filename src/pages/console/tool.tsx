@@ -10,7 +10,6 @@ interface dataItem {
     link: string,
     state: string,
     type: string,
-    vip: any,
     views?: any,
     date?: any,
 }
@@ -47,14 +46,6 @@ export default function Tool() {
             key: 'type',
             render: (value: any) => <div>
                 {get_tool_type(value)}
-            </div>,
-        },
-        {
-            title: 'VIP',
-            dataIndex: 'vip',
-            key: 'vip',
-            render: (value: any) => <div>
-                <span>{value == 1 ? '需要' : '不需要'}</span>
             </div>,
         },
         {
@@ -133,7 +124,6 @@ export default function Tool() {
         link: '',
         state: 'new',
         type: 'usually',
-        vip: 0,
     }
     const [toolData, setToolData] = useSetState<dataItem>(obj)
     //添加工具
@@ -180,7 +170,6 @@ export default function Tool() {
             link: record.link,
             state: record.state,
             type: record.type,
-            vip: record.vip,
         })
         showDrawer()
     }
@@ -320,30 +309,6 @@ export default function Tool() {
                                 }
                             }
                             options={DEFAULT_TYPE}
-                        />
-                    </div>
-                    <div className={'mb-6'}>
-                        <div className={'mb-1'}>是否需要VIP</div>
-                        <Select
-                            value={toolData.vip}
-                            style={{width: '100%'}}
-                            onChange={
-                                (value) => {
-                                    setToolData({
-                                        vip: value
-                                    })
-                                }
-                            }
-                            options={[
-                                {
-                                    value: 1,
-                                    label: '需要',
-                                },
-                                {
-                                    value: 0,
-                                    label: '不需要',
-                                },
-                            ]}
                         />
                     </div>
                 </div>

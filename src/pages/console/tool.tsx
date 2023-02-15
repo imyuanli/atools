@@ -1,8 +1,8 @@
-import {Button, Drawer, Input, message, Select, Table} from "antd";
-import {useEffect} from "react";
+import {Button, Drawer, Input, message, Popconfirm, Select, Table} from "antd";
+import React, {useEffect} from "react";
 import {useSetState} from "ahooks";
 import {DEFAULT_STATE, DEFAULT_TYPE} from "@/utils";
-import {get_all_tools, insert_new_tool, update_tool} from "@/service/service";
+import {get_no_delete_tools, insert_new_tool, update_tool} from "@/service/service";
 import dayjs from "dayjs";
 
 interface dataItem {
@@ -67,7 +67,14 @@ export default function Tool() {
             key: 'action',
             render: (value: any, record: any) => <div>
                 <Button className={'mr-3'} onClick={() => updateTool(record)}>编辑</Button>
-                <Button danger>删除</Button>
+                <Popconfirm
+                    title={`确定删除${record.name}?`}
+                    onConfirm={()=>{handleConfirm(record)}}
+                    okText="确认"
+                    cancelText="取消"
+                >
+                    <Button danger>删除</Button>
+                </Popconfirm>
             </div>,
         },
     ];
@@ -89,7 +96,7 @@ export default function Tool() {
     //获取全部工具
     const getAllTools = () => {
         setState({loading: true})
-        get_all_tools().then(
+        get_no_delete_tools().then(
             (res: any) => {
                 if (!res.errno) {
                     setState({
@@ -173,6 +180,21 @@ export default function Tool() {
         })
         showDrawer()
     }
+    //删除工具
+    const handleConfirm = (record:any)=> {
+        update_tool({
+            tid:record.tid,
+            isDelete:1
+        }).then(
+            (res: any) => {
+                if (!res.errno) {
+                    message.success('删除成功')
+                    getAllTools()
+                }
+            }
+        )
+    }
+
     //搜索
     const handleChange = (e: any) => {
         let val = e.target.value
@@ -182,7 +204,6 @@ export default function Tool() {
             })
         })
     }
-
 
     // //添加新的分类
     // const [isTypeOpen, setIsTypeOpen] = useState(false);

@@ -54,7 +54,7 @@ export default function Login() {
 
     return (
         <div>
-            <Title value={'登录'}/>
+            <Title value={'登录'} isLogin={true}/>
             <div className={'flex-center'}>
                 <Card style={{width: 400}}>
                     <Tabs

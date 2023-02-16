@@ -4,7 +4,7 @@ import {Link} from "@umijs/renderer-react";
 import {useTitle} from "ahooks";
 
 export default function Title(props: any) {
-    const {value,isLogin} = props
+    const {value, isLogin} = props
     //设置页面的title
     useTitle(value ? value : 'WoodBox')
     return (
@@ -23,15 +23,18 @@ export default function Title(props: any) {
             </div>
             <div className={'flex-center mb-3'}>
                 {
-                    !isLogin && <Link to={'/login'} className={'mr-3'}>
-                        <UserOutlined/>
-                        <span className={'ml-1'}>未登录</span>
+                    !isLogin &&
+                  <>
+                    <Link to={'/login'} className={'mr-3'}>
+                      <UserOutlined/>
+                      <span className={'ml-1'}>未登录</span>
                     </Link>
+                    <Link to={'/'} className={'mr-3'}>
+                      <BugOutlined/>
+                      <span className={'ml-1'}>我要反馈</span>
+                    </Link>
+                  </>
                 }
-                <Link to={'/'} className={'mr-3'}>
-                    <BugOutlined/>
-                    <span className={'ml-1'}>我要反馈</span>
-                </Link>
                 {
                     value &&
                   <Link to={'/'}>

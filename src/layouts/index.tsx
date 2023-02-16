@@ -57,22 +57,17 @@ export default function Index() {
     //控制台
     const location = useLocation();
     const [current, setCurrent] = useState('tool');
-
     //收缩
     const [collapsed, setCollapsed] = useState(false);
-
     //初次渲染对应的key
     useEffect(() => {
         const key = location.pathname.split('/console/')[1]
         setCurrent(key)
     }, [])
-
     //切换对应的key
     const onClick: MenuProps['onClick'] = e => {
         setCurrent(e.key);
     };
-
-
     if (location.pathname.startsWith('/console')) {
         return (
             <Layout style={{minHeight: '100vh'}}>
@@ -104,6 +99,16 @@ export default function Index() {
         )
     }
 
+    //登录页面
+    if (location.pathname.startsWith('/')) {
+        return (
+            <div className={'main'}>
+                <div className={'content'}>
+                    <Outlet/>
+                </div>
+            </div>
+        )
+    }
 
     //官网
     //将路由持久化
@@ -115,7 +120,6 @@ export default function Index() {
     );
     //由主页面参数
     const context = {routerList}
-
     //清楚网站缓存
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOk = () => {
@@ -137,7 +141,6 @@ export default function Index() {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-
     const clearWebkitData = () => {
         setIsModalOpen(true);
     }

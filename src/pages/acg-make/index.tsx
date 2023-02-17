@@ -12,6 +12,7 @@ import './index.css'
 import html2canvas from "html2canvas";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
+import withAuth from '@/hocs/withAuth'
 
 const options = [
     {label: '加粗', value: 'font-bold'},
@@ -27,7 +28,7 @@ interface dataItem {
     color: string,
 }
 
-export default function AcgMake() {
+function AcgMake() {
     //配置
     const [data, setData] = useSetState<dataItem>(
         {
@@ -202,3 +203,6 @@ export default function AcgMake() {
         </div>
     );
 }
+
+
+export default withAuth(AcgMake)

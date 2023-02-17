@@ -8,4 +8,5 @@ export default defineConfig({
         "@primary-color": "#b37feb",
         "@link-color": "#b37feb",
     },
+    dva: {},
 });

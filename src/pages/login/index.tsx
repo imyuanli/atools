@@ -3,23 +3,31 @@ import MyCard from "@/components/my-card";
 import {Button, Card, Input, message, Tabs} from "antd";
 import {KeyOutlined, MailOutlined} from "@ant-design/icons";
 import {useSetState} from "ahooks";
+import {get_login, get_login_code} from "@/service/service";
+import {useEffect, useState} from "react";
 
 export default function Login() {
 
     const [data, setData] = useSetState({
         email: "",
         code: "",
+        time: 59,
+        codeLoading: false,
+        loginLoading: false,
     })
+    //定时器
+    let interval: any = ""
+    //解析数据
+    let {email, code, time, codeLoading, loginLoading} = data
 
     //校验邮箱格式
-    const checkEmail = (email: any) => {
+    const checkEmail = (value: any) => {
         const emailRule = /^[a-zA-Z0-9]+([._\\-]*[a-zA-Z0-9])*@([a-zA-Z0-9]+[-a-zA-Z0-9]*[a-zA-Z0-9]+.){1,63}[a-zA-Z0-9]+$/g
-        return emailRule.test(email)
+        return emailRule.test(value)
     }
 
     //获取验证码
     const getLoginCode = () => {
-        const {email} = data
         if (!email) {
             message.warn('请先输入邮箱')
             return
@@ -28,12 +36,35 @@ export default function Login() {
             message.warn('请输入正确格式的邮箱')
             return
         }
+        if (interval) {
+            clearInterval(interval)
+        }
+        setData({codeLoading: true})
+        interval = setInterval(() => {
+            setData((state) => {
+                return {
+                    ...state,
+                    time: state.time - 1
+                }
+            })
+        }, 1000)
         // 获取 验证码
+        get_login_code({email}).then()
     }
+    useEffect(() => {
+        if (time <= -1) {
+            // 定时器超过时间后，可以重新发送验证码
+            clearInterval(interval)
+            // 可点击
+            setData({
+                codeLoading: false,
+                time: 59
+            })
+        }
+    }, [time])
 
     //登录
     const handleLogin = () => {
-        const {email, code} = data
         if (!email) {
             message.warn('请先输入邮箱')
             return
@@ -46,17 +77,21 @@ export default function Login() {
             message.warn('请输入您获取到的验证码')
             return
         }
-        if (code.length !== 6) {
-            message.warn('验证码不正确')
-            return
-        }
+        // if (code.length !== 6) {
+        //     message.warn('验证码不正确')
+        //     return
+        // }
+        get_login({email, code}).then(
+            (res) => {
+                console.log(res)
+            }
+        )
     }
-
     return (
         <div>
             <Title value={'登录'} isLogin={true}/>
             <div className={'flex-center'}>
-                <Card style={{width: 400}}>
+                <Card style={{width: 400}} className={'shadow-lg'}>
                     <Tabs
                         defaultActiveKey="1"
                         centered={true}
@@ -82,7 +117,14 @@ export default function Login() {
                                                 setData({code: e.target.value})
                                             }}
                                             suffix={
-                                                <Button onClick={getLoginCode}>获取验证码</Button>
+                                                <Button disabled={codeLoading} onClick={getLoginCode}>
+                                                    {
+                                                        codeLoading ?
+                                                            <span>{time}秒后重发</span>
+                                                            :
+                                                            <span>获取验证码</span>
+                                                    }
+                                                </Button>
                                             }
                                         />
                                         <Button

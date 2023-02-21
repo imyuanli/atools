@@ -1,9 +1,8 @@
 import {Input, Result} from "antd";
 import MyCard from "@/components/my-card";
-import {DEFAULT_ROUTER, DEFAULT_TYPE} from "@/utils";
+import {DEFAULT_TYPE} from "@/utils";
 import Readme from "@/components/readme";
-import {useOutletContext} from "@@/exports";
-import Favorites from "@/components/favorites";
+
 import Title from "@/components/title";
 import React, {useEffect, useState} from "react";
 import Highlight from "@/components/highlight";

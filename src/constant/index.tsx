@@ -140,6 +140,13 @@ export const DEFAULT_ROUTER = [
         type: 'other',
         isCollect: false,
     },
+    {
+        name: '二维码生成',
+        link: '/qrcode',
+        state: 'new',
+        type: 'other',
+        isCollect: false,
+    },
 ]
 
 //图片api

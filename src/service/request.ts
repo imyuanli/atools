@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {message, notification} from "antd";
-
+import {notification} from "antd";
+import store from 'store'
 // 	返回200表示接口正常
 // 404	接口地址不存在
 // 422	接口请求失败
@@ -28,13 +28,14 @@ const HTTP_STATUS = {
 };
 
 function request(url: any, data: any = {}, method: string = 'GET') {
-    return new Promise(function (resolve,reject) {
+    return new Promise(function (resolve, reject) {
         let axiosJson = {
             url: url,
             method: method,
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': store.get('token'),
             },
             params: null,
             data: null

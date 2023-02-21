@@ -94,6 +94,13 @@ export const DEFAULT_ROUTER = [
         type: 'text',
         isCollect: false,
     },
+    {
+        name: '盘古之白',
+        link: '/pangu',
+        state: "new",
+        type: 'text',
+        isCollect: false,
+    },
 
     //数据转换
     {

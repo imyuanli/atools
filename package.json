@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
+    "@types/pangu": "^4.0.0",
     "@types/react-color": "^3.0.6",
     "@types/react-lazy-load-image-component": "^1.5.2",
     "ahooks": "^3.7.3",
@@ -20,6 +21,7 @@
     "html2canvas": "^1.4.1",
     "moment": "^2.29.4",
     "nzh": "^1.0.8",
+    "pangu": "^4.0.7",
     "query-string": "^8.1.0",
     "react-color": "^2.19.3",
     "react-lazy-images": "^1.1.0",

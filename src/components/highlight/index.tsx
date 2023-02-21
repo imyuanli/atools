@@ -6,7 +6,7 @@ interface props {
 
 export const Highlight: React.FunctionComponent<props> = ({value}) => {
     return (
-        <span className={'mx-1 color-main cursor-pointer hover:underline'}>{value}</span>
+        <span className={'mx-1 color-main'}>{value}</span>
     );
 }
 export default Highlight

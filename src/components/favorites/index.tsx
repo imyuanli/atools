@@ -1,8 +1,7 @@
 import MyCard from "@/components/my-card";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {StarOutlined} from "@ant-design/icons";
-import {Link} from "@umijs/renderer-react";
-import {Button} from "antd";
+import RouterBtn from "@/components/router-btn";
 
 export default function Favorites(props: any) {
     const {routerList} = props
@@ -19,17 +18,15 @@ export default function Favorites(props: any) {
             {
                 favouriteList.length > 0 && <MyCard title={'收藏夹'} icon={<StarOutlined/>} isIndex={true}>
                     {
-                        favouriteList?.map((router: any, k: number) => {
+                        favouriteList?.map((router: any, index: number) => {
                             return (
-                                <Link key={k} to={router?.link} className={'inline-grid'}>
-                                    <Button className={`rounded-md`} size={'large'}>
-                                        {router?.name}
-                                    </Button>
-                                </Link>
+                                <div key={index}>
+                                    <RouterBtn router={router}/>
+                                </div>
                             )
                         })
                     }
-                </MyCard>
+              </MyCard>
             }
         </>
     );

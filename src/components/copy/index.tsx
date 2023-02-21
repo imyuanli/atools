@@ -10,7 +10,7 @@ export default function Copy(props: any) {
     }
     return (
         <div className={'absolute top-1 right-1 cursor-pointer'} onClick={copyEleValue}>
-            <CopyOutlined className={'text-lg text-gray-500'}/>
+            <CopyOutlined className={'text-xl color-main'}/>
         </div>
     );
 }

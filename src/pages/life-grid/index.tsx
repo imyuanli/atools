@@ -2,7 +2,6 @@ import * as React from 'react';
 import MyCard from "@/components/my-card";
 import Title from "@/components/title";
 import {useEffect, useState} from "react";
-import 'dayjs/locale/zh-cn';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import dayjs from "dayjs";
 import {FieldTimeOutlined, HourglassOutlined, ShareAltOutlined} from "@ant-design/icons";
@@ -11,8 +10,12 @@ import Copy from "@/components/copy";
 import {useLocation} from "react-router";
 import queryString from 'query-string';
 import {Button, DatePicker} from "antd";
-import {Link} from "@umijs/renderer-react";
+import Readme from "@/components/readme";
+import Explain from "@/components/explain";
+import moment from 'moment';
+import 'moment/locale/zh-cn'
 
+moment.locale('zh-cn')
 type Props = {};
 const LifeGrid = (props: Props) => {
     //出生日期
@@ -132,6 +135,37 @@ const LifeGrid = (props: Props) => {
     const share = () => {
         return `${window.location.href}?date=${Buffer.from(birthday).toString('base64')}`;
     }
+
+    const divColor = [
+        {
+            desc: '你已经走过的生命',
+            type: 'past',
+        },
+        {
+            desc: '如果你平均每天休息 8 小时，这是你余下生命里睡眠占用的时间',
+            type: 'sleep',
+        },
+        {
+            desc: '如果你 65 岁退休，退休前平均每天工作 8 小时，这是你余下生命里工作占用的时间',
+            type: 'work',
+        },
+        {
+            desc: '65 岁，你退休了',
+            type: 'retired',
+        },
+        {
+            desc: '如果你 28 岁生孩子, 孩子18岁出门上大学, 这 18 年里你平均每天能花 5 个小时陪伴孩子，这里是你余下生命里所用去的时间',
+            type: 'child',
+        },
+        {
+            desc: '如果你每个月能看望父母一天，在他们 80 岁前，这是你的余生里还能陪伴他们的时光',
+            type: 'parents',
+        },
+        {
+            desc: '除了以上之外，你剩下的所有日子',
+            type: 'surplus',
+        }
+    ]
     return (
         <div>
             <Title value={'人生小格'}/>
@@ -149,6 +183,8 @@ const LifeGrid = (props: Props) => {
                         <DatePicker
                             style={{width: '100%'}}
                             placeholder={'请选择你的出生日期'}
+                            defaultPickerValue={moment('2000/01/01', 'YYYY/MM/DD')}
+                            format={'YYYY/MM/DD'}
                             onChange={(_: any, dateString: any) => {
                                 setBirthday(dateString)
                             }}
@@ -214,7 +250,7 @@ const LifeGrid = (props: Props) => {
                         result.map((item: any, index: any) => {
                             return (
                                 <div key={index}
-                                     className={`block ${item.type} ${index === 323 && index >= length.past ? 'retired' : ''} ${index === (length.past - 1) ? 'flash' : ''}`}/>
+                                     className={`blockBox ${item.type} ${index === 323 && index >= length.past ? 'retired' : ''} ${index === (length.past - 1) ? 'flash' : ''}`}/>
                             )
                         })
                     }
@@ -229,6 +265,28 @@ const LifeGrid = (props: Props) => {
                 </div>
               </MyCard>
             }
+            <Readme>
+                <Explain>
+                    假设我们的寿命是 80 岁,分为400个方块。
+                </Explain>
+                {
+                    divColor.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <Explain>
+                                    <div className={'flex'}>
+                                        <div className={`blockBox ${item.type}`}/>
+                                        <span>{item.desc}</span>
+                                    </div>
+                                </Explain>
+                            </div>
+                        )
+                    })
+                }
+                <Explain>
+                    数据仅供娱乐，人生苦短，继续努力吧~
+                </Explain>
+            </Readme>
         </div>
     );
 };

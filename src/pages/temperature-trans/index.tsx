@@ -10,7 +10,8 @@ import Highlight from "@/components/highlight";
 interface systemProps {
     value: any;
     type: string;
-    name: string
+    name: string;
+    inputType: string
 }
 
 export default function TemperatureTrans() {
@@ -19,17 +20,20 @@ export default function TemperatureTrans() {
         {
             name: '摄氏度',
             type: 'C',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: '华氏度',
             type: 'F',
-            value: ''
+            value: '',
+            inputType: 'number'
         },
         {
             name: '开氏度',
             type: 'K',
-            value: ''
+            value: '',
+            inputType: 'number'
         }
     ])
     //输入的是哪一个
@@ -84,8 +88,7 @@ export default function TemperatureTrans() {
             </MyCard>
             <Readme>
                 <Explain>
-                    可实现在线摄氏度(CELSIUS EQUALS)、华氏度(FAHENHEIT EQUALS)、开氏度(KELVIN EQUALS)、三种温度计量单位间的互转互换,查看计算公式
-                    <Highlight value={'https://www.w3schools.cn/howto/howto_js_temperature_converter.asp'}/>
+                    可实现在线摄氏度(CELSIUS EQUALS)、华氏度(FAHENHEIT EQUALS)、开氏度(KELVIN EQUALS)、三种温度计量单位间的互转互换,<a href="https://www.w3schools.cn/howto/howto_js_temperature_converter.asp">点击</a>查看计算公式
                 </Explain>
                 <Explain>
                     因兰氏度(RANKINE EQUALS)、列氏度(REAUMUR EQUALS)已废弃,所以暂不支持转换

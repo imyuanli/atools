@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {CheckboxValueType} from "antd/es/checkbox/Group";
 import Copy from "@/components/copy";
 import Explain from "@/components/explain";
+import ResultCopy from "@/components/result-copy";
 
 export default function PwdGenerator() {
     const [pwdLength, setPwdLength] = useState<number>(16);
@@ -112,16 +113,15 @@ export default function PwdGenerator() {
                 </div>
             </MyCard>
             <MyCard title={'生成结果'} icon={<LockOutlined/>}>
-                <div className={'bg-blue-50 p-3 rounded-lg relative'}>
-                    <Copy value={result.toString()}/>
-                    {
-                        result.map((item: string, index: number) => {
-                            return (
-                                <p key={index}>{item}</p>
-                            )
-                        })
-                    }
-                </div>
+                {
+                    result.map((item: string, index: number) => {
+                        return (
+                            <div key={index}>
+                                <ResultCopy result={item}/>
+                            </div>
+                        )
+                    })
+                }
             </MyCard>
             <Readme>
                 <Explain>

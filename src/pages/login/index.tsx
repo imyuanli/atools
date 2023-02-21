@@ -1,24 +1,30 @@
 import Title from "@/components/title";
-import MyCard from "@/components/my-card";
 import {Button, Card, Input, message, Tabs} from "antd";
 import {KeyOutlined, MailOutlined} from "@ant-design/icons";
 import {useSetState} from "ahooks";
 import {get_login, get_login_code} from "@/service/service";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import store from 'store'
+import {useNavigate} from "@@/exports";
 
 export default function Login() {
+    const navigate= useNavigate()
+    useEffect(()=>{
+        if(store.get('token')){
+            navigate('/')
+        }
+    },[])
 
     const [data, setData] = useSetState({
         email: "",
         code: "",
         time: 59,
         codeLoading: false,
-        loginLoading: false,
     })
     //定时器
     let interval: any = ""
     //解析数据
-    let {email, code, time, codeLoading, loginLoading} = data
+    let {email, code, time, codeLoading} = data
 
     //校验邮箱格式
     const checkEmail = (value: any) => {
@@ -82,8 +88,11 @@ export default function Login() {
         //     return
         // }
         get_login({email, code}).then(
-            (res) => {
-                console.log(res)
+            (res:any) => {
+                if (!res.errno){
+                    store.set('token', res.token)
+                    navigate('/')
+                }
             }
         )
     }

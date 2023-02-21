@@ -10,8 +10,8 @@ export async function get_login(payload: any) {
     return request.post(BASE_URL + `get_login/`, payload)
 }
 
-export async function get_user_info(payload: any) {
-    return request.get(BASE_URL + `get_user_info/`, payload)
+export async function get_user_info() {
+    return request.get(BASE_URL + `get_user_info/`)
 }
 
 //控制台

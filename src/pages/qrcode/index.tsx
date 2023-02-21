@@ -2,16 +2,19 @@ import Title from "@/components/title";
 import MyCard from "@/components/my-card";
 import {Button,Input,Slider} from "antd";
 import {useEffect, useState,useRef} from "react";
-import {useSetState} from "ahooks";
+import { useSetState } from "ahooks";
+import {SketchPicker} from 'react-color'
 import {EditOutlined} from "@ant-design/icons";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
 import './index.css'
+import { backgroundSize } from "html2canvas/dist/types/css/property-descriptors/background-size";
 
 interface configDataItem {
   size: number,
   margin: number,
   typeNumber: number,
+  // 高级设置
   areaColor: string
 }
 
@@ -27,6 +30,7 @@ export default function Qrcode() {
           size: 200,
           margin: 0,
           typeNumber: -1,
+        // 高级设置
           areaColor: '#ffffff',
         }
     )
@@ -85,7 +89,7 @@ export default function Qrcode() {
                 </div>
             </MyCard>
 
-            <MyCard title={'自定义图像'} icon={<EditOutlined/>}>
+            <MyCard title={'基础设置'} icon={<EditOutlined/>}>
                 <div className={'mb-4'}>
                     <div className={'text-lg font-bold mb-1'}>尺寸大小</div>
                     <Slider
@@ -119,6 +123,25 @@ export default function Qrcode() {
                     }}/>
                     <div>指定二维码版本。默认为-1，字符越多，版本越高。</div>
                 </div>
+            </MyCard>
+
+            <MyCard title={'高级设置'} icon={<EditOutlined />}>
+                <div className="flex justify-center items-center w-1/4">
+                    <Input
+                        className=""
+                        value={configData.areaColor}
+                        onChange={(e) => {
+                            setConfigData({ areaColor: e.target.value })
+                        }}
+                    />
+                    <div className="p-2" style={{ backgroundColor: 'red'}}></div>
+                </div>
+               {/*  <SketchPicker
+                    color={configData.areaColor}
+                    onChange={(res) => {
+                        setConfigData({areaColor: res.hex})
+                    }}
+                /> */}
             </MyCard>
             <Readme>
                 <Explain>

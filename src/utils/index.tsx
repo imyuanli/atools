@@ -5,7 +5,7 @@ import {
 //分类
 export const DEFAULT_TYPE = [
     {
-        value: 'usually',
+        value: 'common',
         label: '常用工具',
         icon: <AppstoreOutlined/>
     },

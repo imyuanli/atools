@@ -12,7 +12,6 @@ import './index.css'
 import html2canvas from "html2canvas";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
-import withAuth from '@/hocs/withAuth'
 
 const options = [
     {label: '加粗', value: 'font-bold'},
@@ -205,4 +204,4 @@ function AcgMake() {
 }
 
 
-export default withAuth(AcgMake)
+export default AcgMake

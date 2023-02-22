@@ -5,14 +5,15 @@ import {Avatar, Button, Divider, Input, Tag} from "antd";
 import {FormOutlined, GiftOutlined, UserOutlined} from "@ant-design/icons";
 import dayjs from "dayjs";
 import {useSelector} from "@@/exports";
+import withAuth from "@/hocs/withAuth";
 
-export default function User() {
-    const userInfo = useSelector((state:any) => state.user.userInfo);
+function User() {
+    const userInfo = useSelector((state: any) => state.user.userInfo);
     const [data, setData] = useSetState({
         userName: "",
         isChange: false,
     })
-    const {isChange}: {isChange: boolean } = data
+    const {isChange}: { isChange: boolean } = data
     return (
         <div>
             <Title value={'用户中心'} isLogin={true}/>
@@ -24,16 +25,16 @@ export default function User() {
                         </div>
                         <div className={'flex-center w-full mb-3 text-base'}>
                             {
-                                isChange?
-                                    <Input style={{width:300}}  placeholder="Basic usage" />
+                                isChange ?
+                                    <Input style={{width: 300}} placeholder="Basic usage"/>
                                     :
                                     <div>
                                         <span>{userInfo?.user_name}</span>
                                         <FormOutlined
                                             onClick={() => {
                                                 setData({
-                                                    isChange:true,
-                                                    userName:userInfo?.user_name
+                                                    isChange: true,
+                                                    userName: userInfo?.user_name
                                                 })
                                             }}
                                             className={'ml-1 cursor-pointer hover:text-purple-400'}
@@ -67,3 +68,5 @@ export default function User() {
         </div>
     );
 }
+
+export default withAuth(User)

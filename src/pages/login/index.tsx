@@ -5,15 +5,15 @@ import {useSetState} from "ahooks";
 import {get_login, get_login_code} from "@/service/service";
 import {useEffect} from "react";
 import store from 'store'
-import {useNavigate} from "@@/exports";
+import {useNavigate, useSearchParams} from "@@/exports";
 
 export default function Login() {
-    const navigate= useNavigate()
-    useEffect(()=>{
-        if(store.get('token')){
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (store.get('token')) {
             navigate('/')
         }
-    },[])
+    }, [])
 
     const [data, setData] = useSetState({
         email: "",
@@ -68,7 +68,7 @@ export default function Login() {
             })
         }
     }, [time])
-
+    const [searchParams, setSearchParams] = useSearchParams()
     //登录
     const handleLogin = () => {
         if (!email) {
@@ -83,15 +83,17 @@ export default function Login() {
             message.warn('请输入您获取到的验证码')
             return
         }
-        // if (code.length !== 6) {
-        //     message.warn('验证码不正确')
-        //     return
-        // }
+        if (code.length !== 6) {
+            message.warn('验证码不正确')
+            return
+        }
+        const redirect = searchParams.get('redirect')
         get_login({email, code}).then(
-            (res:any) => {
-                if (!res.errno){
+            (res: any) => {
+                if (!res.errno) {
                     store.set('token', res.token)
-                    navigate('/')
+                    if (redirect) navigate(redirect)
+                    else navigate('/')
                 }
             }
         )

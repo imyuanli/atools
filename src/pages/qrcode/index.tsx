@@ -128,7 +128,6 @@ export default function Qrcode() {
           return
         };
         await setImgFlag(true)
-        console.log(configData);
         
         qr.setOptions(
           {

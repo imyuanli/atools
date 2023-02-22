@@ -2,31 +2,31 @@ import {
     AppstoreOutlined, ToolOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined
 } from '@ant-design/icons';
 
-// 分类
+//分类
 export const DEFAULT_TYPE = [
     {
-        type: 'usually',
-        title: '常用工具',
+        value: 'common',
+        label: '常用工具',
         icon: <AppstoreOutlined/>
     },
     {
-        type: 'picture',
-        title: '图片工具',
+        value: 'picture',
+        label: '图片工具',
         icon: <FileImageOutlined/>
     },
     {
-        type: 'text',
-        title: '文本工具',
+        value: 'text',
+        label: '文本工具',
         icon: <FontSizeOutlined/>
     },
     {
-        type: 'data',
-        title: '数据换算',
+        value: 'data',
+        label: '数据换算',
         icon: <RetweetOutlined/>
     },
     {
-        type: 'other',
-        title: '其他工具',
+        value: 'other',
+        label: '其他工具',
         icon: <ToolOutlined/>
     },
 ]
@@ -151,3 +151,40 @@ export const DEFAULT_ROUTER = [
 
 //图片api
 export const IMG_URL = 'https://qiniu.imyuanli.cn/wbt'
+
+//默认状态
+export const DEFAULT_STATE = [
+    {
+        value: 'idle',
+        label: '无状态',
+    },
+    {
+        value: 'new',
+        label: '新功能',
+    },
+    {
+        value: 'recommend',
+        label: '推荐',
+    },
+    {
+        value: 'hot',
+        label: '热门',
+    },
+    {
+        value: 'vip',
+        label: 'VIP',
+    },
+    {
+        value: 'error',
+        label: 'Bug',
+    },
+]
+
+//百分比
+export const getPercentage = (num: any, total: any) => {
+    if (num == 0 || total == 0) {
+        return 0;
+    }
+    return Math.round(num / total * 10000) / 100.00  // 小数点后两位百分比
+}
+

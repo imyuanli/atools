@@ -29,7 +29,7 @@ export default function RouterBtn(props: any) {
                                     </Tooltip>
                                     :
                                     <Link
-                                        to={`/tools/${item?.type}${item?.link}`}
+                                        to={`/tools/${item?.type}/${item?.link}`}
                                         className={'relative block'}
                                     >
                                         <Button

@@ -14,6 +14,7 @@ import Readme from "@/components/readme";
 import Explain from "@/components/explain";
 import moment from 'moment';
 import 'moment/locale/zh-cn'
+import withAuth from "@/hocs/withAuth";
 
 moment.locale('zh-cn')
 type Props = {};
@@ -290,4 +291,4 @@ const LifeGrid = (props: Props) => {
         </div>
     );
 };
-export default LifeGrid
+export default withAuth(LifeGrid)

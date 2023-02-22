@@ -8,6 +8,7 @@ import {EditOutlined,LoadingOutlined, PlusOutlined} from "@ant-design/icons";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
 import './index.css'
+import UQRCode from 'uqrcodejs'
 
 interface configDataItem {
   size: number,
@@ -74,7 +75,6 @@ interface configDataItem {
 
 export default function Qrcode() {
     const { TextArea } = Input;
-    const UQRCode = require('uqrcodejs');
     const qrCanvas = useRef<any>(null)
 
     const qr = new UQRCode();

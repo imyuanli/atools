@@ -7878,6 +7878,11 @@ update-browserslist-db@^1.0.9:
     escalade "^3.1.1"
     picocolors "^1.0.0"
 
+uqrcodejs@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/uqrcodejs/-/uqrcodejs-4.0.6.tgz#f95b2949e56365556c6bcfeb96f68eb1009e786f"
+  integrity sha512-0W8EtXIyS8Nxr+4Libl1BBYlc1RaNOXhuPZmyRO9ncIRtEMdz5mOob33vIFTl+e08IKsV28i/rZPkbXLJh884A==
+
 uri-js@^4.2.2:
   version "4.4.1"
   resolved "https://registry.npmjs.org/uri-js/-/uri-js-4.4.1.tgz"

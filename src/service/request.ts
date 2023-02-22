@@ -29,13 +29,14 @@ const HTTP_STATUS = {
 
 function request(url: any, data: any = {}, method: string = 'GET') {
     return new Promise(function (resolve, reject) {
+        const token = store.get('token')
         let axiosJson = {
             url: url,
             method: method,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': store.get('token'),
+                'Authorization': token ? token : "",
             },
             params: null,
             data: null
@@ -48,15 +49,24 @@ function request(url: any, data: any = {}, method: string = 'GET') {
         axios(axiosJson)
             .then((res) => {
                 if (res.status === HTTP_STATUS.SUCCESS) {
-                    //正常请求
-                    if (res.data.errno === 0) {
-                        resolve(res.data.data);
-                    } else if (res.data.errno === 422) {
+                    const errno = res.data.errno
+                    //如果有错误码
+                    if (errno) {
+                        //普通错误
+                        let title = "提示"
+                        //token过期
+                        if (errno == 403) {
+                            title = "登录失效"
+                        }
                         notification['warning']({
-                            message: '提示',
+                            message: title,
                             description: res.data.errmsg,
                         });
-                        resolve(res.data.errno);
+                        resolve(res.data);
+                    }
+                    //正常请求
+                    else {
+                        resolve(res.data.data);
                     }
                 }
             })

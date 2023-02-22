@@ -6,6 +6,7 @@ import {useEffect} from "react";
 import store from 'store'
 import {useLocation, useNavigate, useSelector} from "@@/exports";
 import {message} from "antd";
+import {update_tool_views} from "@/service/service";
 
 export default function Title(props: any) {
     const token = store.get('token')
@@ -16,23 +17,29 @@ export default function Title(props: any) {
     useEffect(() => {
         const {pathname} = location
         const res = toolArr.find((item: any) => pathname == `/tools/${item?.type}/${item?.link}`)
-        //报错的工具
-        if (res?.state == "error") {
-            message.error('工具正在维护，不能访问')
-            navigate('/', {replace: true})
-        }
-        //vip
-        if (res?.state == "vip") {
-            //如果没登陆
-            if (!token) {
-                message.warn('请先登陆一下')
-                navigate(`/login?redirect=${pathname}`, {replace: true})
-                return
+        if(res){
+            //报错的工具
+            if (res?.state == "error") {
+                message.error('工具正在维护，不能访问')
+                navigate('/', {replace: true})
             }
-            //登陆后鉴权
-            else {
-                console.log("权限")
+
+            //vip
+            if (res?.state == "vip") {
+                //如果没登陆
+                if (!token) {
+                    message.warn('请先登陆一下')
+                    navigate(`/login?redirect=${pathname}`, {replace: true})
+                    return
+                }
+                //登陆后鉴权
+                else {
+                    console.log("权限")
+                }
             }
+
+            //工具使用次数
+            update_tool_views({tid:res.tid}).then()
         }
     }, [])
 

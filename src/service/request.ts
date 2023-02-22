@@ -57,6 +57,7 @@ function request(url: any, data: any = {}, method: string = 'GET') {
                         //token过期
                         if (errno == 403) {
                             title = "登录失效"
+                            store.remove('token')
                         }
                         notification['warning']({
                             message: title,

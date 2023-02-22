@@ -21,13 +21,6 @@ export default {
     subscriptions: {
         setup({ dispatch}:any) {
             dispatch({type: 'getAllTools'});
-        },
-        setupHistory({dispatch,history}:any){
-            history.listen(({location}:any) => {
-                if(location.pathname == '/'){
-                    dispatch({type: 'getAllTools'});
-                }
-            })
         }
     }
 };

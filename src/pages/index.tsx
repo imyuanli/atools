@@ -2,40 +2,26 @@ import {Input, Result} from "antd";
 import MyCard from "@/components/my-card";
 import {DEFAULT_TYPE} from "@/utils";
 import Readme from "@/components/readme";
-
 import Title from "@/components/title";
 import React, {useEffect, useState} from "react";
 import Highlight from "@/components/highlight";
 import Explain from "@/components/explain";
 import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
 import RouterBtn from "@/components/router-btn";
-import {get_no_delete_tools} from "@/service/service";
+import {useSelector} from "@@/exports";
 
 export default function Index() {
+    const toolArr = useSelector((state: any) => state.tools.toolArr);
     //接口获取列表
     const [toolList, setToolList] = useState([])
     const [sum, setSum] = useState(0)
-    const [loading, setLoading] = useState(false)
     useEffect(() => {
-        setLoading(true)
-        get_no_delete_tools().then(
-            (res: any) => {
-                if (!res.errno) {
-                    const arr: any = DEFAULT_TYPE.map(pitem => {
-                        const children = res.filter((item: any) => pitem.value == item?.type)
-                        return {...pitem, children}
-                    })
-                    setSum(res.length)
-                    setToolList(arr)
-                    setLoading(false)
-                } else setLoading(false)
-            }
-        ).catch(() => {
-            setTimeout(() => {
-                setLoading(false)
-            }, 1500)
+        const arr: any = DEFAULT_TYPE.map(pitem => {
+            const children = toolArr.filter((item: any) => pitem.value == item?.type)
+            return {...pitem, children}
         })
-
+        setSum(toolArr.length)
+        setToolList(arr)
     }, [])
     //搜索结果
     const [inputVal, setInputVal] = useState(null)
@@ -50,7 +36,6 @@ export default function Index() {
             setResultArr(arr)
         }
     }
-
     return (
         <div>
             <Title/>
@@ -85,13 +70,15 @@ export default function Index() {
                     :
                     <>
                         {
-                            !loading && toolList?.map((list: any, index: any) => {
+                            toolList?.map((list: any, index: any) => {
                                 return (
                                     <>
                                         {list.children.length > 0 &&
-                                          <MyCard key={index} title={list?.label} icon={list?.icon} isIndex={true}>
-                                            <RouterBtn routerList={list?.children}/>
-                                          </MyCard>
+                                          <div key={index}>
+                                            <MyCard title={list?.label} icon={list?.icon} isIndex={true}>
+                                              <RouterBtn routerList={list?.children}/>
+                                            </MyCard>
+                                          </div>
                                         }
                                     </>
                                 )

@@ -3,7 +3,7 @@ import {get_no_delete_tools} from "@/service/service";
 export default {
     namespace: 'tools',
     state: {
-        toolArr: null,
+        toolArr: [],
     },
     reducers: {
         setToolArr(state: any, {payload}: any) {

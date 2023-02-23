@@ -1,10 +1,11 @@
-import {Button, Tooltip} from "antd";
+import {Button, Card, Tooltip} from "antd";
 import {Link} from "@umijs/renderer-react";
 import React from "react";
 import './index.less'
 
 export default function RouterBtn(props: any) {
     const {routerList} = props
+    const bodyStyle={padding:12}
     return (
         <>
             {
@@ -15,15 +16,15 @@ export default function RouterBtn(props: any) {
                                 item?.state === 'error' ?
                                     <Tooltip title="维护中，禁止访问">
                                         <div className={'relative'}>
-                                            <Button
-                                                className={`rounded-md w-full `}
-                                                size={'large'}
+                                            <Card
+                                                className={`rounded-md w-full flex-center shadow-md`}
+                                                bodyStyle={bodyStyle}
                                                 style={{
                                                     cursor: "not-allowed",
                                                 }}
                                             >
                                                 {item?.name}
-                                            </Button>
+                                            </Card>
                                             <div className={`badge ${item?.state}`}/>
                                         </div>
                                     </Tooltip>
@@ -32,12 +33,13 @@ export default function RouterBtn(props: any) {
                                         to={`/tools/${item?.link}`}
                                         className={'relative block'}
                                     >
-                                        <Button
-                                            className={`rounded-md w-full`}
-                                            size={'large'}
+                                        <Card
+                                            className={`rounded-md w-full flex-center shadow-md`}
+                                            bodyStyle={bodyStyle}
+                                            hoverable={true}
                                         >
                                             {item?.name}
-                                        </Button>
+                                        </Card>
                                         <div className={`badge ${item?.state}`}/>
                                     </Link>
                             }

@@ -14,6 +14,10 @@ export default (api: IApi) => {
         content: 'HETnJoh_WOyutSDQIjZviEznBH_mbZGxlj0jdvS1QgE'
     }]);
     api.addHTMLMetas(() => [{
+        name: 'msvalidate.01',
+        content: 'D60AC75F80F4F99B6E1EECFB8D7886E7'
+    }]);
+    api.addHTMLMetas(() => [{
         name: 'keywords',
         content: 'aTools,在线工具,便民工具,站长工具,工具箱,工具站,小工具,在线软件,实用工具,程序员工具,开发人员工具,代码格式化、压缩、加密、解密,下载链接转换,json格式化,正则测试工具,favicon在线制作,字帖工具,中文简繁体转换,迅雷下载链接转换,进制转换,二维码,照片压缩,pdf合并'
     }]);

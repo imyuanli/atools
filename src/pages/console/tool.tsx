@@ -4,6 +4,7 @@ import {useSetState} from "ahooks";
 import {DEFAULT_STATE, DEFAULT_TYPE} from "@/utils";
 import {get_no_delete_tools, insert_new_tool, update_tool} from "@/service/service";
 import dayjs from "dayjs";
+import withAuthRole from "@/hocs/withAuthRole";
 
 interface dataItem {
     name: string,
@@ -14,7 +15,7 @@ interface dataItem {
     date?: any,
 }
 
-export default function Tool() {
+function Tool() {
     //获取状态
     const getState = (value: any) => {
         const res = DEFAULT_STATE.find(item => item.value === value)
@@ -392,3 +393,6 @@ export default function Tool() {
         </div>
     );
 }
+
+
+export default withAuthRole(Tool)

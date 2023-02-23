@@ -9,6 +9,7 @@ import Explain from "@/components/explain";
 import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
 import RouterBtn from "@/components/router-btn";
 import {useSelector} from "@@/exports";
+import Loading from "@/components/loading";
 
 export default function Index() {
     const toolArr = useSelector((state: any) => state.tools.toolArr);
@@ -47,45 +48,48 @@ export default function Index() {
                 allowClear={true}
             />
             {
-                inputVal ?
-                    <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
-                        {
-                            resultArr.length > 0 ?
-                                resultArr?.map((result: any, index: number) => {
+                toolArr.length > 0 ?
+                    inputVal ?
+                        <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
+                            {
+                                resultArr.length > 0 ?
+                                    resultArr?.map((result: any, index: number) => {
+                                        return (
+                                            <div key={index}>
+                                                <RouterBtn router={result}/>
+                                            </div>
+                                        )
+                                    })
+                                    :
+                                    <div className={'flex-center'}>
+                                        <Result
+                                            style={{padding: 0}}
+                                            title="没有找到相关结果"
+                                        />
+                                    </div>
+                            }
+                        </MyCard>
+                        :
+                        <>
+                            {
+                                toolList?.map((list: any, index: any) => {
                                     return (
-                                        <div key={index}>
-                                            <RouterBtn router={result}/>
-                                        </div>
+                                        <>
+                                            {list.children.length > 0 &&
+                                              <div key={index}>
+                                                <MyCard title={list?.label} icon={list?.icon} isIndex={true}>
+                                                  <RouterBtn routerList={list?.children}/>
+                                                </MyCard>
+                                              </div>
+                                            }
+                                        </>
                                     )
                                 })
-                                :
-                                <div className={'flex-center'}>
-                                    <Result
-                                        style={{padding: 0}}
-                                        title="没有找到相关结果"
-                                    />
-                                </div>
-                        }
-                    </MyCard>
+                            }
+                            {/*<Favorites routerList={routerList}/>*/}
+                        </>
                     :
-                    <>
-                        {
-                            toolList?.map((list: any, index: any) => {
-                                return (
-                                    <>
-                                        {list.children.length > 0 &&
-                                          <div key={index}>
-                                            <MyCard title={list?.label} icon={list?.icon} isIndex={true}>
-                                              <RouterBtn routerList={list?.children}/>
-                                            </MyCard>
-                                          </div>
-                                        }
-                                    </>
-                                )
-                            })
-                        }
-                        {/*<Favorites routerList={routerList}/>*/}
-                    </>
+                    <Loading/>
             }
             <Readme>
                 <Explain>

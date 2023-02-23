@@ -22,7 +22,7 @@ export default function Index() {
         })
         setSum(toolArr.length)
         setToolList(arr)
-    }, [])
+    }, [toolArr])
     //搜索结果
     const [inputVal, setInputVal] = useState(null)
     const [resultArr, setResultArr] = useState<any>([])

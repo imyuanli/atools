@@ -7,6 +7,7 @@ import store from 'store'
 import {useLocation, useNavigate, useSelector} from "@@/exports";
 import {message} from "antd";
 import {update_tool_views} from "@/service/service";
+import {DEFAULT_TITLE} from "@/utils";
 
 export default function Title(props: any) {
     const token = store.get('token')
@@ -47,17 +48,17 @@ export default function Title(props: any) {
 
     const {value, isLogin} = props
     //设置页面的title
-    useTitle(value ? value : 'WoodBox')
+    useTitle(value ? value : DEFAULT_TITLE)
     return (
         <div className={'flex-center flex-col w-full my-12'}>
             <div className={'text-3xl font-bold mb-3'}>
                 {value ?
                     <div className={'flex'}>
                         <span>{value}</span>
-                        <span className={'hidden ml-1 md:block'}>- FlashTools</span>
+                        <span className={'hidden ml-1 md:block'}>- {DEFAULT_TITLE}</span>
                     </div> :
                     <div className={'flex'}>
-                        <span>FlashTools</span>
+                        <span>{DEFAULT_TITLE}</span>
                         <span className={'hidden ml-1 md:block'}>- 你的工具伙伴</span>
                     </div>
                 }

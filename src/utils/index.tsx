@@ -2,6 +2,9 @@ import {
     AppstoreOutlined, ToolOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined
 } from '@ant-design/icons';
 
+//网站名称
+export const DEFAULT_TITLE='aTools'
+
 //分类
 export const DEFAULT_TYPE = [
     {

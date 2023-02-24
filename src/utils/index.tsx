@@ -3,7 +3,7 @@ import {
 } from '@ant-design/icons';
 
 //网站名称
-export const DEFAULT_TITLE='aTools'
+export const DEFAULT_TITLE = 'aTools'
 
 //分类
 export const DEFAULT_TYPE = [
@@ -184,3 +184,12 @@ export const getPercentage = (num: any, total: any) => {
     return Math.round(num / total * 10000) / 100.00  // 小数点后两位百分比
 }
 
+export const numFormat = (views: any) => {
+    let res
+    if (views >= 10000) {
+        res = Math.floor(views / 1000) / 10 + 'W+';
+    } else if (views >= 1000) {
+        res = Math.round(views / 100) / 10 + 'K+';
+    }
+    return res;
+}

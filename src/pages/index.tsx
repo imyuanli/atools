@@ -17,12 +17,14 @@ export default function Index() {
     const [toolList, setToolList] = useState([])
     const [sum, setSum] = useState(0)
     useEffect(() => {
-        const arr: any = DEFAULT_TYPE.map(pitem => {
-            const children = toolArr.filter((item: any) => pitem.value == item?.type)
-            return {...pitem, children}
-        })
-        setSum(toolArr.length)
-        setToolList(arr)
+        if(toolArr){
+            const arr: any = DEFAULT_TYPE.map(pitem => {
+                const children = toolArr.filter((item: any) => pitem.value == item?.type)
+                return {...pitem, children}
+            })
+            setSum(toolArr.length)
+            setToolList(arr)
+        }
     }, [toolArr])
     //搜索结果
     const [inputVal, setInputVal] = useState(null)
@@ -48,7 +50,7 @@ export default function Index() {
                 allowClear={true}
             />
             {
-                toolArr.length > 0 ?
+                toolArr ?
                     inputVal ?
                         <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
                             {

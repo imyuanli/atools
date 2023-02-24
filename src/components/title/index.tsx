@@ -16,7 +16,7 @@ export default function Title(props: any) {
     const location = useLocation()
     const navigate = useNavigate()
     useEffect(() => {
-        if (toolArr.length > 0) {
+        if (toolArr) {
             const {pathname} = location
             const res = toolArr.find((item: any) => pathname == `/tools/${item?.type}/${item?.link}`)
             if (res) {

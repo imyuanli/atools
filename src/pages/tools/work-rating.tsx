@@ -179,9 +179,36 @@ export default function WorkRating() {
         })
     }
 
-    const [result,setResult]=useSetState({
-
+    const [result, setResult] = useSetState({
+        workCost: 0,
+        environment: 0
     })
+
+    const getResult = () => {
+        console.log(inputValue)
+        const {
+            perDiem,
+            workDuration,
+            commuteDuration,
+            freeDuration,
+            education,
+            work,
+            sex,
+            tongshi,
+            job,
+            isEight
+        } = inputValue
+        //综合环境
+        let environment = job * work * sex * tongshi
+        let workCost = (perDiem * environment) / (35 * (workDuration + commuteDuration - 0.5 * freeDuration) * education)
+        if (isEight !== 1) {
+            workCost = workCost * isEight
+        }
+        setResult({
+            workCost,
+            environment
+        })
+    }
     return (
         <div>
             <Title value={'这班上的值不值得'}/>
@@ -208,7 +235,7 @@ export default function WorkRating() {
                                         />
                                         :
                                         <Select
-                                           className={'w-full'}
+                                            className={'w-full'}
                                             defaultValue={inputValue[type]}
                                             onChange={(value: any) => {
                                                 onChangeInput(value, type)
@@ -222,14 +249,12 @@ export default function WorkRating() {
                 }
                 <ApiBtn
                     text={'到底值不值得？'}
-                    func={() => {
-                        console.log(inputValue)
-                    }}
+                    func={getResult}
                 />
             </MyCard>
             <MyCard>
-                <div>综合环境系数：</div>
-                <div>工作性价比</div>
+                <div>综合环境系数：{result.environment}</div>
+                <div>工作性价比：{result.workCost}</div>
             </MyCard>
         </div>
     );

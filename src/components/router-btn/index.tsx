@@ -15,8 +15,7 @@ export default function RouterBtn(props: any) {
         marginLeft: 3,
         marginRight: 3,
         fontWeight: 600,
-        fontSize: 13,
-        padding: 1
+        fontSize: 12,
     }
     return (
         <>
@@ -34,12 +33,11 @@ export default function RouterBtn(props: any) {
                                                 style={{
                                                     cursor: "not-allowed",
                                                 }}
-                                                hoverable={true}
                                                 actions={[
-                                                    <div className={'flex justify-start items-end ml-1'}>
+                                                    <div className={'flex-center ml-1'}>
                                                         <span>已被使用</span>
                                                         <Tag
-                                                            color={'#9f9f9f'}
+                                                            color={'#9CA3AF'}
                                                             style={tagStyle}
                                                         >
                                                             {numFormat(item.views)}
@@ -48,7 +46,9 @@ export default function RouterBtn(props: any) {
                                                     </div>
                                                 ]}
                                             >
-                                                {item?.name}
+                                                <div className={'truncate'}>
+                                                    {item?.name}
+                                                </div>
                                             </Card>
                                             <div className={`badge ${item?.state}`}/>
                                         </div>
@@ -63,10 +63,10 @@ export default function RouterBtn(props: any) {
                                             bodyStyle={bodyStyle}
                                             hoverable={true}
                                             actions={[
-                                                <div className={'flex justify-start items-end ml-1'}>
+                                                <div className={'flex-center ml-1'}>
                                                     <span>已被使用</span>
                                                     <Tag
-                                                        color={'#9f9f9f'}
+                                                        color={'#9CA3AF'}
                                                         style={tagStyle}
                                                     >
                                                         {numFormat(item.views)}
@@ -75,7 +75,9 @@ export default function RouterBtn(props: any) {
                                                 </div>
                                             ]}
                                         >
-                                            {item?.name}
+                                            <div className={'truncate'}>
+                                                {item?.name}
+                                            </div>
                                         </Card>
                                         <div className={`badge ${item?.state}`}/>
                                     </Link>

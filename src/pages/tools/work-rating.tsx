@@ -1,9 +1,13 @@
 import Title from "@/components/title";
 import MyCard from "@/components/my-card";
-import {Input, Select} from "antd";
+import {Button, Checkbox, Input, Radio, Select, Statistic} from "antd";
 import * as React from "react";
 import {useSetState} from "ahooks";
 import ApiBtn from "@/components/api-btn";
+import {useEffect, useState} from "react";
+import {FrownOutlined, MehOutlined, SmileOutlined} from "@ant-design/icons";
+import Readme from "@/components/readme";
+import Explain from "@/components/explain";
 
 export default function WorkRating() {
     const inputArr: any[] = [
@@ -16,7 +20,7 @@ export default function WorkRating() {
         {
             name: '工作时长',
             type: 'workDuration',
-            placeholder: '上班时间-下班时间',
+            placeholder: '下班时间-上班时间',
             isInput: true
         },
         {
@@ -32,116 +36,116 @@ export default function WorkRating() {
             isInput: true
         },
         {
-            name: '学历系数',
+            name: '学历',
             type: 'education',
             option: [
                 {
                     value: 0.8,
-                    label: '专科及以下0.8',
+                    label: '专科及以下',
                 },
                 {
                     value: 1,
-                    label: '普通本科1',
+                    label: '普通本科',
                 },
                 {
                     value: 1.2,
-                    label: '985/211本科1.2',
+                    label: '985/211本科',
                 },
                 {
                     value: 1.4,
-                    label: '普通硕士1.4',
+                    label: '普通硕士',
                 },
                 {
                     value: 1.6,
-                    label: '985/211硕士1.6',
+                    label: '985/211硕士',
                 },
                 {
                     value: 1.8,
-                    label: '普通博士1.8',
+                    label: '普通博士',
                 },
                 {
                     value: 2,
-                    label: '985/211博士2',
+                    label: '985/211博士',
                 }
             ]
         },
         {
-            name: '工作环境系数',
+            name: '工作环境',
             type: 'work',
             option: [
                 {
                     value: 0.8,
-                    label: '偏僻地区0.8',
+                    label: '偏僻地区',
                 },
                 {
                     value: 0.9,
-                    label: '工厂户外0.9',
+                    label: '工厂户外',
                 },
                 {
                     value: 1,
-                    label: '普通1',
+                    label: '普通',
                 },
                 {
                     value: 1.1,
-                    label: '体制内1.1',
+                    label: '体制内',
                 },
             ]
         },
         {
-            name: '异性环境系数',
+            name: '异性环境',
             type: 'sex',
             option: [
                 {
                     value: 0.9,
-                    label: '没有0.9',
+                    label: '没有',
                 },
                 {
                     value: 1,
-                    label: '不多不少1',
+                    label: '不多不少',
                 },
                 {
                     value: 1.1,
-                    label: '很多1.1',
+                    label: '很多',
                 },
             ]
         },
         {
-            name: '同事环境系数',
+            name: '同事环境',
             type: 'tongshi',
             option: [
                 {
                     value: 0.95,
-                    label: 'SB很多0.95',
+                    label: 'SB很多',
                 },
                 {
                     value: 1,
-                    label: '普通很多1',
+                    label: '普通很多',
                 },
                 {
                     value: 1.05,
-                    label: '优秀很多1.05',
+                    label: '优秀很多',
                 },
             ]
         },
         {
-            name: '职业环境系数',
+            name: '职业环境',
             type: 'job',
             option: [
                 {
                     value: 1,
-                    label: '无要求,二级1',
+                    label: '无要求',
                 },
                 {
                     value: 1.05,
-                    label: '建造造价监理1.05',
+                    label: '建造造价监理',
                 },
                 {
                     value: 1.1,
-                    label: '建筑岩土结构1.1',
+                    label: '建筑岩土结构',
                 },
                 {
                     value: 1.15,
-                    label: '主任医师、教授1.15',
+                    label: '主任医师、教授',
                 },
             ]
         },
@@ -151,11 +155,11 @@ export default function WorkRating() {
             option: [
                 {
                     value: 0.95,
-                    label: '是0.95',
+                    label: '是',
                 },
                 {
                     value: 1,
-                    label: '否1',
+                    label: '否',
                 },
 
             ]
@@ -173,19 +177,14 @@ export default function WorkRating() {
         job: 1,
         isEight: 1,
     })
+    const [check, setCheck] = useState(false)
     const onChangeInput = (value: any, type: any) => {
         setInputValue({
-            [type]: value
+            [type]: Number(value)
         })
     }
-
-    const [result, setResult] = useSetState({
-        workCost: 0,
-        environment: 0
-    })
-
+    const [workCost, setWorkCost] = useState<any>(null)
     const getResult = () => {
-        console.log(inputValue)
         const {
             perDiem,
             workDuration,
@@ -204,20 +203,21 @@ export default function WorkRating() {
         if (isEight !== 1) {
             workCost = workCost * isEight
         }
-        setResult({
-            workCost,
-            environment
-        })
+        //八点前上班
+        if (check) {
+            workCost = workCost * 0.95
+        }
+        setWorkCost(workCost.toFixed(2))
     }
     return (
         <div>
             <Title value={'这班上的值不值得'}/>
-            <MyCard>
+            <MyCard title={'这班上的值不值得'}>
                 {
                     inputArr.map((item, index) => {
                         const {name, type, placeholder, isInput, option} = item
                         return (
-                            <div className="mt-3 p-3 rounded-lg flex-center relative">
+                            <div className="mt-3 p-3 rounded-lg flex relative">
                                 <div className={'text-base flex-none'}>
                                     <span>{name}：</span>
                                 </div>
@@ -231,7 +231,6 @@ export default function WorkRating() {
                                             style={{width: '100%'}}
                                             allowClear
                                             placeholder={placeholder}
-                                            type={'number'}
                                         />
                                         :
                                         <Select
@@ -247,15 +246,68 @@ export default function WorkRating() {
                         )
                     })
                 }
+                <div className="mt-3 p-3 rounded-lg flex relative">
+                    <div className={'text-base flex-none'}>
+                        <span>八点前上班建议勾选：<Checkbox onChange={() => {
+                            setCheck(!check)
+                        }}/></span>
+                    </div>
+                </div>
                 <ApiBtn
-                    text={'到底值不值得？'}
+                    text={'看看结果'}
                     func={getResult}
                 />
             </MyCard>
-            <MyCard>
-                <div>综合环境系数：{result.environment}</div>
-                <div>工作性价比：{result.workCost}</div>
-            </MyCard>
+            {
+                workCost &&
+              <MyCard title={'工作性价比'}>
+                <div className={'w-full flex-center flex-col'}>
+                  <Statistic
+                    title="工作性价比"
+                    value={workCost}
+                    prefix={
+                        <div>
+                            {
+                                workCost <= 0.8 && <FrownOutlined/>
+                            }
+                            {
+                                (workCost > 1.5 && workCost <= 2) && <MehOutlined/>
+                            }
+                            {
+                                workCost > 2 && <SmileOutlined/>
+                            }
+                        </div>
+                    }
+                  />
+                  <div className={'text-xl'}>
+                      {
+                          workCost <= 0.8 &&
+                        <div>这破班不如不上！</div>
+                      }
+                      {
+                          workCost > 0.8 && workCost <= 1.5 &&
+                        <div>标准的打工人</div>
+                      }
+                      {
+                          (workCost > 1.5 && workCost <= 2) &&
+                        <div>这班上的有点爽，羡慕啊，求内推！</div>
+                      }
+                      {
+                          workCost > 2 &&
+                        <div>这班上的爽到爆，老板亲儿子是吧！</div>
+                      }
+                  </div>
+                </div>
+              </MyCard>
+            }
+            <Readme>
+                <Explain>
+                    以上结果仅供娱乐，请勿当真影响你的工作
+                </Explain>
+                <Explain>
+                    工作性价比低于0.8的人很惨,高于1.5的人很爽,高于2.0的人爽爆炸
+                </Explain>
+            </Readme>
         </div>
     );
 }

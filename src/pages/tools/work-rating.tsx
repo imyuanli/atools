@@ -16,28 +16,28 @@ export default function WorkRating() {
             type: 'perDiem',
             placeholder: 'xxxxx元',
             isInput: true,
-            suffix:'元'
+            suffix: '元'
         },
         {
-            name: '工作时长',
+            name: '每日工作时长',
             type: 'workDuration',
             placeholder: '下班时间-上班时间',
             isInput: true,
-            suffix:'小时'
+            suffix: '小时'
         },
         {
-            name: '通勤时长',
+            name: '每日通勤时长',
             type: 'commuteDuration',
             placeholder: 'xx小时',
             isInput: true,
-            suffix:'小时'
+            suffix: '小时'
         },
         {
-            name: '摸鱼时长',
+            name: '每日摸鱼时长',
             type: 'freeDuration',
             placeholder: '不干活+吃饭+午休的xx小时',
             isInput: true,
-            suffix:'小时'
+            suffix: '小时'
         },
         {
             name: '学历',
@@ -221,7 +221,7 @@ export default function WorkRating() {
                     inputArr.map((item, index) => {
                         const {name, type, placeholder, isInput, option} = item
                         return (
-                            <div className="mt-3 p-3 rounded-lg flex relative">
+                            <div key={index} className="mt-3 p-3 rounded-lg flex relative">
                                 <div className={'text-base flex-none'}>
                                     <span>{name}：</span>
                                 </div>

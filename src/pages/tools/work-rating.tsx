@@ -12,28 +12,32 @@ import Explain from "@/components/explain";
 export default function WorkRating() {
     const inputArr: any[] = [
         {
-            name: '平均日新',
+            name: '平均日薪(实际到手)',
             type: 'perDiem',
             placeholder: 'xxxxx元',
-            isInput: true
+            isInput: true,
+            suffix:'元'
         },
         {
             name: '工作时长',
             type: 'workDuration',
             placeholder: '下班时间-上班时间',
-            isInput: true
+            isInput: true,
+            suffix:'小时'
         },
         {
             name: '通勤时长',
             type: 'commuteDuration',
             placeholder: 'xx小时',
-            isInput: true
+            isInput: true,
+            suffix:'小时'
         },
         {
             name: '摸鱼时长',
             type: 'freeDuration',
             placeholder: '不干活+吃饭+午休的xx小时',
-            isInput: true
+            isInput: true,
+            suffix:'小时'
         },
         {
             name: '学历',
@@ -231,6 +235,7 @@ export default function WorkRating() {
                                             style={{width: '100%'}}
                                             allowClear
                                             placeholder={placeholder}
+                                            suffix={item.suffix}
                                         />
                                         :
                                         <Select

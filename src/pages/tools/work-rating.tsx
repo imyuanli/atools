@@ -40,7 +40,7 @@ export default function WorkRating() {
             suffix: '小时'
         },
         {
-            name: '学历',
+            name: '学历/学位',
             type: 'education',
             option: [
                 {

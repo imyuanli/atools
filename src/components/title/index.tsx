@@ -18,7 +18,7 @@ export default function Title(props: any) {
     useEffect(() => {
         if (toolArr) {
             const {pathname} = location
-            const res = toolArr.find((item: any) => pathname == `/tools/${item?.type}/${item?.link}`)
+            const res = toolArr.find((item: any) => pathname == `/tools/${item?.link}`)
             if (res) {
                 //报错的工具
                 if (res?.state == "error") {
@@ -44,7 +44,7 @@ export default function Title(props: any) {
                 update_tool_views({tid: res.tid}).then()
             }
         }
-    }, [])
+    }, [toolArr])
 
     const {value, isLogin} = props
     //设置页面的title

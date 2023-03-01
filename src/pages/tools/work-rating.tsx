@@ -184,7 +184,7 @@ export default function WorkRating() {
     const [check, setCheck] = useState(false)
     const onChangeInput = (value: any, type: any) => {
         setInputValue({
-            [type]: Number(value)
+            [type]: value
         })
     }
     const [workCost, setWorkCost] = useState<any>(null)
@@ -203,7 +203,7 @@ export default function WorkRating() {
         } = inputValue
         //综合环境
         let environment = job * work * sex * tongshi
-        let workCost = (perDiem * environment) / (35 * (workDuration + commuteDuration - 0.5 * freeDuration) * education)
+        let workCost = (perDiem * environment) / (35 * (Number(workDuration) + Number(commuteDuration) - (Number(0.5 * freeDuration))) * education)
         if (isEight !== 1) {
             workCost = workCost * isEight
         }

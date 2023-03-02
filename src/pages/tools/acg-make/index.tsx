@@ -152,7 +152,7 @@ function AcgMake() {
                                                 <div id={`canvasImg${index}`}>
                                                     <LazyLoadImage
                                                         width={'100%'}
-                                                        src={`${IMG_URL}/acg/100${index + 1}.jpg`}
+                                                        src={`${IMG_URL}/aTools/acg/100${index + 1}.jpg`}
                                                         alt="图像"
                                                         effect="opacity"
                                                     />

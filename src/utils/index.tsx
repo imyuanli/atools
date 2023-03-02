@@ -146,7 +146,7 @@ export const DEFAULT_ROUTER = [
 ]
 
 //图片api
-export const IMG_URL = 'https://qiniu.imyuanli.cn/wbt'
+export const IMG_URL = 'https://qiniu.imyuanli.cn'
 
 //默认状态
 export const DEFAULT_STATE = [

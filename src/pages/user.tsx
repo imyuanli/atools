@@ -2,7 +2,6 @@ import Title from "@/components/title";
 import MyCard from "@/components/my-card";
 import {useSetState} from "ahooks";
 import ImgCrop from 'antd-img-crop';
-
 import {Button, Divider, Input, message, Tag, Upload, UploadFile, UploadProps} from "antd";
 import {FormOutlined, GiftOutlined, LoadingOutlined, PlusOutlined, UserOutlined} from "@ant-design/icons";
 import dayjs from "dayjs";
@@ -11,7 +10,7 @@ import withAuth from "@/hocs/withAuth";
 import {useEffect, useState} from "react";
 import {RcFile, UploadChangeParam} from "antd/es/upload";
 import {IMG_URL} from "@/utils";
-
+import BASE_URL from "@/service/base_url";
 
 function User() {
     const userInfo = useSelector((state: any) => state.user.userInfo);
@@ -49,12 +48,6 @@ function User() {
         }
         return isJpgOrPng && isLt2M;
     };
-    //文件上传的逻辑
-    const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => callback(reader.result as string));
-        reader.readAsDataURL(img);
-    };
     const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
         if (info.file.status === 'uploading') {
             setLoading(true);
@@ -70,7 +63,6 @@ function User() {
             setImageUrl(info?.file?.response.data);
         }
     };
-
     return (
         <div>
             <Title value={'用户中心'} isLogin={true}/>
@@ -83,7 +75,7 @@ function User() {
                                     name="file"
                                     listType="picture-card"
                                     showUploadList={false}
-                                    action="http://127.0.0.1:7000/tools/upload_avatar/"
+                                    action={`${BASE_URL}upload_avatar/`}
                                     beforeUpload={beforeUpload}
                                     onChange={handleChange}
                                     data={{ftId: ft_id}}

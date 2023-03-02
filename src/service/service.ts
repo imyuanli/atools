@@ -14,6 +14,11 @@ export async function get_user_info() {
     return request.get(BASE_URL + `get_user_info/`)
 }
 
+export async function upload_image_to_qiniu(payload: any) {
+    return request.post(BASE_URL + `upload_image_to_qiniu/`, payload)
+}
+
+
 //控制台
 export async function get_all_tools() {
     return request.get(BASE_URL + `get_all_tools/`)

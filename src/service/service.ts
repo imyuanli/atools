@@ -14,8 +14,8 @@ export async function get_user_info() {
     return request.get(BASE_URL + `get_user_info/`)
 }
 
-export async function upload_image_to_qiniu(payload: any) {
-    return request.post(BASE_URL + `upload_image_to_qiniu/`, payload)
+export async function update_user_name(payload: any) {
+    return request.post(BASE_URL + `update_user_name/`, payload)
 }
 
 

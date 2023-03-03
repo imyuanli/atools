@@ -2,17 +2,16 @@ import Title from "@/components/title";
 import MyCard from "@/components/my-card";
 import {useSetState} from "ahooks";
 import ImgCrop from 'antd-img-crop';
-import {Button, Divider, Input, message, Tag, Upload, UploadFile, UploadProps} from "antd";
+import {Button, Input, message, Modal, Upload, UploadFile, UploadProps} from "antd";
 import {
-    CalendarOutlined, FieldNumberOutlined,
-    FormOutlined,
-    GiftOutlined,
+    CalendarOutlined, DeleteOutlined, FieldNumberOutlined,
+    GiftOutlined, KeyOutlined,
     LoadingOutlined, MailOutlined,
     PlusOutlined,
     UserOutlined
 } from "@ant-design/icons";
 import dayjs from "dayjs";
-import {useSelector} from "@@/exports";
+import {useDispatch, useSelector} from "@@/exports";
 import withAuth from "@/hocs/withAuth";
 import {useEffect, useState} from "react";
 import {RcFile, UploadChangeParam} from "antd/es/upload";
@@ -20,25 +19,32 @@ import {IMG_URL} from "@/utils";
 import BASE_URL from "@/service/base_url";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
+import {update_user_name} from "@/service/service";
 
 function User() {
+    const dispatch = useDispatch();
     const userInfo = useSelector((state: any) => state.user.userInfo);
+    const {ft_id, avatar, user_name, create_time, email} = userInfo || {}
+    //名称
     const [data, setData] = useSetState({
-        userName: "",
-        isChange: false,
+        nameModal: false,
+        newName: user_name,
+        userLoading: false,
+
+        //邮箱相关
+        emailModal:false,
+        oldEmailLoading:'',
+        code:"",
+        newEmail:""
     })
-    const {isChange}: { isChange: boolean } = data
-    const {ft_id, avatar, user_name, create_time} = userInfo || {}
 
     //上传头像
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
-
     useEffect(() => {
         setImageUrl(avatar)
+        setData({newName: user_name})
     }, [userInfo])
-
-
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined/> : <PlusOutlined/>}
@@ -73,14 +79,85 @@ function User() {
         }
     };
 
+    //ui
     const infoBoxClass = 'flex justify-between items-center w-full mb-2'
-    const iconStyle={fontSize:18,marginRight:2}
-    const infoTitleClass='text-gray-500 text-base mr-3'
-    const infoClass='font-semibold text-base'
+    const iconStyle = {fontSize: 18, marginRight: 2}
+    const infoTitleClass = 'text-gray-500 text-base mr-3'
+    const infoClass = 'font-semibold text-base'
 
+    //组件封装
+    const getInfoBox = (
+        icon: any,
+        title: string,
+        info: string,
+        btnName?: string,
+        onClick?: any,
+        btnClass?: boolean
+    ) => {
+        return (
+            <div className={infoBoxClass}>
+                <div className={'flex-center'}>
+                    {icon}
+                    <span className={infoTitleClass}>{title}</span>
+                    <span className={infoClass}>{info}</span>
+                </div>
+                {btnName &&
+                  <Button style={{padding: 0}} danger={btnClass} onClick={onClick} type={'link'}>{btnName}</Button>}
+            </div>
+        )
+    }
+    //开通会员
+    const showVip=()=>{
+        message.success('本网站暂时不需要开通VIP，谢谢您的支持')
+    }
 
+    const {
+        //名称相关
+        newName,
+        nameModal,
+        userLoading,
 
+        //邮箱
+        emailModal,
+    } = data
+    //修改名称
 
+    const openNameModal: any = () => {
+        setData({nameModal: true})
+    }
+    const closeNameModal = () => {
+        setData({nameModal: false})
+    }
+    const onChangeName = () => {
+        if (!newName) {
+            message.warn('请输入名字')
+        }
+        setData({userLoading: true})
+        update_user_name({user_name: newName}).then(
+            (res: any) => {
+                if (!res.errno) {
+                    dispatch({type: 'user/getUserInfo'}).then(() => {
+                        if (!userLoading) {
+                            closeNameModal()
+                            setData({userLoading: false})
+                        }
+                    })
+                } else {
+                    setData({userLoading: false})
+                }
+            }
+        ).catch(() => {
+            setData({userLoading: false})
+        })
+    }
+
+    //修改邮箱
+    const openEmailModal: any = () => {
+        setData({emailModal: true})
+    }
+    const closeEmailModal = () => {
+        setData({emailModal: false})
+    }
 
 
     return (
@@ -109,56 +186,26 @@ function User() {
                             </Upload>
                         </ImgCrop>
                     </div>
-                    <div className={infoBoxClass}>
-                        <div className={'flex-center'}>
-                            <UserOutlined style={iconStyle} />
-                            <span className={infoTitleClass}>名称</span>
-                            <span className={infoClass}>{user_name}</span>
-                        </div>
-                        <Button type={'link'}>更换名称</Button>
-                    </div>
-                    <div className={infoBoxClass}>
-                        <div>
-                            <UserOutlined style={iconStyle} />
-                            <span className={infoTitleClass}>FTID</span>
-                            <span className={infoClass}>{ft_id}</span>
-                        </div>
-                        <Button type={'link'}>复制ID</Button>
-                    </div>
-                    <div className={infoBoxClass}>
-                        <div>
-                            <GiftOutlined style={iconStyle} />
-                            <span className={infoTitleClass}>会员类型</span>
-                            <span className={infoClass}>暂未开通会员</span>
-                        </div>
-                        <Button type={'link'}>开通会员</Button>
-                    </div>
-                    <div className={infoBoxClass}>
-                        <div>
-                            <CalendarOutlined style={iconStyle} />
-                            <span className={infoTitleClass}>注册日期</span>
-                            <span className={infoClass}>{dayjs(create_time).format('YYYY-MM-DD')}</span>
-                        </div>
-                        <Button type={'link'}>查看日期</Button>
-                    </div>
-                    <div className={'flex justify-end items-center w-full'}>
+                    {getInfoBox(<GiftOutlined style={iconStyle}/>, "会员类型", "免费会员", "开通会员", showVip)}
+                    {getInfoBox(<UserOutlined style={iconStyle}/>, "名称", user_name, "更换名称", openNameModal)}
+                    {getInfoBox(<FieldNumberOutlined style={iconStyle}/>, "FTID", ft_id)}
+                    {getInfoBox(<CalendarOutlined style={iconStyle}/>, "注册日期", dayjs(create_time).format('YYYY-MM-DD'))}
+                    <div className={'flex-center w-full mt-3'}>
                         <Button danger>退出账号</Button>
                     </div>
                 </div>
             </MyCard>
             <MyCard title={'账户与安全'}>
-                <div className={'flex-center flex-col'}>
-                    <div className={infoBoxClass}>
-                        <div>
-                            <MailOutlined style={iconStyle} />
-                            <span className={infoTitleClass}>邮箱</span>
-                            <span className={infoClass}>{dayjs(create_time).format('YYYY-MM-DD')}</span>
-                        </div>
-                        <Button type={'link'}>查看日期</Button>
-                    </div>
-                </div>
-            </MyCard>
-            <MyCard title={'我的订单'}>
+                {getInfoBox(<MailOutlined style={iconStyle}/>, "邮箱", email, "更换邮箱", openEmailModal)}
+                {/*{getInfoBox(<KeyOutlined style={iconStyle}/>, "密码", '', "更换密码", openNameModal)}*/}
+                {/*{getInfoBox(*/}
+                {/*    <DeleteOutlined style={iconStyle}/>,*/}
+                {/*    "注销",*/}
+                {/*    '永久注销aTools帐号',*/}
+                {/*    "注销账号",*/}
+                {/*    openNameModal,*/}
+                {/*    true*/}
+                {/*)}*/}
             </MyCard>
             <Readme>
                 <Explain>
@@ -168,6 +215,41 @@ function User() {
                     激活码激活失败：仔细核对是否正确输入了激活码，请不要手动输入，直接复制粘贴即可
                 </Explain>
             </Readme>
+            <Modal
+                title="修改名称"
+                open={nameModal}
+                onOk={onChangeName}
+                onCancel={closeNameModal}
+                okText={'确认'}
+                cancelText={'取消'}
+                confirmLoading={userLoading}
+            >
+                <Input
+                    onChange={
+                        (e: any) => {
+                            setData({
+                                newName: e.target.value
+                            })
+                        }
+                    }
+                    placeholder="请输入名称"
+                    value={newName}
+                    maxLength={12}
+                    showCount
+                    allowClear
+                />
+            </Modal>
+            {/*<Modal*/}
+            {/*    title="修改邮箱"*/}
+            {/*    open={emailModal}*/}
+            {/*    onOk={}*/}
+            {/*    onCancel={}*/}
+            {/*    okText={'确认'}*/}
+            {/*    cancelText={'取消'}*/}
+            {/*    confirmLoading={}*/}
+            {/*>*/}
+            {/*</Modal>*/}
+
         </div>
     );
 }

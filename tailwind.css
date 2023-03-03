@@ -38,3 +38,7 @@
     background-color: var(--parimary-color);
     border-radius: 6666rem;
 }
+
+.text-link{
+    color: #606266;
+}

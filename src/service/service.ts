@@ -14,6 +14,11 @@ export async function get_user_info() {
     return request.get(BASE_URL + `get_user_info/`)
 }
 
+export async function update_user_name(payload: any) {
+    return request.post(BASE_URL + `update_user_name/`, payload)
+}
+
+
 //控制台
 export async function get_all_tools() {
     return request.get(BASE_URL + `get_all_tools/`)

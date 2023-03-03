@@ -17,6 +17,7 @@
     "@types/store": "^2.0.2",
     "ahooks": "^3.7.3",
     "antd": "^4.24.5",
+    "antd-img-crop": "^4.7.0",
     "bytes": "^3.1.2",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.7",

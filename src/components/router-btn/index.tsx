@@ -46,7 +46,7 @@ export default function RouterBtn(props: any) {
                                                     </div>
                                                 ]}
                                             >
-                                                <div className={'truncate'}>
+                                                <div className={'truncate font-bold text-link'}>
                                                     {item?.name}
                                                 </div>
                                             </Card>
@@ -75,7 +75,7 @@ export default function RouterBtn(props: any) {
                                                 </div>
                                             ]}
                                         >
-                                            <div className={'truncate'}>
+                                            <div className={'truncate font-bold text-link'}>
                                                 {item?.name}
                                             </div>
                                         </Card>

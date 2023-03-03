@@ -4,14 +4,14 @@ import {useSetState} from "ahooks";
 import ImgCrop from 'antd-img-crop';
 import {Button, Input, message, Modal, Upload, UploadFile, UploadProps} from "antd";
 import {
-    CalendarOutlined, DeleteOutlined, FieldNumberOutlined,
+    CalendarOutlined, DeleteOutlined, ExclamationCircleOutlined, FieldNumberOutlined,
     GiftOutlined, KeyOutlined,
     LoadingOutlined, MailOutlined,
     PlusOutlined,
     UserOutlined
 } from "@ant-design/icons";
 import dayjs from "dayjs";
-import {useDispatch, useSelector} from "@@/exports";
+import {useDispatch, useNavigate, useSelector} from "@@/exports";
 import withAuth from "@/hocs/withAuth";
 import {useEffect, useState} from "react";
 import {RcFile, UploadChangeParam} from "antd/es/upload";
@@ -20,6 +20,7 @@ import BASE_URL from "@/service/base_url";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
 import {update_user_name} from "@/service/service";
+import store from 'store'
 
 function User() {
     const dispatch = useDispatch();
@@ -32,10 +33,10 @@ function User() {
         userLoading: false,
 
         //邮箱相关
-        emailModal:false,
-        oldEmailLoading:'',
-        code:"",
-        newEmail:""
+        emailModal: false,
+        oldEmailLoading: '',
+        code: "",
+        newEmail: ""
     })
 
     //上传头像
@@ -107,7 +108,7 @@ function User() {
         )
     }
     //开通会员
-    const showVip=()=>{
+    const showVip = () => {
         message.success('本网站暂时不需要开通VIP，谢谢您的支持')
     }
 
@@ -159,6 +160,26 @@ function User() {
         setData({emailModal: false})
     }
 
+    const navigate = useNavigate()
+    //退出登录
+    const getLogout = () => {
+        Modal.confirm({
+            title: '退出登录',
+            icon: <ExclamationCircleOutlined/>,
+            content: '是否确认退出登录？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk: () => {
+                store.remove('token')
+                dispatch({
+                    type: 'user/clearUserInfo'
+                })
+                message.success('退出成功');
+                navigate('/')
+            }
+        });
+
+    }
 
     return (
         <div>
@@ -190,23 +211,23 @@ function User() {
                     {getInfoBox(<UserOutlined style={iconStyle}/>, "名称", user_name, "更换名称", openNameModal)}
                     {getInfoBox(<FieldNumberOutlined style={iconStyle}/>, "FTID", ft_id)}
                     {getInfoBox(<CalendarOutlined style={iconStyle}/>, "注册日期", dayjs(create_time).format('YYYY-MM-DD'))}
-                    <div className={'flex-center w-full mt-3'}>
+                    <div className={'flex-center w-full mt-3'} onClick={getLogout}>
                         <Button danger>退出账号</Button>
                     </div>
                 </div>
             </MyCard>
-            <MyCard title={'账户与安全'}>
-                {getInfoBox(<MailOutlined style={iconStyle}/>, "邮箱", email, "更换邮箱", openEmailModal)}
-                {/*{getInfoBox(<KeyOutlined style={iconStyle}/>, "密码", '', "更换密码", openNameModal)}*/}
-                {/*{getInfoBox(*/}
-                {/*    <DeleteOutlined style={iconStyle}/>,*/}
-                {/*    "注销",*/}
-                {/*    '永久注销aTools帐号',*/}
-                {/*    "注销账号",*/}
-                {/*    openNameModal,*/}
-                {/*    true*/}
-                {/*)}*/}
-            </MyCard>
+            {/*<MyCard title={'账户与安全'}>*/}
+            {/*    {getInfoBox(<MailOutlined style={iconStyle}/>, "邮箱", email, "更换邮箱", openEmailModal)}*/}
+            {/*    /!*{getInfoBox(<KeyOutlined style={iconStyle}/>, "密码", '', "更换密码", openNameModal)}*!/*/}
+            {/*    /!*{getInfoBox(*!/*/}
+            {/*    /!*    <DeleteOutlined style={iconStyle}/>,*!/*/}
+            {/*    /!*    "注销",*!/*/}
+            {/*    /!*    '永久注销aTools帐号',*!/*/}
+            {/*    /!*    "注销账号",*!/*/}
+            {/*    /!*    openNameModal,*!/*/}
+            {/*    /!*    true*!/*/}
+            {/*    /!*)}*!/*/}
+            {/*</MyCard>*/}
             <Readme>
                 <Explain>
                     任何问题请咨询我们的微信：xxxx
@@ -249,7 +270,6 @@ function User() {
             {/*    confirmLoading={}*/}
             {/*>*/}
             {/*</Modal>*/}
-
         </div>
     );
 }

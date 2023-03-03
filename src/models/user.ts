@@ -10,6 +10,10 @@ export default {
             state.userInfo = payload
             return state
         },
+        clearUserInfo(state: any) {
+            state.userInfo = null
+            return state
+        },
     },
     effects: {
         * getUserInfo({payload}: any, {put, call}: any) {

@@ -48,7 +48,7 @@ export default function Title(props: any) {
 
     const {value, isLogin} = props
     //设置页面的title
-    useTitle(value ? value : DEFAULT_TITLE)
+    useTitle(value ? value + "-" + DEFAULT_TITLE : DEFAULT_TITLE)
     return (
         <div className={'flex-center flex-col w-full my-12'}>
             <div className={'text-3xl font-bold mb-3'}>

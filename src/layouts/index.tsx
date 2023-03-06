@@ -4,17 +4,18 @@ import 'antd/es/style/themes/default.less';
 import 'antd/dist/antd.less'; // 引入官方提供的 less 样式入口文件
 import {
     ArrowLeftOutlined, CoffeeOutlined,
-    DownloadOutlined, InfoOutlined,
+    DownloadOutlined, InfoOutlined, LinkOutlined,
     MailOutlined,
     MenuFoldOutlined,
-    MenuUnfoldOutlined,
+    MenuUnfoldOutlined, QqOutlined,
     SettingOutlined, ShareAltOutlined,
-    StarOutlined, VerticalAlignTopOutlined,
+    VerticalAlignTopOutlined, WeiboOutlined,
 } from "@ant-design/icons";
-import {BackTop, Button, Layout, Menu, MenuProps, Popover, Tooltip} from "antd";
+import {BackTop, Button, Layout, Menu, MenuProps, message, Popover, Tooltip} from "antd";
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "@@/exports";
 import {Link} from "@umijs/renderer-react";
+import copy from "copy-to-clipboard";
 
 const {Header, Content, Footer, Sider} = Layout;
 const items: MenuProps['items'] = [
@@ -131,6 +132,10 @@ export default function Index() {
             </>
         )
     }
+
+    //title
+    const title = document.title
+    const url = "https://atools.imyuanli.cn" + pathname
     return (
         <div className={'main'}>
             <div className={'content'}>
@@ -139,41 +144,78 @@ export default function Index() {
                     <div className={'flex-col flex'}>
                         {/*{*/}
                         {/*    <>*/}
-                        {/*        {*/}
-                        {/*            <>*/}
-                        {/*                <div className={'flex-col hidden  md:block'}>*/}
-                        {/*                    <div className={'flex flex-col'}>*/}
-                        {/*                        {getBtn('mb-3', 'left')}*/}
-                        {/*                    </div>*/}
-                        {/*                </div>*/}
-                        {/*                <div className={'block  md:hidden mb-3'}>*/}
-                        {/*                    <div className={'flex-center'}>*/}
-                        {/*                        <Popover*/}
-                        {/*                            placement="left"*/}
-                        {/*                            content={getBtn('mr-3', 'bottom')}*/}
-                        {/*                            trigger="click"*/}
-                        {/*                        >*/}
-                        {/*                            <Button*/}
-                        {/*                                type="primary"*/}
-                        {/*                                shape="circle"*/}
-                        {/*                                icon={<MenuFoldOutlined/>}*/}
-                        {/*                                size={'large'}*/}
-                        {/*                            />*/}
-                        {/*                        </Popover>*/}
-                        {/*                    </div>*/}
-                        {/*                </div>*/}
-                        {/*            </>*/}
-                        {/*        }*/}
-                        {/*        <Tooltip className={'mb-3'} placement="left" title={'分享'}>*/}
-                        {/*            <Button*/}
-                        {/*                type="primary"*/}
-                        {/*                shape="circle"*/}
-                        {/*                icon={<ShareAltOutlined/>}*/}
-                        {/*                size={'large'}*/}
-                        {/*            />*/}
-                        {/*        </Tooltip>*/}
+                        {/*        <div className={'flex-col hidden  md:block'}>*/}
+                        {/*            <div className={'flex flex-col'}>*/}
+                        {/*                {getBtn('mb-3', 'left')}*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*        <div className={'block  md:hidden mb-3'}>*/}
+                        {/*            <div className={'flex-center'}>*/}
+                        {/*                <Popover*/}
+                        {/*                    placement="left"*/}
+                        {/*                    content={getBtn('mr-3', 'bottom')}*/}
+                        {/*                    trigger="click"*/}
+                        {/*                >*/}
+                        {/*                    <Button*/}
+                        {/*                        type="primary"*/}
+                        {/*                        shape="circle"*/}
+                        {/*                        icon={<MenuFoldOutlined/>}*/}
+                        {/*                        size={'large'}*/}
+                        {/*                    />*/}
+                        {/*                </Popover>*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
                         {/*    </>*/}
                         {/*}*/}
+                        <Popover
+                            placement="leftTop"
+                            content={
+                                <>
+                                    <a
+                                        href={`http://connect.qq.com/widget/shareqq/index.html?title=${title}&url=${url}`}
+                                        target="_blank"
+                                    >
+                                        <div className={'hover:bg-gray-200'}>
+                                            <Button type={'link'}>
+                                                <QqOutlined/>
+                                                <span>QQ</span>
+                                            </Button>
+                                        </div>
+                                    </a>
+                                    <a
+                                        href={`https://service.weibo.com/share/share.php?title=${title}&url=${url}`}
+                                        target="_blank"
+                                    >
+                                        <div className={'hover:bg-gray-200'}>
+                                            <Button type={'link'}>
+                                                <WeiboOutlined/>
+                                                <span>新浪微博</span>
+                                            </Button>
+                                        </div>
+                                    </a>
+                                    <div className={'hover:bg-gray-200'} onClick={
+                                        () => {
+                                            copy(url);
+                                            message.success("复制成功")
+                                        }
+                                    }>
+                                        <Button type={'link'}>
+                                            <LinkOutlined/>
+                                            <span>复制链接</span>
+                                        </Button>
+                                    </div>
+                                </>
+                            }
+                            trigger="click"
+                            className={'mb-3'}
+                        >
+                            <Button
+                                type="primary"
+                                shape="circle"
+                                icon={<ShareAltOutlined/>}
+                                size={'large'}
+                            />
+                        </Popover>
                         {
                             pathname !== '/' &&
                           <Tooltip placement="left" title={'返回上一页'}>

@@ -68,26 +68,32 @@ export const DEFAULT_STATE = [
     {
         value: 'idle',
         label: '无状态',
+        color:'',
     },
     {
         value: 'new',
-        label: '新功能',
-    },
-    {
-        value: 'recommend',
-        label: '推荐',
+        label: 'NEW',
+        color:'#87d068',
     },
     {
         value: 'hot',
-        label: '热门',
+        label: 'HOT',
+        color:'#f50',
+    },
+    {
+        value: 'free',
+        label: '限时免费',
+        color:'orange',
     },
     {
         value: 'vip',
         label: 'VIP',
+        color:'gold',
     },
     {
-        value: 'error',
-        label: 'Bug',
+        value: 'bug',
+        label: 'BUG',
+        color:'#bfbfbf',
     },
 ]
 

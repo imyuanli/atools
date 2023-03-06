@@ -68,7 +68,7 @@ export default function RouterBtn(props: any) {
             {
                 routerList.map((item: any, index: any) => {
                     return (
-                        <div key={index + item.name} className={'router-btn'}>
+                        <div key={index.tid} className={'router-btn'}>
                             {
                                 item?.state === 'bug' ?
                                     <Tooltip title="维护中，禁止访问">

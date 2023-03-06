@@ -42,7 +42,7 @@ function Tool() {
             </div>,
         },
         {
-            title: '类型',
+            title: '分类',
             dataIndex: 'type',
             key: 'type',
             render: (value: any) => <div>

@@ -16,12 +16,19 @@ export default function Index() {
     //接口获取列表
     const [toolList, setToolList] = useState([])
     const [sum, setSum] = useState(0)
+    const [allViews, setAllViews] = useState(0)
     useEffect(() => {
         if (toolArr) {
             const arr: any = DEFAULT_TYPE.map(pitem => {
-                const children = toolArr.filter((item: any) => pitem.value == item?.type)
+                const children = toolArr.filter((item: any) => {
+                    return pitem.value == item?.type
+                })
                 return {...pitem, children}
             })
+            const allViews = toolArr.reduce((pre: any, cur: any) => {
+                return pre + cur.views
+            }, 0)
+            setAllViews(allViews)
             setSum(toolArr.length)
             setToolList(arr)
         }
@@ -42,6 +49,9 @@ export default function Index() {
     return (
         <div>
             <Title/>
+            <div className={'w-full flex justify-end text-lg mb-2'}>
+                已累计帮助<span className={'font-bold mx-1'}>{allViews}</span>人次
+            </div>
             <Input
                 prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
                 placeholder="输入关键字搜索"

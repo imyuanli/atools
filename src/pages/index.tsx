@@ -32,13 +32,10 @@ export default function Index() {
     const handleChange = (e: any) => {
         let val = e.target.value
         setInputVal(val)
-        if (sum > 0) {
-            const arr = toolList.reduce((pre: any, cur: any) => {
-                const res = cur.children?.filter((item: any) => {
-                    return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
-                })
-                return [...pre, ...res]
-            }, [])
+        if (sum > 0 && toolArr) {
+            const arr = toolArr?.filter((item: any) => {
+                return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
+            })
             setResultArr(arr)
         }
     }

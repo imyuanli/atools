@@ -1,5 +1,11 @@
 import {
-    AppstoreOutlined, ToolOutlined, FileImageOutlined, FontSizeOutlined, RetweetOutlined
+    AppstoreOutlined,
+    ToolOutlined,
+    FileImageOutlined,
+    FontSizeOutlined,
+    RetweetOutlined,
+    PlaySquareOutlined,
+    CodeOutlined, DribbbleOutlined, SwapOutlined, BookOutlined, FileSyncOutlined
 } from '@ant-design/icons';
 
 //网站名称
@@ -8,14 +14,34 @@ export const DEFAULT_TITLE = 'aTools'
 //分类
 export const DEFAULT_TYPE = [
     {
-        value: 'common',
-        label: '常用工具',
-        icon: <AppstoreOutlined/>
+        value: 'file',
+        label: '文档转换',
+        icon: <FileSyncOutlined />
     },
     {
         value: 'picture',
         label: '图片工具',
         icon: <FileImageOutlined/>
+    },
+    {
+        value: 'av',
+        label: '影音工具',
+        icon: <PlaySquareOutlined />
+    },
+    {
+        value: 'life',
+        label: '生活娱乐',
+        icon: <DribbbleOutlined />
+    },
+    {
+        value: 'code',
+        label: '开发工具',
+        icon: <CodeOutlined />
+    },
+    {
+        value: 'study',
+        label: '教育学习',
+        icon: <BookOutlined />
     },
     {
         value: 'text',
@@ -34,117 +60,6 @@ export const DEFAULT_TYPE = [
     },
 ]
 
-//路由
-export const DEFAULT_ROUTER = [
-    //常用
-    {
-        name: '人生小格',
-        link: '/life-grid',
-        state: 'new',
-        type: 'usually',
-        isCollect: false,
-    },
-    {
-        name: '短网址生成',
-        link: '/short-url',
-        state: 'new',
-        type: 'usually',
-        isCollect: false,
-    },
-    {
-        name: '短网址还原',
-        link: '/short-revert',
-        state: 'new',
-        type: 'usually',
-        isCollect: false,
-    },
-
-    //图片
-    {
-        name: '必应壁纸',
-        link: '/bing-image',
-        state: 'error',
-        type: 'picture',
-        isCollect: false,
-    },
-    {
-        name: 'ACG表情包制作',
-        link: '/acg-make',
-        state: 'hot',
-        type: 'picture',
-        isCollect: false,
-    },
-
-    //文本
-    {
-        name: '密码生成器',
-        link: '/pwd-generator',
-        state: 'hot',
-        type: 'text',
-        isCollect: false,
-    },
-    {
-        name: '舔狗日记',
-        link: '/dog-diary',
-        state: 'recommend',
-        type: 'text',
-        isCollect: false,
-    },
-    {
-        name: '心灵毒鸡汤',
-        link: '/toxic-soul',
-        state: "",
-        type: 'text',
-        isCollect: false,
-    },
-    {
-        name: '盘古之白',
-        link: '/pangu',
-        state: "new",
-        type: 'text',
-        isCollect: false,
-    },
-
-    //数据转换
-    {
-        name: '字节数转换',
-        link: '/byte-transform',
-        state: 'new',
-        type: 'data',
-        isCollect: false,
-    },
-    {
-        name: '进制转换',
-        link: '/radix-transform',
-        state: 'new',
-        type: 'data',
-        isCollect: false,
-    },
-    {
-        name: '温度转换',
-        link: '/temperature-trans',
-        state: 'new',
-        type: 'data',
-        isCollect: false,
-    },
-    {
-        name: '数字转中文',
-        link: '/number-transform',
-        state: 'new',
-        type: 'data',
-        isCollect: false,
-    },
-
-    //其他
-    {
-        name: 'MBTI测试',
-        link: '/mbti',
-        state: 'new',
-        type: 'other',
-        isCollect: false,
-    },
-]
-
 //图片api
 export const IMG_URL = 'https://qiniu.imyuanli.cn'
 
@@ -153,26 +68,32 @@ export const DEFAULT_STATE = [
     {
         value: 'idle',
         label: '无状态',
+        color:'',
     },
     {
         value: 'new',
-        label: '新功能',
-    },
-    {
-        value: 'recommend',
-        label: '推荐',
+        label: 'NEW',
+        color:'#87d068',
     },
     {
         value: 'hot',
-        label: '热门',
+        label: 'HOT',
+        color:'#f50',
+    },
+    {
+        value: 'free',
+        label: '限时免费',
+        color:'orange',
     },
     {
         value: 'vip',
         label: 'VIP',
+        color:'gold',
     },
     {
-        value: 'error',
-        label: 'Bug',
+        value: 'bug',
+        label: 'BUG',
+        color:'#bfbfbf',
     },
 ]
 

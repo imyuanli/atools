@@ -16,12 +16,19 @@ export default function Index() {
     //接口获取列表
     const [toolList, setToolList] = useState([])
     const [sum, setSum] = useState(0)
+    const [allViews, setAllViews] = useState(0)
     useEffect(() => {
-        if(toolArr){
+        if (toolArr) {
             const arr: any = DEFAULT_TYPE.map(pitem => {
-                const children = toolArr.filter((item: any) => pitem.value == item?.type)
+                const children = toolArr.filter((item: any) => {
+                    return pitem.value == item?.type
+                })
                 return {...pitem, children}
             })
+            const allViews = toolArr.reduce((pre: any, cur: any) => {
+                return pre + cur.views
+            }, 0)
+            setAllViews(allViews)
             setSum(toolArr.length)
             setToolList(arr)
         }
@@ -32,8 +39,8 @@ export default function Index() {
     const handleChange = (e: any) => {
         let val = e.target.value
         setInputVal(val)
-        if (sum > 0) {
-            const arr = toolList?.filter((item: any) => {
+        if (sum > 0 && toolArr) {
+            const arr = toolArr?.filter((item: any) => {
                 return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
             })
             setResultArr(arr)
@@ -42,6 +49,9 @@ export default function Index() {
     return (
         <div>
             <Title/>
+            <div className={'w-full flex justify-end text-lg mb-2'}>
+                已累计帮助<span className={'font-bold mx-1'}>{allViews}</span>人次
+            </div>
             <Input
                 prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
                 placeholder="输入关键字搜索"
@@ -55,13 +65,7 @@ export default function Index() {
                         <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
                             {
                                 resultArr.length > 0 ?
-                                    resultArr?.map((result: any, index: number) => {
-                                        return (
-                                            <div key={index}>
-                                                <RouterBtn router={result}/>
-                                            </div>
-                                        )
-                                    })
+                                    <RouterBtn routerList={resultArr}/>
                                     :
                                     <div className={'flex-center'}>
                                         <Result

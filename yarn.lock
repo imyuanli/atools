@@ -7158,6 +7158,11 @@ relateurl@^0.2.7:
   resolved "https://registry.npmjs.org/relateurl/-/relateurl-0.2.7.tgz"
   integrity sha512-G08Dxvm4iDN3MLM0EsP62EDV9IuhXPR6blNz6Utcp7zyV3tr4HVNINt6MpaRWbxoOHT3Q7YN2P+jaHX8vUbgog==
 
+relationship.js@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/relationship.js/-/relationship.js-1.2.3.tgz#b3a0e66329c5711f854f4ae691c32028260c33df"
+  integrity sha512-3PfNsYLQBBBFNnyJ4TmNJ/UhkZLm1Jqdg6i9unMUNUN5ptvw6uRVS/g3MHjSItXmo26gHoCF0M6Q93tm554PTA==
+
 remove-accents@0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/remove-accents/-/remove-accents-0.4.2.tgz#0a43d3aaae1e80db919e07ae254b285d9e1c7bb5"

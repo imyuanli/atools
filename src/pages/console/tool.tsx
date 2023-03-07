@@ -130,8 +130,8 @@ function Tool() {
     const obj = {
         name: '',
         link: '',
-        state: 'new',
-        type: 'usually',
+        state: 'idle',
+        type: 'other',
     }
     const [toolData, setToolData] = useSetState<dataItem>(obj)
     //添加工具

@@ -1,7 +1,7 @@
 import {Button} from "antd";
 
-export default function ApiBtn(props: any) {
-    const {text, func} = props
+
+const ApiBtn = ({text, func}: any) => {
     return (
         <div className={'flex w-full justify-end items-center'}>
             <Button
@@ -14,3 +14,5 @@ export default function ApiBtn(props: any) {
         </div>
     );
 }
+
+export default ApiBtn

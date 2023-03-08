@@ -6,6 +6,7 @@ import 'jsoneditor/dist/jsoneditor.css';
 import {Button} from "antd";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
+import copy from "copy-to-clipboard";
 
 const json = {
     'array': [1, 2, 3],
@@ -47,7 +48,9 @@ export default function JsonEditor() {
                         className={'mr-3'}
                         size={'large'}
                         type={'primary'}
-                        onClick={}
+                        onClick={()=>{
+                            copy(text)
+                        }}
                     >
                         复制JSON
                     </Button>

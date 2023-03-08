@@ -42,3 +42,14 @@
 .text-link{
     color: #606266;
 }
+.jsoneditor{
+    border:thin solid var(--parimary-color)
+}
+
+.jsoneditor-menu{
+    background-color:var(--parimary-color);
+    border-bottom:var(--parimary-color)
+}
+.jsoneditor-poweredBy{
+    display: none;
+}

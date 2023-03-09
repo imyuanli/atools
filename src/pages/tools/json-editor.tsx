@@ -7,6 +7,7 @@ import {Button, message} from "antd";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
 import copy from "copy-to-clipboard";
+import {downLoadFile} from "@/utils/utils";
 
 const json = {
     'array': [1, 2, 3],
@@ -39,18 +40,6 @@ export default function JsonEditor() {
         editorObj.current.updateText(text);
     }, [text])
 
-
-    //下载
-    const DownloadJSON = () => {
-        const dataStr = 'data:application/json;charset=utf-8,' + encodeURIComponent(text);
-        const download = document.createElement('a');
-        download.setAttribute('href', dataStr);
-        download.setAttribute('download', 'aTools' + '.json');
-        document.body.appendChild(download);
-        download.click();
-        download.remove();
-    };
-
     return (
         <div>
             <Title value={'JSON在线编辑器'}/>
@@ -71,7 +60,9 @@ export default function JsonEditor() {
                     <Button
                         size={'large'}
                         type={'primary'}
-                        onClick={DownloadJSON}
+                        onClick={()=>{
+                            downLoadFile('json',text)
+                        }}
                     >
                         下载JSON文件
                     </Button>

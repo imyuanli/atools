@@ -116,7 +116,7 @@ const editor = new Editor(options);
 >    3. [ ] Ember
 `
 
-export default function markdown() {
+export default function markdownEditor() {
     const [mode, setMode] = useState<any>(true)
     const editorRef = useRef(null)
     const [el, setEl] = useState<any>()
@@ -125,8 +125,8 @@ export default function markdown() {
     }, [editorRef])
     return (
         <div>
-            <Title value={'便捷Markdown编辑器'}/>
-            <MyCard title={'便捷Markdown编辑器'}>
+            <Title value={'Markdown编辑器'}/>
+            <MyCard title={'Markdown编辑器'}>
                 <div className={'w-full flex justify-end mb-3'}>
                     <Switch
                         checkedChildren="垂直两列"

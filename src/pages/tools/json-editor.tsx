@@ -42,8 +42,8 @@ export default function JsonEditor() {
 
     return (
         <div>
-            <Title value={'JSON在线编辑器'}/>
-            <MyCard title={'JSON在线编辑器'}>
+            <Title value={'JSON编辑器'}/>
+            <MyCard title={'JSON编辑器'}>
                 <div style={{height: '65vh'}} ref={editorRef}/>
                 <div className={'w-full flex justify-end mt-3'}>
                     <Button

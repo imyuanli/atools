@@ -32,7 +32,7 @@ export default function Uuid() {
     }
     return (
         <div>
-            <Title value={'uuid生成'} isLogin={true}/>
+            <Title value={'uuid生成'}/>
             <MyCard title={'uuid生成'}>
                 <div className="mt-3 p-3 rounded-lg flex-center relative">
                     <div className={'text-base flex-none'}>

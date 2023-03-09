@@ -78,7 +78,7 @@ export default function Relative() {
 
     return (
         <div>
-            <Title value={'亲戚关系计算器'} isLogin={true}/>
+            <Title value={'亲戚关系计算器'}/>
             <MyCard title={'亲戚关系计算器'}>
                 <Tabs
                     defaultActiveKey="1"

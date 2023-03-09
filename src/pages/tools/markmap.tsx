@@ -44,7 +44,7 @@ export default function MarkMap() {
     }, [refMm.current, value]);
     return (
         <div>
-            <Title value={'便捷思维导图'} isLogin={true}/>
+            <Title value={'便捷思维导图'}/>
             <MyCard title={'Markdown'}>
                 <div className={'flex'}>
                     <TextArea

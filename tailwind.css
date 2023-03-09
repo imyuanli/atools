@@ -53,3 +53,7 @@
 .jsoneditor-poweredBy{
     display: none!important;
 }
+
+.tui-image-editor-container .tui-image-editor-controls-logo > img, .tui-image-editor-container .tui-image-editor-header-logo > img{
+    display: none;!important
+}

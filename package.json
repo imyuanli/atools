@@ -17,6 +17,7 @@
     "@toast-ui/editor-plugin-table-merged-cell": "^3.1.0",
     "@toast-ui/editor-plugin-uml": "^3.0.1",
     "@toast-ui/react-editor": "^3.2.3",
+    "@toast-ui/react-image-editor": "^3.15.2",
     "@types/pangu": "^4.0.0",
     "@types/react-color": "^3.0.6",
     "@types/react-lazy-load-image-component": "^1.5.2",

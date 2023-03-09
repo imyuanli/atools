@@ -3,7 +3,7 @@ import MyCard from "@/components/my-card";
 import React, {useEffect, useRef, useState} from "react";
 import JSONEditor from "jsoneditor";
 import 'jsoneditor/dist/jsoneditor.css';
-import {Button} from "antd";
+import {Button, message} from "antd";
 import Readme from "@/components/readme";
 import Explain from "@/components/explain";
 import copy from "copy-to-clipboard";
@@ -38,6 +38,19 @@ export default function JsonEditor() {
         // editorObj.current.setText(text)
         editorObj.current.updateText(text);
     }, [text])
+
+
+    //下载
+    const DownloadJSON = () => {
+        const dataStr = 'data:application/json;charset=utf-8,' + encodeURIComponent(text);
+        const download = document.createElement('a');
+        download.setAttribute('href', dataStr);
+        download.setAttribute('download', 'aTools' + '.json');
+        document.body.appendChild(download);
+        download.click();
+        download.remove();
+    };
+
     return (
         <div>
             <Title value={'JSON在线编辑器'}/>
@@ -50,6 +63,7 @@ export default function JsonEditor() {
                         type={'primary'}
                         onClick={()=>{
                             copy(text)
+                            message.success('复制成功')
                         }}
                     >
                         复制JSON
@@ -57,11 +71,9 @@ export default function JsonEditor() {
                     <Button
                         size={'large'}
                         type={'primary'}
-                        onClick={() => {
-                            console.log(text)
-                        }}
+                        onClick={DownloadJSON}
                     >
-                        下载JSON
+                        下载JSON文件
                     </Button>
                 </div>
             </MyCard>

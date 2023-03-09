@@ -43,13 +43,13 @@
     color: #606266;
 }
 .jsoneditor{
-    border:thin solid var(--parimary-color)
+    border:thin solid var(--parimary-color)!important;
 }
 
 .jsoneditor-menu{
-    background-color:var(--parimary-color);
-    border-bottom:var(--parimary-color)
+    background-color:var(--parimary-color)!important;
+    border-bottom:var(--parimary-color)!important;
 }
 .jsoneditor-poweredBy{
-    display: none;
+    display: none!important;
 }

@@ -17,11 +17,15 @@
 
 /*主色*/
 .color-main {
-    color: var(--parimary-color)
+    color: var(--parimary-color)!important;
 }
 
 .bg-color-main {
     background-color: var(--parimary-color)
+}
+
+.bg-color-shadow {
+    background-color: var(--shadow-color)
 }
 
 .bg-color-result {

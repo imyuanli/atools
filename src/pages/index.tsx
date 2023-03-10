@@ -1,4 +1,4 @@
-import {Input, Result} from "antd";
+import {Button, Card, Input, Result, Statistic} from "antd";
 import MyCard from "@/components/my-card";
 import {DEFAULT_TYPE} from "@/utils";
 import Readme from "@/components/readme";
@@ -6,7 +6,7 @@ import Title from "@/components/title";
 import React, {useEffect, useState} from "react";
 import Highlight from "@/components/highlight";
 import Explain from "@/components/explain";
-import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
+import {FileSearchOutlined, LikeOutlined, SearchOutlined, ToolOutlined} from "@ant-design/icons";
 import RouterBtn from "@/components/router-btn";
 import {useSelector} from "@@/exports";
 import Loading from "@/components/loading";
@@ -49,16 +49,54 @@ export default function Index() {
     return (
         <div>
             <Title/>
-            <div className={'w-full flex justify-end text-lg mb-2'}>
-                已累计帮助<span className={'font-bold mx-1'}>{allViews}</span>人次
+            <div className={'grid gap-4 grid-cols-2'}>
+                <MyCard>
+                    <div className={'flex-center'}>
+                        <div
+                            style={{width:60,height:60}}
+                            className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}
+                        >
+                            <ToolOutlined style={{fontSize:30}} className={'color-main'}/>
+                        </div>
+                        <div className={'flex-center flex-col'}>
+                            <div className={'font-bold mx-1 text-3xl'}>
+                                {sum}
+                            </div>
+                            <div>
+                                全部工具数
+                            </div>
+                        </div>
+                    </div>
+                </MyCard>
+                <MyCard>
+                    <div className={'flex-center'}>
+                        <div
+                            style={{width:60,height:60}}
+                            className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}
+                        >
+                            <LikeOutlined style={{fontSize:30}} className={'color-main'}/>
+                        </div>
+                        <div className={'flex-center flex-col'}>
+                            <div className={'font-bold mx-1 text-3xl'}>
+                                {allViews}
+                            </div>
+                            <div>
+                                累计使用次数
+                            </div>
+                        </div>
+                    </div>
+                </MyCard>
             </div>
-            <Input
-                prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
-                placeholder="输入关键字搜索"
-                size={'large'}
-                onChange={handleChange}
-                allowClear={true}
-            />
+            <div className={'mb-12 p-3 shadow-lg bg-white rounded-lg border-2'}>
+                <Input
+                    prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
+                    placeholder="输入关键字搜索"
+                    size={'large'}
+                    onChange={handleChange}
+                    allowClear={true}
+                    bordered={false}
+                />
+            </div>
             {
                 toolArr ?
                     inputVal ?

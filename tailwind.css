@@ -12,7 +12,7 @@
 :root {
     --parimary-color: #b37feb;
     --shadow-color: #efdbff;
-    --result-color:#f9f0ff
+    --result-color: #f9f0ff
 }
 
 /*主色*/
@@ -39,21 +39,23 @@
     border-radius: 6666rem;
 }
 
-.text-link{
+.text-link {
     color: #606266;
 }
-.jsoneditor{
-    border:thin solid var(--parimary-color)!important;
+
+.jsoneditor {
+    border: thin solid var(--parimary-color) !important;
 }
 
-.jsoneditor-menu{
-    background-color:var(--parimary-color)!important;
-    border-bottom:var(--parimary-color)!important;
-}
-.jsoneditor-poweredBy{
-    display: none!important;
+.jsoneditor-menu {
+    background-color: var(--parimary-color) !important;
+    border-bottom: var(--parimary-color) !important;
 }
 
-.tui-image-editor-container .tui-image-editor-controls-logo > img, .tui-image-editor-container .tui-image-editor-header-logo > img{
-    display: none;!important
+.jsoneditor-poweredBy {
+    display: none !important;
+}
+
+.tui-image-editor-container .tui-image-editor-controls-logo > img, .tui-image-editor-container .tui-image-editor-header-logo > img {
+    display: none !important;
 }

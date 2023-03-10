@@ -52,11 +52,8 @@ export default function Index() {
             <div className={'grid gap-4 grid-cols-2'}>
                 <MyCard>
                     <div className={'flex-center'}>
-                        <div
-                            style={{width: 60, height: 60}}
-                            className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}
-                        >
-                            <ToolOutlined style={{fontSize: 30}} className={'color-main'}/>
+                        <div className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}>
+                            <ToolOutlined className={'color-main text-2xl'}/>
                         </div>
                         <div className={'flex-center flex-col'}>
                             <div className={'font-bold mx-1 text-3xl'}>
@@ -70,11 +67,8 @@ export default function Index() {
                 </MyCard>
                 <MyCard>
                     <div className={'flex-center'}>
-                        <div
-                            style={{width: 60, height: 60}}
-                            className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}
-                        >
-                            <LikeOutlined style={{fontSize: 30}} className={'color-main'}/>
+                        <div className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}>
+                            <LikeOutlined className={'color-main text-2xl'}/>
                         </div>
                         <div className={'flex-center flex-col'}>
                             <div className={'font-bold mx-1 text-3xl'}>

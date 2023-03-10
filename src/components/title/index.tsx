@@ -79,10 +79,10 @@ export default function Title(props: any) {
                                   <span className={'ml-1'}>未登录</span>
                               </Link>
                       }
-                    <Link to={'/'} className={'mr-3'}>
+                    <a href={'https://support.qq.com/products/521274/'} className={'mr-3'}>
                       <BugOutlined/>
                       <span className={'ml-1'}>我要反馈</span>
-                    </Link>
+                    </a>
                   </>
                 }
                 {

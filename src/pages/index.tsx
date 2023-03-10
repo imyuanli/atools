@@ -53,10 +53,10 @@ export default function Index() {
                 <MyCard>
                     <div className={'flex-center'}>
                         <div
-                            style={{width:60,height:60}}
+                            style={{width: 60, height: 60}}
                             className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}
                         >
-                            <ToolOutlined style={{fontSize:30}} className={'color-main'}/>
+                            <ToolOutlined style={{fontSize: 30}} className={'color-main'}/>
                         </div>
                         <div className={'flex-center flex-col'}>
                             <div className={'font-bold mx-1 text-3xl'}>
@@ -71,10 +71,10 @@ export default function Index() {
                 <MyCard>
                     <div className={'flex-center'}>
                         <div
-                            style={{width:60,height:60}}
+                            style={{width: 60, height: 60}}
                             className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}
                         >
-                            <LikeOutlined style={{fontSize:30}} className={'color-main'}/>
+                            <LikeOutlined style={{fontSize: 30}} className={'color-main'}/>
                         </div>
                         <div className={'flex-center flex-col'}>
                             <div className={'font-bold mx-1 text-3xl'}>
@@ -137,7 +137,7 @@ export default function Index() {
             }
             <Readme>
                 <Explain>
-                    第三方软件(手机 App 或电脑软件)将本网站 <a href="https://woodbox.imyuanli.cn"> https://woodbox.imyuanli.cn </a>嵌入到软件内时,
+                    第三方软件(手机 App 或电脑软件)将本网站 <a href="https://atools.imyuanli.cn/"> https://atools.imyuanli.cn/ </a>嵌入到软件内时,
                     请注明来源, 且软件内产生的一切内容与本网站无关
                 </Explain>
                 <Explain>

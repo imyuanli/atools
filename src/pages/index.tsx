@@ -10,6 +10,7 @@ import {FileSearchOutlined, LikeOutlined, SearchOutlined, ToolOutlined} from "@a
 import RouterBtn from "@/components/router-btn";
 import {useSelector} from "@@/exports";
 import Loading from "@/components/loading";
+import CountUp from "react-countup";
 
 export default function Index() {
     const toolArr = useSelector((state: any) => state.tools.toolArr);
@@ -57,7 +58,12 @@ export default function Index() {
                         </div>
                         <div className={'flex-center flex-col'}>
                             <div className={'font-bold mx-1 text-2xl'}>
-                                {sum}
+                                <CountUp
+                                    end={sum}
+                                    duration={2}
+                                    separator=" "
+                                    decimal=","
+                                />
                             </div>
                             <div>
                                 工具数
@@ -72,7 +78,10 @@ export default function Index() {
                         </div>
                         <div className={'flex-center flex-col'}>
                             <div className={'font-bold mx-1 text-2xl'}>
-                                {allViews}
+                                <CountUp
+                                    end={allViews}
+                                    duration={3}
+                                />
                             </div>
                             <div>
                                 使用次数

@@ -42,6 +42,7 @@
     "prismjs": "^1.29.0",
     "query-string": "^8.1.0",
     "react-color": "^2.19.3",
+    "react-countup": "^6.4.2",
     "react-cropper": "^2.1.8",
     "react-lazy-images": "^1.1.0",
     "react-lazy-load-image-component": "^1.5.6",

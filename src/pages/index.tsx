@@ -50,32 +50,32 @@ export default function Index() {
         <div>
             <Title/>
             <div className={'grid gap-4 grid-cols-2'}>
-                <div className={`mb-9 p-6 shadow-lg bg-white rounded-lg relative border-2`}>
+                <div className={`mb-9 p-4 shadow-lg bg-white rounded-lg relative border-2`}>
                     <div className={'flex-center'}>
-                        <div className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}>
+                        <div style={{width:50,height:50,minWidth:50}} className={'bg-color-shadow rounded-full flex-center mr-3'}>
                             <ToolOutlined className={'color-main text-2xl'}/>
                         </div>
                         <div className={'flex-center flex-col'}>
-                            <div className={'font-bold mx-1 text-3xl'}>
+                            <div className={'font-bold mx-1 text-2xl'}>
                                 {sum}
                             </div>
                             <div>
-                                全部工具数
+                                工具数
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={`mb-9 p-6 shadow-lg bg-white rounded-lg relative border-2`}>
+                <div className={`mb-9 p-4 shadow-lg bg-white rounded-lg relative border-2`}>
                     <div className={'flex-center'}>
-                        <div className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}>
+                        <div style={{width:50,height:50,minWidth:50}} className={'bg-color-shadow rounded-full flex-center mr-3'}>
                             <LikeOutlined className={'color-main text-2xl'}/>
                         </div>
                         <div className={'flex-center flex-col'}>
-                            <div className={'font-bold mx-1 text-3xl'}>
+                            <div className={'font-bold mx-1 text-2xl'}>
                                 {allViews}
                             </div>
                             <div>
-                                累计使用次数
+                                使用次数
                             </div>
                         </div>
                     </div>

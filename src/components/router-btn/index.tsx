@@ -22,16 +22,19 @@ export default function RouterBtn(props: any) {
 
     const getAction = (views: any) => {
         return (
-            <div className={'flex-center ml-1'}>
-                <span>已被使用</span>
-                <Tag
-                    color={'#9CA3AF'}
-                    style={tagStyle}
-                >
-                    {numFormat(views)}
-                </Tag>
-                <span>次</span>
-            </div>
+            <Tooltip placement="bottom" title={<div className={'color-main'}>{views}次</div>} color={'#fff'}>
+                <div className={'flex-center ml-1'}>
+                    <span>已被使用</span>
+                    <Tag
+                        color={'#9CA3AF'}
+                        style={tagStyle}
+                    >
+                        {numFormat(views)}
+                    </Tag>
+                    <span>次</span>
+                </div>
+            </Tooltip>
+
         )
     }
 
@@ -49,7 +52,7 @@ export default function RouterBtn(props: any) {
                 }
             }
         } else {
-            const res:any = DEFAULT_STATE.find((i: any) => i.value == state)
+            const res: any = DEFAULT_STATE.find((i: any) => i.value == state)
             return getStateTag(res?.label, res?.color)
         }
     }

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "1.8.3",
+  "version": "1.8.5",
   "author": "yuanli <2865437316@qq.com>",
   "scripts": {
     "dev": "umi dev",

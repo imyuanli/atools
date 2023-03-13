@@ -50,7 +50,7 @@ export default function Index() {
         <div>
             <Title/>
             <div className={'grid gap-4 grid-cols-2'}>
-                <MyCard>
+                <div className={`mb-9 p-6 shadow-lg bg-white rounded-lg relative border-2`}>
                     <div className={'flex-center'}>
                         <div className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}>
                             <ToolOutlined className={'color-main text-2xl'}/>
@@ -64,8 +64,8 @@ export default function Index() {
                             </div>
                         </div>
                     </div>
-                </MyCard>
-                <MyCard>
+                </div>
+                <div className={`mb-9 p-6 shadow-lg bg-white rounded-lg relative border-2`}>
                     <div className={'flex-center'}>
                         <div className={'bg-color-shadow p-3 rounded-full flex-center mr-3'}>
                             <LikeOutlined className={'color-main text-2xl'}/>
@@ -79,7 +79,7 @@ export default function Index() {
                             </div>
                         </div>
                     </div>
-                </MyCard>
+                </div>
             </div>
             <div className={'mb-12 p-3 shadow-lg bg-white rounded-lg border-2'}>
                 <Input

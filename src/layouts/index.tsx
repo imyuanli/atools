@@ -32,6 +32,7 @@ const items: MenuProps['items'] = [
 export default function Index() {
     //控制台
     const location = useLocation();
+    const navigate = useNavigate()
     const pathname = location.pathname
     const [current, setCurrent] = useState('tool');
     //收缩
@@ -88,7 +89,6 @@ export default function Index() {
     }
 
     //官网
-    const navigate = useNavigate()
     const goBackPreLocation = () => {
         navigate(-1)
     }

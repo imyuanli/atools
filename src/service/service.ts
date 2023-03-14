@@ -82,3 +82,7 @@ export async function get_comfort_word() {
 export async function get_joke() {
     return request.get(BASE_URL + `get_joke/`)
 }
+
+export async function get_url_whois(payload?: any) {
+    return request.get(BASE_URL + `get_url_whois/`, payload)
+}

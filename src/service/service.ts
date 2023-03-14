@@ -86,3 +86,8 @@ export async function get_joke() {
 export async function get_url_whois(payload?: any) {
     return request.get(BASE_URL + `get_url_whois/`, payload)
 }
+
+export async function get_translate_result(payload?: any) {
+    return request.post(BASE_URL + `get_translate_result/`, payload)
+}
+

@@ -8,7 +8,7 @@ interface props {
 
 const ApiBtn: React.FunctionComponent<props> = ({text, func}) => {
     return (
-        <div className={'flex w-full justify-end items-center'}>
+        <div className={'flex w-full justify-end items-center mt-3'}>
             <Button
                 type={'primary'}
                 size={'large'}

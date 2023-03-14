@@ -70,3 +70,7 @@ export async function get_mbti_result(payload: any) {
 export async function get_one_answer() {
     return request.get(BASE_URL + `get_one_answer/`)
 }
+
+export async function get_one_word() {
+    return request.get(BASE_URL + `get_one_word/`)
+}

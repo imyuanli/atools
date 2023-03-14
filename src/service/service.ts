@@ -67,4 +67,6 @@ export async function get_mbti_result(payload: any) {
     return request.post(BASE_URL + `get_mbti_result/`, payload)
 }
 
-
+export async function get_one_answer() {
+    return request.get(BASE_URL + `get_one_answer/`)
+}

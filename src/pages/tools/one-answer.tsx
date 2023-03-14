@@ -1,5 +1,5 @@
 import {get_one_answer} from "@/service/service";
-import ASentence from "@/components/a sentence";
+import ASentence from "@/components/a-sentence";
 
 export default function oneAnswer() {
     return (

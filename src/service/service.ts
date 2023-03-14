@@ -78,3 +78,7 @@ export async function get_one_word() {
 export async function get_comfort_word() {
     return request.get(BASE_URL + `get_comfort_word/`)
 }
+
+export async function get_joke() {
+    return request.get(BASE_URL + `get_joke/`)
+}

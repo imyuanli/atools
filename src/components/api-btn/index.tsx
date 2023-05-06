@@ -1,9 +1,14 @@
 import {Button} from "antd";
+import React from "react";
 
-export default function ApiBtn(props: any) {
-    const {text, func} = props
+interface props {
+    text: any,
+    func: any
+}
+
+const ApiBtn: React.FunctionComponent<props> = ({text, func}) => {
     return (
-        <div className={'flex w-full justify-end items-center'}>
+        <div className={'flex w-full justify-end items-center mt-3'}>
             <Button
                 type={'primary'}
                 size={'large'}
@@ -14,3 +19,5 @@ export default function ApiBtn(props: any) {
         </div>
     );
 }
+
+export default ApiBtn

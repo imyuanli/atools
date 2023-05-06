@@ -1,132 +1,147 @@
-import {Input, Result} from "antd";
-import './index.css'
+import {Button, Card, Input, Result, Statistic} from "antd";
 import MyCard from "@/components/my-card";
-import {DEFAULT_ROUTER, DEFAULT_TYPE} from "@/constant";
+import {DEFAULT_TYPE} from "@/utils";
 import Readme from "@/components/readme";
-import {useOutletContext} from "@@/exports";
-import Welcome from "@/components/welcome";
-import Favorites from "@/components/favorites";
 import Title from "@/components/title";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Highlight from "@/components/highlight";
 import Explain from "@/components/explain";
-import {FileSearchOutlined, SearchOutlined} from "@ant-design/icons";
+import {FileSearchOutlined, LikeOutlined, SearchOutlined, ToolOutlined} from "@ant-design/icons";
 import RouterBtn from "@/components/router-btn";
+import {useSelector} from "@@/exports";
+import Loading from "@/components/loading";
+import CountUp from "react-countup";
 
 export default function Index() {
-    const {routerList}: any = useOutletContext();
-    //总共有多少工具
-    let sum = 0
+    const toolArr = useSelector((state: any) => state.tools.toolArr);
+    //接口获取列表
+    const [toolList, setToolList] = useState([])
+    const [sum, setSum] = useState(0)
+    const [allViews, setAllViews] = useState(0)
+    useEffect(() => {
+        if (toolArr) {
+            const arr: any = DEFAULT_TYPE.map(pitem => {
+                const children = toolArr.filter((item: any) => {
+                    return pitem.value == item?.type
+                })
+                return {...pitem, children}
+            })
+            const allViews = toolArr.reduce((pre: any, cur: any) => {
+                return pre + cur.views
+            }, 0)
+            setAllViews(allViews)
+            setSum(toolArr.length)
+            setToolList(arr)
+        }
+    }, [toolArr])
     //搜索结果
     const [inputVal, setInputVal] = useState(null)
     const [resultArr, setResultArr] = useState<any>([])
     const handleChange = (e: any) => {
         let val = e.target.value
         setInputVal(val)
-        let arr: Array<any> = []
-        if (val) {
-            arr = DEFAULT_ROUTER.filter((item: any) => {
+        if (sum > 0 && toolArr) {
+            const arr = toolArr?.filter((item: any) => {
                 return item.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
             })
+            setResultArr(arr)
         }
-        setResultArr([...arr])
     }
-    //状态数组
-    const stateArr = [
-        {
-            name: '热门',
-            state: 'hot',
-        },
-        {
-            name: '新功能',
-            state: 'new',
-        },
-        {
-            name: '推荐',
-            state: 'recommend',
-        },
-        {
-            name: '维护中',
-            state: 'error',
-        }
-    ]
     return (
         <div>
             <Title/>
-            <Welcome/>
-            <div className={`flex-center  bg-white p-3 rounded-lg shadow-lg duration-100`}>
+            <div className={'grid gap-4 grid-cols-2'}>
+                <div className={`mb-9 p-4 shadow-lg bg-white rounded-lg relative border-2`}>
+                    <div className={'flex-center'}>
+                        <div style={{width:50,height:50,minWidth:50}} className={'bg-color-shadow rounded-full flex-center mr-3'}>
+                            <ToolOutlined className={'color-main text-2xl'}/>
+                        </div>
+                        <div className={'flex-center flex-col'}>
+                            <div className={'font-bold mx-1 text-2xl'}>
+                                <CountUp
+                                    end={sum}
+                                    duration={2}
+                                    separator=" "
+                                    decimal=","
+                                />
+                            </div>
+                            <div>
+                                工具数
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={`mb-9 p-4 shadow-lg bg-white rounded-lg relative border-2`}>
+                    <div className={'flex-center'}>
+                        <div style={{width:50,height:50,minWidth:50}} className={'bg-color-shadow rounded-full flex-center mr-3'}>
+                            <LikeOutlined className={'color-main text-2xl'}/>
+                        </div>
+                        <div className={'flex-center flex-col'}>
+                            <div className={'font-bold mx-1 text-2xl'}>
+                                <CountUp
+                                    end={allViews}
+                                    duration={3}
+                                />
+                            </div>
+                            <div>
+                                使用次数
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className={'mb-12 p-3 shadow-lg bg-white rounded-lg border-2'}>
                 <Input
                     prefix={<SearchOutlined className={'text-2xl mr-3'}/>}
                     placeholder="输入关键字搜索"
                     size={'large'}
-                    bordered={false}
                     onChange={handleChange}
                     allowClear={true}
+                    bordered={false}
                 />
             </div>
             {
-                inputVal ?
-                    <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
-                        {
-                            resultArr.length > 0 ?
-                                resultArr?.map((result: any, index: number) => {
+                toolArr ?
+                    inputVal ?
+                        <MyCard isIndex={resultArr.length > 0} title={'搜索结果'} icon={<FileSearchOutlined/>}>
+                            {
+                                resultArr.length > 0 ?
+                                    <RouterBtn routerList={resultArr}/>
+                                    :
+                                    <div className={'flex-center'}>
+                                        <Result
+                                            style={{padding: 0}}
+                                            title="没有找到相关结果"
+                                        />
+                                    </div>
+                            }
+                        </MyCard>
+                        :
+                        <>
+                            {
+                                toolList?.map((list: any, index: any) => {
                                     return (
-                                        <div key={index}>
-                                            <RouterBtn router={result}/>
-                                        </div>
+                                        <>
+                                            {list.children.length > 0 &&
+                                              <div key={index}>
+                                                <MyCard title={list?.label} icon={list?.icon} isIndex={true}>
+                                                  <RouterBtn routerList={list?.children}/>
+                                                </MyCard>
+                                              </div>
+                                            }
+                                        </>
                                     )
                                 })
-                                :
-                                <div className={'flex-center'}>
-                                    <Result
-                                        style={{padding: 0}}
-                                        title="没有找到相关结果"
-                                    />
-                                </div>
-                        }
-                    </MyCard>
+                            }
+                            {/*<Favorites routerList={routerList}/>*/}
+                        </>
                     :
-                    <>
-                        <Favorites routerList={routerList}/>
-                        {
-                            DEFAULT_TYPE.map((list: any, index: any) => {
-                                return (
-                                    <MyCard key={index} title={list?.title} icon={list?.icon} isIndex={true}>
-                                        {
-                                            routerList?.map((router: any, k: number) => {
-                                                if (list?.type == router?.type) {
-                                                    sum += 1
-                                                    return (
-                                                        <div key={router.name + k} className={'w-full'}>
-                                                            <RouterBtn router={router}/>
-                                                        </div>
-                                                    )
-                                                }
-                                            })
-                                        }
-                                    </MyCard>
-                                )
-                            })
-                        }
-                    </>
+                    <Loading/>
             }
             <Readme>
                 <Explain>
-                    <div className={'flex'}>
-                        {
-                            stateArr.map((item, index) => {
-                                return (
-                                    <div key={index} className={'relative pr-4 mr-3'}>
-                                        <div>{item.name}</div>
-                                        <div className={`badge ${item.state}`}/>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </Explain>
-                <Explain>
-                    第三方软件(手机 App 或电脑软件)将本网站 <a href="https://woodbox.imyuanli.cn"> https://woodbox.imyuanli.cn </a>嵌入到软件内时, 请注明来源, 且软件内产生的一切内容与本网站无关
+                    第三方软件(手机 App 或电脑软件)将本网站 <a href="https://atools.imyuanli.cn/"> https://atools.imyuanli.cn/ </a>嵌入到软件内时,
+                    请注明来源, 且软件内产生的一切内容与本网站无关
                 </Explain>
                 <Explain>
                     当前处于高速更新迭代中，敬请期待 (当前共有 <Highlight value={sum}/> 个工具)

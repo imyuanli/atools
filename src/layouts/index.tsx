@@ -3,161 +3,258 @@ import './index.css'
 import 'antd/es/style/themes/default.less';
 import 'antd/dist/antd.less'; // 引入官方提供的 less 样式入口文件
 import {
-    HomeOutlined,
-    MenuFoldOutlined, ReloadOutlined,
+    ArrowLeftOutlined, CoffeeOutlined,
+    DownloadOutlined, InfoOutlined, LinkOutlined,
+    MailOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined, QqOutlined,
+    SettingOutlined, ShareAltOutlined,
+    VerticalAlignTopOutlined, WeiboOutlined,
 } from "@ant-design/icons";
-import {Button, Divider, Drawer, message, Modal, Tooltip} from "antd";
-import {useState} from "react";
-import {useNavigate} from "@umijs/renderer-react";
-import Title from "@/components/title";
-import Collect from "@/components/collect";
-import {DEFAULT_ROUTER} from "@/constant";
-import {useLocalStorageState} from "ahooks";
+import {BackTop, Button, Layout, Menu, MenuProps, message, Popover, Tooltip} from "antd";
+import React, {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "@@/exports";
+import {Link} from "@umijs/renderer-react";
+import copy from "copy-to-clipboard";
 
-
-const menuItems = [
+const {Header, Content, Footer, Sider} = Layout;
+const items: MenuProps['items'] = [
     {
-        label: '返回首页',
-        icon: <HomeOutlined/>,
-        link: '/'
-    },
-    // {
-    //     label: '更新日志',
-    //     icon: <BulbOutlined/>,
-    //     link: '/update_history',
-    // },
-    // {
-    //     label: '反馈',
-    //     icon: <UserOutlined/>,
-    //     link: '/help',
-    // },
-    // {
-    //     label: '帮助',
-    //     icon: <QuestionCircleOutlined/>,
-    //     link: '/help',
-    // },
-    // {
-    //     label: '设置',
-    //     icon: <UserOutlined/>,
-    //     link: '/setting',
-    // },
-]
-export default function Layout() {
-    //菜单
-    const [open, setOpen] = useState(false);
-    const showDrawer = () => {
-        setOpen(true);
-    };
-    const onClose = () => {
-        setOpen(false);
-    };
-
-    //将路由持久化
-    const [routerList, setRouterList] = useLocalStorageState<any>(
-        'routerList',
-        {
-            defaultValue: DEFAULT_ROUTER,
-        },
-    );
-    //由主页面参数
-    const context = {routerList}
-
-    //链接跳转
+        label: (
+            <Link to={'/console/tool'}>
+                工具管理
+            </Link>
+        ),
+        key: 'tool',
+        icon: <MailOutlined/>,
+    }
+];
+export default function Index() {
+    //控制台
+    const location = useLocation();
     const navigate = useNavigate()
-    const goToPage = (link: any) => {
-        onClose()
-        navigate(link)
-    }
-    //清楚网站缓存
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleOk = () => {
-        //重置欢迎
-        localStorage.removeItem("welcome")
-        //重置你的收藏夹
-        localStorage.removeItem("routerList")
-        setIsModalOpen(false);
-
-        //加个清除效果
-        const hide = message.loading('正在删除', 0, () => {
-            message.success('清除成功，即将自动刷新页面');
-        });
-        setTimeout(hide, 1000);
-        setTimeout(() => {
-            window.location.reload()
-        }, 1500)
+    const pathname = location.pathname
+    const [current, setCurrent] = useState('tool');
+    //收缩
+    const [collapsed, setCollapsed] = useState(false);
+    //初次渲染对应的key
+    useEffect(() => {
+        const key = location.pathname.split('/console/')[1]
+        setCurrent(key)
+    }, [])
+    //切换对应的key
+    const onClick: MenuProps['onClick'] = e => {
+        setCurrent(e.key);
     };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-    const clearWebkitData = () => {
-        setIsModalOpen(true);
+    if (pathname.startsWith('/console')) {
+        return (
+            <Layout style={{minHeight: '100vh'}}>
+                <Sider trigger={null} collapsible collapsed={collapsed}>
+                    <div className={'flex-center m-3'}>
+                        <img src="../favicon.ico" className={'w-24'} alt=""/>
+                    </div>
+                    <Menu
+                        onClick={onClick}
+                        selectedKeys={[current]}
+                        theme="dark"
+                        mode="inline"
+                        items={items}
+                    />
+                </Sider>
+                <Layout className="site-layout">
+                    <Header style={{padding: 0, background: '#fff'}}>
+                        {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+                            className: 'ml-3 text-lg',
+                            onClick: () => setCollapsed(!collapsed),
+                        })}
+                    </Header>
+                    <Content className="bg-white m-3 p-6">
+                        <Outlet/>
+                    </Content>
+                    <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
+                </Layout>
+            </Layout>
+        )
     }
+
+    //登录页面
+    if (pathname === '/login') {
+        return (
+            <div className={'main'}>
+                <div className={'content'}>
+                    <Outlet/>
+                </div>
+            </div>
+        )
+    }
+
+    //官网
+    const goBackPreLocation = () => {
+        navigate(-1)
+    }
+
+    //按钮box
+    const getBtn = (style: any, placement: any) => {
+        return (
+            <>
+                <Tooltip className={style} placement={placement} title={'设置'}>
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<SettingOutlined/>}
+                        size={'large'}
+                    />
+                </Tooltip>
+                <Tooltip className={style} placement={placement} title={'请作者喝一杯咖啡'}>
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<CoffeeOutlined/>}
+                        size={'large'}
+                    />
+                </Tooltip>
+                <Tooltip className={style} placement={placement} title={'更新日志&帮助'}>
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<InfoOutlined/>}
+                        size={'large'}
+                    />
+                </Tooltip>
+                <Tooltip className={style} placement={placement} title={'下载背景图片'}>
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<DownloadOutlined/>}
+                        size={'large'}
+                    />
+                </Tooltip>
+            </>
+        )
+    }
+
+    //title
+    const title = document.title
+    const url = "https://atools.imyuanli.cn" + pathname
     return (
         <div className={'main'}>
-            <div className={'absolute right-1 md:right-3 top-3 flex-col flex'}>
-                <Tooltip title="菜单" placement={"left"}>
-                    <Button type="primary" shape="circle" icon={<MenuFoldOutlined/>} size={"large"}
-                            onClick={showDrawer}/>
-                </Tooltip>
-                {/*<Tooltip title="设置" placement={"left"}>*/}
-                {/*    <Button type="primary" shape="circle" className={'m-2'} icon={<SettingOutlined/>} size={"large"}/>*/}
-                {/*</Tooltip>*/}
-                <Tooltip title="清除网站缓存" placement={"left"}>
-                    <Button type="primary" shape="circle" className={'mt-2'} icon={<ReloadOutlined/>} size={"large"}
-                            onClick={clearWebkitData}/>
-                </Tooltip>
-            </div>
             <div className={'content'}>
-                <Outlet context={context}/>
-            </div>
-            <Collect routerList={routerList} setRouterList={setRouterList}/>
-            <Drawer
-                width={300}
-                onClose={onClose}
-                open={open}
-                closable={false}
-            >
-                <div>
-                    <div className={'w-full flex-center text-3xl font-bold mb-3'}>
-                        WoodBox
-                    </div>
-                    <div className={'flex-center flex-col'}>
-                        {/*<Link to={'/login'}*/}
-                        {/*      className={'text-gray-800 text-lg p-3 flex-center w-full hover:bg-gray-100 hover:text-gray-800'}*/}
-                        {/*>*/}
-                        {/*    <UserOutlined/>*/}
-                        {/*    <span className={'ml-2'}>未登录</span>*/}
-                        {/*</Link>*/}
-                        <Divider/>
-                        {
-                            menuItems.map((item: any, index: number) => {
-                                return (
-                                    <div
-                                        onClick={() => {
-                                            goToPage(item?.link)
-                                        }}
-                                        key={index}
-                                        className={'text-gray-800 text-lg p-3 flex-center w-full cursor-pointer hover:bg-gray-100'}
+                <Outlet/>
+                <div className={'absolute right-3 top-3'}>
+                    <div className={'flex-col flex'}>
+                        {/*{*/}
+                        {/*    <>*/}
+                        {/*        <div className={'flex-col hidden  md:block'}>*/}
+                        {/*            <div className={'flex flex-col'}>*/}
+                        {/*                {getBtn('mb-3', 'left')}*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*        <div className={'block  md:hidden mb-3'}>*/}
+                        {/*            <div className={'flex-center'}>*/}
+                        {/*                <Popover*/}
+                        {/*                    placement="left"*/}
+                        {/*                    content={getBtn('mr-3', 'bottom')}*/}
+                        {/*                    trigger="click"*/}
+                        {/*                >*/}
+                        {/*                    <Button*/}
+                        {/*                        type="primary"*/}
+                        {/*                        shape="circle"*/}
+                        {/*                        icon={<MenuFoldOutlined/>}*/}
+                        {/*                        size={'large'}*/}
+                        {/*                    />*/}
+                        {/*                </Popover>*/}
+                        {/*            </div>*/}
+                        {/*        </div>*/}
+                        {/*    </>*/}
+                        {/*}*/}
+                        <Popover
+                            placement="leftTop"
+                            content={
+                                <>
+                                    <a
+                                        href={`http://connect.qq.com/widget/shareqq/index.html?title=${title}&url=${url}`}
+                                        target="_blank"
                                     >
-                                        {item?.icon}
-                                        <span className={'ml-2'}>{item?.label}</span>
+                                        <div className={'hover:bg-gray-200'}>
+                                            <Button type={'link'}>
+                                                <QqOutlined/>
+                                                <span>QQ</span>
+                                            </Button>
+                                        </div>
+                                    </a>
+                                    <a
+                                        href={`https://service.weibo.com/share/share.php?title=${title}&url=${url}`}
+                                        target="_blank"
+                                    >
+                                        <div className={'hover:bg-gray-200'}>
+                                            <Button type={'link'}>
+                                                <WeiboOutlined/>
+                                                <span>新浪微博</span>
+                                            </Button>
+                                        </div>
+                                    </a>
+                                    <div className={'hover:bg-gray-200'} onClick={
+                                        () => {
+                                            copy(url);
+                                            message.success("复制成功")
+                                        }
+                                    }>
+                                        <Button type={'link'}>
+                                            <LinkOutlined/>
+                                            <span>复制链接</span>
+                                        </Button>
                                     </div>
-                                )
-                            })
+                                </>
+                            }
+                            trigger="click"
+                            className={'mb-3'}
+                        >
+                            <Button
+                                type="primary"
+                                shape="circle"
+                                icon={<ShareAltOutlined/>}
+                                size={'large'}
+                            />
+                        </Popover>
+                        {
+                            pathname !== '/' &&
+                          <Tooltip placement="left" title={'返回上一页'}>
+                            <Button
+                              type="primary"
+                              shape="circle"
+                              icon={<ArrowLeftOutlined/>}
+                              size={'large'}
+                              onClick={goBackPreLocation}
+                            />
+                          </Tooltip>
                         }
                     </div>
                 </div>
-            </Drawer>
-            <Modal title="清楚网站缓存"
-                   open={isModalOpen}
-                   onOk={handleOk}
-                   onCancel={handleCancel}
-                   okText={'确定'}
-                   cancelText={'再思考一下'}
-            >
-                是否要清除浏览器缓存？该操作不会删除你的用户数据，清除数据后页面将会刷新
-            </Modal>
+                <BackTop
+                    style={{
+                        right: '0.75rem',
+                        bottom: '4rem'
+                    }}
+                    visibilityHeight={100}
+                >
+                    <Button
+                        type="primary"
+                        shape="circle"
+                        icon={<VerticalAlignTopOutlined/>}
+                        size={'large'}
+                    />
+                </BackTop>
+                {/*<div className={'fixed right-3 bottom-3'}>*/}
+                {/*    <Tooltip placement="left" title={'收藏'}>*/}
+                {/*        <Button*/}
+                {/*            type="primary"*/}
+                {/*            shape="circle"*/}
+                {/*            icon={<StarOutlined/>}*/}
+                {/*            size={'large'}*/}
+                {/*        />*/}
+                {/*    </Tooltip>*/}
+                {/*</div>*/}
+            </div>
         </div>
     );
 }

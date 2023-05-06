@@ -3,9 +3,10 @@ import {defineConfig} from "umi";
 export default defineConfig({
     npmClient: "yarn",
     tailwindcss: {},
-    plugins: ["@umijs/plugins/dist/tailwindcss"],
+    plugins: ["@umijs/plugins/dist/tailwindcss", "@umijs/plugins/dist/dva"],
     theme: {
-        "@primary-color": '#13c2c2',
-        "@link-color": "#13c2c2"
-    }
-})
+        "@primary-color": "#b37feb",
+        "@link-color": "#b37feb",
+    },
+    dva: {},
+});

@@ -9,17 +9,27 @@
     align-items: center;
 }
 
+:root {
+    --parimary-color: #b37feb;
+    --shadow-color: #efdbff;
+    --result-color: #f9f0ff
+}
+
 /*主色*/
 .color-main {
-    color: #13c2c2
+    color: var(--parimary-color)!important;
 }
 
 .bg-color-main {
-    background-color: #13c2c2
+    background-color: var(--parimary-color)
 }
 
-.bg-color-op{
-    background-color: #e6fffb
+.bg-color-shadow {
+    background-color: var(--shadow-color)
+}
+
+.bg-color-result {
+    background-color: var(--result-color)
 }
 
 
@@ -29,6 +39,27 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #13c2c2;
+    background-color: var(--parimary-color);
     border-radius: 6666rem;
+}
+
+.text-link {
+    color: #606266;
+}
+
+.jsoneditor {
+    border: thin solid var(--parimary-color) !important;
+}
+
+.jsoneditor-menu {
+    background-color: var(--parimary-color) !important;
+    border-bottom: var(--parimary-color) !important;
+}
+
+.jsoneditor-poweredBy {
+    display: none !important;
+}
+
+.tui-image-editor-container .tui-image-editor-controls-logo > img, .tui-image-editor-container .tui-image-editor-header-logo > img {
+    display: none !important;
 }

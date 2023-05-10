@@ -1,7 +1,7 @@
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
-import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
+import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';  
 import React, { useState } from 'react';
 import BASE_URL from "@/service/base_url";
 
@@ -22,12 +22,12 @@ const beforeUpload = (file: RcFile) => {
     }
     return isJpgOrPng && isLt2M;
 };
-
+ 
 const Test: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState<string>();
 
-    const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
+    const handleChange:any = (info: UploadChangeParam<UploadFile>) => {
         if (info.file.status === 'uploading') {
             setLoading(true);
             return;

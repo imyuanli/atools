@@ -25,7 +25,7 @@
     "@types/store": "^2.0.2",
     "@types/uuid": "^9.0.1",
     "ahooks": "^3.7.3",
-    "antd": "^4.24.5",
+    "antd": "^4.24.10",
     "antd-img-crop": "^4.7.0",
     "bytes": "^3.1.2",
     "copy-to-clipboard": "^3.3.3",
@@ -51,6 +51,7 @@
     "standard-version": "^9.5.0",
     "store": "^2.0.12",
     "umi": "^4.0.38",
+    "uqrcodejs": "^4.0.7",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

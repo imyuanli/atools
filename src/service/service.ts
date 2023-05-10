@@ -20,20 +20,8 @@ export async function update_user_name(payload: any) {
 
 
 //控制台
-export async function get_all_tools() {
-    return request.get(BASE_URL + `get_all_tools/`)
-}
-
-export async function get_no_delete_tools() {
-    return request.get(BASE_URL + `get_no_delete_tools/`)
-}
-
-export async function insert_new_tool(payload: any) {
-    return request.post(BASE_URL + `insert_new_tool/`, payload)
-}
-
-export async function update_tool(payload: any) {
-    return request.post(BASE_URL + `update_tool/`, payload)
+export async function get_tools_list() {
+    return request.get(BASE_URL + `get_tools_list/`)
 }
 
 export async function update_tool_views(payload: any) {

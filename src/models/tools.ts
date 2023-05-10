@@ -1,4 +1,4 @@
-import {get_no_delete_tools} from "@/service/service";
+import {get_tools_list} from "@/service/service";
 
 export default {
     namespace: 'tools',
@@ -15,7 +15,7 @@ export default {
         * getAllTools({payload}: any, {put, call}: any) {
             try {
                 // @ts-ignore
-                const res: any = yield call(get_no_delete_tools);
+                const res: any = yield call(get_tools_list);
                 yield put({type: 'setToolArr', payload: res})
             } catch (e) {
                 yield put({type: 'setToolArr', payload: []})

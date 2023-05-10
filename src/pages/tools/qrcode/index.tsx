@@ -13,6 +13,9 @@ import type { RcFile, UploadFile } from 'antd/es/upload/interface';
 import ImgCrop from 'antd-img-crop';
 import './index.css'
 import UQRCode from 'uqrcodejs';
+import UQRCodePluginLiquid from './components/uqrcode.plugin.liquid.es.js';
+import UQRCodePluginRound from './components/uqrcode.plugin.round.es.js';
+import UQRCodePluginWords from './components/uqrcode.plugin.words.es.js';
 
 interface configDataItem {
   size: number,
@@ -84,7 +87,7 @@ export default function Qrcode() {
 
   const qrCanvas = useRef<any>(null)
   const qr = new UQRCode();
-  
+  // 注册扩展
   const [loading, setLoading] = useState(false);
   const [imgFlag, setImgFlag] = useState(false);
   //二维码配置
@@ -124,12 +127,12 @@ export default function Qrcode() {
     }
   )
 
-  UQRCode.prototype.loadImage = function(src:any) {
+  UQRCode.prototype.loadImage = function (src: any) {
     // 需要返回Promise对象
     return new Promise((resolve, reject) => {
       var img = new Image();
       img.src = src;
-      img.onload = function() {
+      img.onload = function () {
         // resolve返回img
         resolve(img);
       }
@@ -141,30 +144,48 @@ export default function Qrcode() {
   }
   // 输入框内容
   const [qrContent, setQrContent] = useState<any>('')
+  // 二维码风格
+  const [qrCodeStyle, setQrCodeStyle] = useState<any>('default')
+  // 文字码显示的内容
+  const [qrWordsConent, setQrWordsConent] = useState<any>('')
   // 单选框
-  const [errorRadio,setErrorRadio] = useState<number>(0)
- 
+  const [errorRadio, setErrorRadio] = useState<number>(0)
+
   // 生成二维码
   const generateQr = (async () => {
-    if (qrContent == '') {
-      message.warning('输入的内容不能为空！')
-      return
-    };
+    if (qrContent == '')  return message.warning('输入的内容不能为空！')
+    if(qrCodeStyle === 'words' && qrWordsConent == '') return message.warning('文字码要显示的文本不能为空！')
     await setImgFlag(true)
-    qr.setOptions(Object.assign({data: qrContent,errorCorrectLevel: errorRadio},{...configData}))
+    qr.setOptions(Object.assign({ data: qrContent, errorCorrectLevel: errorRadio }, { ...configData }))
     // 调用制作二维码方法
     qr.make();
     // 获取canvas上下文
     let canvasContext = qrCanvas.current.getContext("2d");
     // 设置uQRCode实例的canvas上下文
     qr.canvasContext = canvasContext;
-    // 调用绘制方法将二维码图案绘制到canvas上
-    qr.drawCanvas();
+    // 调用绘制方法将二维码图案绘制到canvas上并根据不同的二维码风格绘制
+    switch (qrCodeStyle) {
+      case 'liquid':
+        qr.register(UQRCodePluginLiquid);
+        qr.drawLiquidCanvas();
+        break;
+      case 'round':
+        qr.register(UQRCodePluginRound);
+        qr.drawRoundCanvas();
+        break;
+      case 'words':
+        qr.register(UQRCodePluginWords);
+        qr.words = qrWordsConent;
+        qr.drawWordsCanvas();
+        break;
+      default:
+        qr.drawCanvas()
+    }
   })
 
   useEffect(() => {
     if (qrContent !== '') generateQr()
-  }, [configData,errorRadio])
+  }, [configData, errorRadio])
 
   const beforeUpload = (file: RcFile) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg';
@@ -173,7 +194,7 @@ export default function Qrcode() {
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-        message.error('图片大小不能超过2MB!');
+      message.error('图片大小不能超过2MB!');
     }
     return isJpgOrPng && isLt2M;
   };
@@ -191,19 +212,19 @@ export default function Qrcode() {
    * @param type 
    * type 图片类型 back背景图片 front前景图片
   */
-  const handlePicChange = (info: UploadChangeParam<UploadFile>,type: string) => {
+  const handlePicChange = (info: UploadChangeParam<UploadFile>, type: string) => {
     if (info.file.status === 'uploading') {
       setLoading(true);
       return;
     }
     if (info.file.status === 'done') {
-      if(type === 'back') {
+      if (type === 'back') {
         getBase64(info.file.originFileObj as RcFile, url => {
           UQRCode.prototype.loadImage(url)
           setConfigData({ backgroundImageSrc: url });
         });
       }
-      if(type === 'front') {
+      if (type === 'front') {
         getBase64(info.file.originFileObj as RcFile, url => {
           UQRCode.prototype.loadImage(url)
           setConfigData({ foregroundImageSrc: url });
@@ -226,6 +247,30 @@ export default function Qrcode() {
             rows={6}
             placeholder="请输入文本或网址" />
         </div>
+        <div className={'mb-6'}>
+          <Radio.Group onChange={((e: RadioChangeEvent) => {
+            setQrWordsConent('')
+            setQrCodeStyle(e.target.value)
+          })} value={qrCodeStyle}>
+            <Radio value={'default'}>默认</Radio>
+            <Radio value={'liquid'}>液态码</Radio>
+            <Radio value={'round'}>圆点码</Radio>
+            <Radio value={'words'}>文字码</Radio>
+          </Radio.Group>
+        </div>
+        {
+          qrCodeStyle === 'words' ?
+            <div className={'mb-6'}>
+              <Input
+                placeholder={'请输入文字码显示的文本'}
+                onChange={(e) => {
+                  setQrWordsConent(e.target.value)
+                }}
+                className={'mb-3'}
+                allowClear
+              />
+            </div> : null
+        }
         <div className={'flex w-full justify-end items-center'}>
           <Button onClick={generateQr} type={'primary'} size={'large'}>生成二维码</Button>
         </div>
@@ -255,16 +300,16 @@ export default function Qrcode() {
 
               <div className={'mb-4'}>
                 <div className={'text-lg font-bold mb-1'}>容错率</div>
-                  <Radio.Group onChange={((e: RadioChangeEvent) => {
-                    setErrorRadio(e.target.value)
-                  })} value={errorRadio}>
-                    <Radio value={0}>7%</Radio>
-                    <Radio value={1}>15%</Radio>
-                    <Radio value={2}>25%</Radio>
-                    <Radio value={3}>30%</Radio>
-                  </Radio.Group>
-                  <div>容错率越高的二维码，可在遮挡越多的情况下被扫描出来</div>
-                </div>
+                <Radio.Group onChange={((e: RadioChangeEvent) => {
+                  setErrorRadio(e.target.value)
+                })} value={errorRadio}>
+                  <Radio value={0}>7%</Radio>
+                  <Radio value={1}>15%</Radio>
+                  <Radio value={2}>25%</Radio>
+                  <Radio value={3}>30%</Radio>
+                </Radio.Group>
+                <div>容错率越高的二维码，可在遮挡越多的情况下被扫描出来</div>
+              </div>
             </MyCard>
 
             <MyCard title={'高级设置'} icon={<EditOutlined />}>
@@ -443,7 +488,7 @@ export default function Qrcode() {
                       showUploadList={false}
                       beforeUpload={beforeUpload}
                       onChange={(file) => {
-                        handlePicChange(file,'back')
+                        handlePicChange(file, 'back')
                       }}
                     >
                       {configData.backgroundImageSrc ? <img src={configData.backgroundImageSrc} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
@@ -542,7 +587,7 @@ export default function Qrcode() {
                       showUploadList={false}
                       beforeUpload={beforeUpload}
                       onChange={(file) => {
-                        handlePicChange(file,'front')
+                        handlePicChange(file, 'front')
                       }}
                     >
                       {configData.foregroundImageSrc ? <img src={configData.foregroundImageSrc} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
@@ -709,7 +754,7 @@ export default function Qrcode() {
       }
       <Readme>
         <Explain>
-          改变二维码内容时需再次点击生成二维码
+          改变二维码内容或改变二维码风格时需再次点击生成二维码
         </Explain>
       </Readme>
     </div>

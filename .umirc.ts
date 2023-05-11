@@ -9,4 +9,7 @@ export default defineConfig({
         "@link-color": "#b37feb",
     },
     dva: {},
+    codeSplitting: {
+        jsStrategy: 'granularChunks'
+    }
 });
